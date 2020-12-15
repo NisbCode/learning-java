@@ -1,2 +1,1 @@
-# Java-learning
-Starting to learn Python
+Esse repositório contém vários exercícios de java. Meu estudo começou dia 13/03/2019. Desde então, meus arquivos tem sido para treinar usando desafios pessoais e relembrar a matéria que utilizei para estudo.
