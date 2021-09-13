@@ -1,0 +1,16 @@
+Classes usadas: StreamTeste6Collectors1
+package Estudando.javacore.ZZKstreams.teste;
+
+#FRAMEWORKS COLLECTORS#
+
+Ele  ajuda agt definir oq agt quer ao oinvés de cm vamos fazer
+
+
+#TEREMOS 3 AULAS P FALAR SOBRE COLLECTORS#
+
+Por enquanto vamos ver cm funciona determinadas ações usando collectors
+
+
+#O MOMENTO Q MAIS USAREMOS COLLECTORS#
+
+Em agrupamento, no caso, a proxima aula

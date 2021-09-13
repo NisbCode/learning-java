@@ -1,0 +1,13 @@
+Cardinalidade de relacionamento entre duas classes
+
+1 - Obrigatoriamente 1
+0..1 - zero ou um
+1..* - um ou mais
+0..* zero ou mais
+* - zero ou mais(Sim, eu repeti e está correto)
+
+E bem, exercícios de associação "G" explica mais coisas
+
+Temos também um exercício que fala sobre e está no OneNote, vinculado a conta natyig
+
+Boa sorte pra entender <3

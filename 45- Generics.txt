@@ -1,0 +1,7 @@
+Uso da Classe: GenericsTest
+
+Definem o tipo de uma coleção
+Só existe em tempo de compilação
+Cuidado com a certificação q pede entendimento sobre
+type erasure ===> Verificar o tipo em tempo de execução em uma lista
+Para não ter um grande for tendo q separar cada tipo de lista, eles criaram os generics q lançam um erro em tempo de execução sem parar o processo

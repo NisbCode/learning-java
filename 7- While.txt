@@ -1,0 +1,98 @@
+while usa valores boolean entre parênteses
+
+while só vai executar caso esteja coerente a condição 
+
+public class ControleFluxo4 {
+    public static void main(String[] args) {
+        int contador = 0;
+        while (contador < 10) {
+            contador += 1;
+            System.out.println(contador);
+        }
+    }
+}
+
+
+===================================================================
+do while
+
+ao menos uma vez ele irá executar:
+
+
+public class ControleFluxo4 {
+    public static void main(String[] args) {
+        int contador = 11
+        do{
+            System.out.println("I believe");
+        }while(contador < 10);
+    }
+}
+
+===================================================================
+for 
+
+usa 3 divisões tendo na primeira parte sua variavel, na segunda sua condição, na terceira sua incrementação:
+
+
+public class ControleFluxo4 {
+    public static void main(String[] args) {
+        for(int i=0; i <=10;i++){
+            System.out.println("O valor de i é "+i);
+        }
+    }
+}
+
+
+-------------------------------------------------------------------
+Segunda maneira(mais usada) de se utilizar o for
+Chamada de foreach
+
+
+1- Primeiro vc cria um array:
+
+
+public class Arrays3 {
+    public static void main(String[] args) {
+        int[] numeros = new int[]{1, 2, 3, 4, 5};
+
+
+2- Você cria a estrutura do foreach começando criando uma variável que representará as posições do seu array
+3- escreva " : <array>" para definir quantas posições são
+
+                 2-       3-
+                 |       |
+        for(int aux : numeros){
+            System.out.println(aux);
+        }
+    }
+}
+
+4- O que acontecerá é que ele irá pegar cada quantidade do array numeros e jogar no aux escrevendo ele até acabar a 
+quantidade de numeros 
+===================================================================
+Interrompendo o programa podemos usar o break
+
+        for(int i=0; i <=10;i++){
+            System.out.println("O valor de i é "+i);
+            if(i== 5){
+                break;
+            }
+        }
+    }
+}
+
+
+======================================================================
+Exercício proposto sobre contar números pares:
+
+public class ExercicioWhile {
+    public static void main(String[] args) {
+        int contador = 0;
+        while (contador <= 100000) {
+            contador++;
+            if (contador % 2 == 0) {
+                System.out.println(contador);
+            }
+        }
+    }
+}

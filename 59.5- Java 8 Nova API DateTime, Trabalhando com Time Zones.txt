@@ -1,0 +1,14 @@
+Classes usadas: DateTimeAPITest6
+package Estudando.javacore.ZZNdatetime.test;
+
+
+#COMO ASSIM ZONAS?#
+
+Bem, nós sabemos q dentro de um país pode haver a diferenciação por meio de zonas:Zona Norte, Zona Sul, etc
+O TimeZones nos ajuda a trabalhar c essa forma mais específica, pois existem países q dependendo da zona
+Sua formatação muda
+
+
+#NESSA API#
+
+Também foi introduzida a capacidade de lidar c outros calendários

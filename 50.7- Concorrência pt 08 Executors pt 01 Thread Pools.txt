@@ -1,0 +1,14 @@
+Classes usadas: ExecutorTest, ThreadTrabalhadoraExecutor
+
+
+#QUANDO USAR#
+
+Foi pensado p momentos onde supondo q a casa 1 usuário q entre, vc crie uma Thread
+Daq à 1000 usuários o seu processador vai passar mais tempo organizando as Threads do q em si executando a tarefa
+
+
+
+#PASSOS A SE TOMAR#
+
+1- Dissociar a execução das Threads à submissão às tarefas
+O mais importante é q se vc delimita o uso apenas de 4 Threads, se executar 6 pelo executors ele reutilizará as threads ao invés de deixa-las morrer p recuperar elas

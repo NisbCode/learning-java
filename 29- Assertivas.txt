@@ -1,0 +1,54 @@
+É para verificar valores e caso esse valor não seja o q vc quer, ele lança um erro
+Não é bom pôr o assert em public EXCETO EM UM CASO:
+Quando ocorre o uso de switch
+
+    public static void diasDaSemana(int dia){
+        switch (dia){
+            case 1: break;
+            case 2: break;
+            case 3: break;
+            case 4: break;
+            case 5: break;
+            case 6: break;
+            case 7: break;
+            default: assert false;
+        }
+    }
+}
+
+
+Ele substitui o if else em alguns casos pôr sobrecarregar o sistema
+Na hora do erro por ex, ele ainda carregaria uma parte desnecessária:
+
+if(sua mãe é feia == true){
+	sout("otimo")
+}else{
+	sout("Ferrou")
+}
+
+
+Isso meio que pesa no sistema já que é desnecessário pensar no else se ele SÓ PODE ser o primeiro
+
+
+Então assertivas vai olhar e falar "tá certo" ou "ESTÁ ERRADO, MANDA UM ERRO E FECHA O PROGRAMA"
+Assertivas não são tratadas pq não são exceções e sim erros
+
+
+PS.: Assertivas de comum estão desabitadas, vá em "Run">"Edit Configurations">"VM" e escreva: "-ea" (enable assertivas); "-da" para disabilitar
+Para abilitar para apenas uma classe "-ea:Estudando.javacore.P_assertions"
+Para abilitar para todas menos para uma "-ea -da:Estudando.javacore.P_assertions"
+
+Exemplo:
+
+public class AssertTest {
+    public static void main(String[] args) {
+        calculaSalario(-1000);
+    }
+
+    private static void calculaSalario(double salario){
+        assert salario > 0 : "O salário não deve ser menor que zero";        <------Quando vc coloca assertivas, vc tem CERTEZA q o salário nunca será menor que zero
+//        calculo de salario
+    }
+
+
+

@@ -1,0 +1,24 @@
+Classes usadas: StreamsParalelosTeste
+package Estudando.javacore.ZZLstreamsparalelos.teste;
+
+#QUANDO USAR#
+
+Nem sempre você vai saber quando utilizar Streams paralelos, então, é necessário você tomar algumas medidas antes de resolver usar:
+- Benchmark: testar o código sem stream, com stream e com streams paralelas pra ver qual gasta menos processamento
+- Boxing e unboxing: ver se os streams fazem boxing e unboxing dos objetos q vc tá usando (usa se vc estiver usando classes wrapper), isso gasta processamento
+- findFirst() e limit() funcionam melhor quando são sequenciais
+- Com quantidade altas de dados
+- Desempenho de Streams paralelas em listas (do melhor para o pior):
+		      ArrayList = IntStream.range ou LongStream.range > HashSet = TreeSet > LinkedList = Stream.iterate
+- Ter uma noção do tamanho do Stream, do quanto vai gastar as operações que eles vão fazer
+- Considerar o processamento do merge, ou seja, se vai demorar  pra juntar(Join) as operações que foram quebradas(Que houve um fork)
+
+
+#O QUE É#
+
+Quando vc separa o trabalho pra que uma Thread faça uma parte de, por ex, uma soma, a outra faça a outra parte e por ultimo somem/juntem td
+
+
+#O QUE FOI DITO NA AULA#
+
+Fala sobre o tempo e processamento ao usar cada coisa numa soma basica, dentre usar for ou paralelismo

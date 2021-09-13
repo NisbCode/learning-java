@@ -1,0 +1,149 @@
+Classes usadas: ListaMembros(ZZZD_concorrencia)
+
+Essa classe(Conditions) tem os mesmos métodos vindos de synchronized fazendo os msm papeis, porém, o nome muda e pequena parte da sintaxe muda
+
+
+						Condition
+
+public class ListaMembros {
+    private final Queue<String> emails = new LinkedList<>();
+    private final ReentrantLock lock = new ReentrantLock();    //Por estar com final, as Threads verão essa variável imediatamente
+    private final Condition conditionLock = lock.newCondition();
+    private boolean aberta = true;
+
+    public int getEmailPendentes() {
+        // Aq estão as alterações no caso de Conditions
+        synchronized (emails) {
+            return this.emails.size();
+        }
+    }
+
+
+-------------------------------                                                -------------------------------------------                                            ---------------------------------------       
+             
+						synchronized
+
+public class ListaMembros {
+    private final Queue<String> emails = new LinkedList<>();
+    private boolean aberta = true;
+
+    public int getEmailPendentes() {
+        // Os métodos wait, notify e notifyAll só
+        // funcionam em métodos sincronizados
+        synchronized (emails) {   //Como eu não quero que todas as Threads mexam nessa instância, eu a sincronizo
+            return this.emails.size();
+        }
+    }
+
+
+======================================================================================
+
+						Condition
+
+    public String obterEmailMembro() {
+        String email = null;
+        // método wait exige try-catch
+        try {
+            lock.lock();
+            while (this.emails.size() == 0) {
+                if (!aberta) return null;
+                System.out.println("Lista vazia. Colocando a thread " + Thread.currentThread().getName() + " em modo wait");
+                conditionLock.await();
+            }
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock();
+        }
+        return null;
+    }
+
+
+
+-------------------------------                                                -------------------------------------------                                            ---------------------------------------                    
+
+						synchronized
+
+    public String obterEmailMembro() {
+        String email = null;
+        // método wait exige try-catch
+        try {
+            synchronized (this.emails) {
+                while (this.emails.size() == 0) {   //Seu tamanho inicial é 0 pois não obtemos nenhum email
+                    if (!aberta) return null;       //E ele está aberto
+                    System.out.println("Lista vazia. Colocando a thread " + Thread.currentThread().getName() + " em modo wait");
+                    this.emails.wait();  //A Thread q estiver executando esse método irá esperar até q algo interrompa isso, nesse caso um email chegar
+                }
+                email = this.emails.poll(); //Fará com que o primeiro da Queue seja apagado assim q o email seja respondido pela Thread
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return email;  //pq agt vai usar dps
+    }
+
+
+
+
+======================================================================================
+
+						Condition
+
+    public void adicionarEmailMembro(String email) {
+        lock.lock();
+        try {
+            this.emails.add(email);
+            System.out.println("Email adicionado a lista");
+            System.out.println("Notificando as Threads que estão em epera");
+            this.emails.notifyAll();
+        } finally {
+            lock.unlock();
+        }
+    }
+
+
+
+-------------------------------                                                -------------------------------------------                                            ---------------------------------------                    
+
+						synchronized
+
+    public void adicionarEmailMembro(String email) {   ///Ao ser adicionado um email, esse método será ativado
+        synchronized (this.emails) {
+            this.emails.add(email);
+            System.out.println("Email adicionado a lista");
+            System.out.println("Notificando as Threads que estão em espera");
+            this.emails.notifyAll();  //Notifiquei a todas as Threads em espera p voltar ao trabalho
+        }
+    }
+
+
+
+======================================================================================
+
+						Condition
+
+    public void fecharLista() {
+        System.out.println("Notificando as threads e fechando a lista");
+        aberta = false;
+        try {
+            this.emails.notifyAll();
+        } finally {
+            lock.unlock();
+        }
+    }
+}
+
+
+-------------------------------                                                -------------------------------------------                                            ---------------------------------------                    
+
+						synchronized
+
+    public void fecharLista() {
+        System.out.println("Notificando as threads e fechando a lista");
+        aberta = false;
+        synchronized (this.emails) {
+            this.emails.notifyAll();
+        }
+    }
+}

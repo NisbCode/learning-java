@@ -1,0 +1,14 @@
+Classes usadas: Desconto, NovaLoja, Orcamento,                                                 NovaLojaTest
+package Estudando.javacore.ZZMcompletablefuture.classe;                                 package Estudando.javacore.ZZMcompletablefuture.teste;
+
+
+#FAZENDO REQUISIÇÕES ASSÍNCRONAS SEGUIDAMENTE#
+Exemplo:
+Ao chamar o comando de calcular preço ele iniciasse um comando de desconto se fossse necessário
+
+Esse trabalho foi executado por no min duas aulas
+Dentre elas descobrimos a diferença de fazer de uma forma sincrona ou n
+E vemos o uso de novos métodos
+
+Tipo na aula 202 q diz q Compose e Compine tem modos diferentes de uso
+Sendo o Compine p quando vc n precisar da espera anterior

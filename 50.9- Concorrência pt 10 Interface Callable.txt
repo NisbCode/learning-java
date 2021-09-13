@@ -1,0 +1,18 @@
+Classes usadas:
+
+
+#COMO FUNCIONA#
+
+Como o Runnable tendo sua principal diferença o retorno
+Em Runnable, n retorna nd
+Em Callable tem um retorno
+
+
+#AVISOS#
+
+Evitar o uso de notifyAll e demais ao usar Callable pq vc n conhece o comportamento daquela Thread
+
+#QUANDO USAR#
+
+
+Em ambientes em q seja necessário um retorno ao trabalhar c Threads, nessa aula tb aprendemos a usar ThreadLocalRandom

@@ -1,0 +1,8 @@
+Classes usadas: StreamTeste3
+package Estudando.javacore.ZZKstreams.teste;
+
+
+#SERVE PARA#
+
+Ao trabalhar com uma lista de pessoas vc pode ter alguns problemas de pegar quem da lista tem tal salário
+Nesse caso temos alguns métodos da classe stream que ajudam

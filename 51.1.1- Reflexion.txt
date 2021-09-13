@@ -1,0 +1,27 @@
+Classes usadas: Esse documento é uma extenção da aula 51.1- tds os documentos usados lá tb são aq, apenas estarei dando informações
+
+#O QUE É#
+
+Vc conseguir criar um objeto msm c um construtor privado
+
+
+#COMO#
+
+        AviaoSingleton aviaoSingleton = AviaoSingleton.getINSTANCE();
+        AviaoSingleton aviaoSingleton1 = null;
+        Constructor[] constructors = AviaoSingleton.class.getDeclaredConstructors();
+        for (Constructor constructor : constructors){
+            constructor.setAccessible(true);
+            aviaoSingleton1 = (AviaoSingleton) constructor.newInstance();
+            break;
+        }
+
+
+#O QUE AFETA#
+
+Nesse caso, ele torna o padrão Singleton usado n Threadsafe
+
+
+#COMO RESOLVER#
+
+Usando uma classe Enum(Tds os construtores são privados e n é possível criar um objeto enum)

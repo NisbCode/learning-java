@@ -1,0 +1,122 @@
+Classes utilizadas: TesteConexao, CompradorDBOLD
+
+Criamos métodos deletar e atualizar(meio q um sobreescrever no MySQL)
+A melhor forma de saber o código do MySQL p algo é fazer a ação e dps copiar o código(P fazer isso é só ir no app, clicar sobre oq quer q mude
+Mudar algo, apertar em aply copia o comando e dps cancela e reverte ao lado de aply
+
+
+
+
+package Estudando.javacore.ZZB_jdbc.database;
+
+
+import Estudando.javacore.ZZB_jdbc.classe.Comprador;
+import Estudando.javacore.ZZB_jdbc.ConexaoFactory;
+
+import java.sql.*;
+
+/**
+ * ADICIONANDO DADOS A UMA TABELA COM JAVA
+ */
+
+public class CompradorDBOLD {
+    public static void save(Comprador comprador) {
+        // INSERT INTO no java
+        String insertInto = "INSERT INTO agencia.comprador (cpf, nome) VALUES ('" + comprador.getNome() + "', '" + comprador.getCpf() + "');";
+        // conectar o java com o banco de dados
+        Connection conn = ConexaoFactory.getConexao();
+        try {
+            Statement stmt = conn.createStatement();
+            // Dentro da classe Statement temos vários tipos
+            // de execute:
+            //   executeUpdate: usado para ações que mudam
+            //   o estado da tabela (Update, Delete e Alter)
+            //   execute: é usado quando o desenvolvedor não
+            //   sabe o que vai fazer de primeira
+            //   executeQuery: para fazer consulta
+            System.out.println(stmt.executeUpdate(insertInto));
+            ConexaoFactory.close(conn, stmt);
+            System.out.println("Registro inserido com sucesso");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void delete(Comprador comprador) {
+        // DELETE no java
+        if (comprador == null || comprador.getId() == null) {
+            System.out.println("Não foi possível excluir o registro");
+            return;
+        }
+        String delete = "DELETE FROM agencia.comprador WHERE id = '" + comprador.getId() + "';";
+        // conectar o java com o banco de dados
+        Connection conn = ConexaoFactory.getConexao();
+        try {
+            Statement stmt = conn.createStatement();
+            System.out.println(stmt.executeUpdate(delete));
+            ConexaoFactory.close(conn, stmt);
+            System.out.println("Registro excluído com sucesso");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void update(Comprador comprador) {
+        // UPDATE no java
+        if (comprador == null || comprador.getId() == null) {
+            System.out.println("Não foi possível atualizar o registro");
+            return;
+        }
+        String update = "UPDATE agencia.comprador SET cpf = '" + comprador.getCpf() + "', nome = '" + comprador.getNome() + "' WHERE id = '" + comprador.getId() + "';";
+        // conectar o java com o banco de dados
+        Connection conn = ConexaoFactory.getConexao();
+        try {
+            Statement stmt = conn.createStatement();
+            System.out.println(stmt.executeUpdate(update));
+            ConexaoFactory.close(conn, stmt);
+            System.out.println("Registro atualizado com sucesso");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
+
+
+
+
+
+package Estudando.javacore.ZZB_jdbc.test;
+
+import Estudando.javacore.ZZB_jdbc.classe.Comprador;
+import Estudando.javacore.ZZB_jdbc.database.CompradorDBOLD;
+
+public class TesteConexao {
+    public static void main(String[] args) {
+
+//      Para deletar:
+        deletar();
+//      Para atualizar:
+        atualizar();
+    }
+
+    // Escolha um método para executar no main e divirta-se :)
+    public static void inserir(){
+        Comprador inserirCompradorPriscila = new Comprador("111.111.111-12", "Priscila ");
+        CompradorDBOLD compradorDB = new CompradorDBOLD();
+        compradorDB.save(inserirCompradorPriscila); //vai retornar o numero de linhas alteradas
+    }
+
+    public static void deletar(){
+        Comprador comprador = new Comprador();
+        comprador.setId(2);
+        CompradorDBOLD.delete(comprador);
+    }
+
+    public static void atualizar(){
+        Comprador comprador = new Comprador(1, "000.000.000-11", "MARIA");
+        CompradorDBOLD.update(comprador);
+    }
+}

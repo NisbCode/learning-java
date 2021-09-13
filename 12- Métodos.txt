@@ -1,0 +1,41 @@
+Criamos um método definindo o estado da classe e cm ela se comporta. Nesse caso decidimos este:
+
+    public void somaDoisNumeros(){
+
+E esta é a forma de criar um método
+
+Um nome estilo variável(1 letra pequena o resto grande), seguida de parenteses e chaves
+Após isto, devemos chamar o método usando o comando sout com o valor a ser calculado:
+
+        System.out.println(5+5);
+
+E assim que criamos métodos
+
+
+#SABER#
+
+Sua formação vem c 1- Quem poderá ver/usar o método; 2- Oq ele retorna 3- Seu nome
+
+====================================================================
+Na parte de execução, em outra pasta, devemos seguir como chamar e executar esta classe. Neste caso devemos usar o método
+comum de comportamento:
+
+    public static void main(String[] args) {
+
+Seguido da criação e atribuição de uma classe em uma variável:
+
+        Calculadora calc = new Calculadora();
+
+E por fim o método de chamar será diferente, porém, parte do mesmo do objeto:
+
+        calc.somaDoisNumeros();
+
+A ssim o retorno será o valor de que foi estabelecido na 1 classe
+
+====================================================================
+Quando se define uma variável dentro dos parenteses de criação de método, elas são chamadas de parametros:
+
+    public void multiplicacaoDoisNumeros(int num1, int num2) {
+
+
+E ao ir na classe de execução, ele pedirá os valores, eles são chamados de argumentos

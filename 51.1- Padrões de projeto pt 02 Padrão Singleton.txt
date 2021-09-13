@@ -1,0 +1,190 @@
+Classes usadas: AviaoTeste, Aviao, viaoSingletonTeste e AviaoSingleton
+
+
+#QUANDO USAR#
+
+Quando vc precisar de uma única instância de objeto, nesse caso foi o avião
+Existem vários Aviões porém dentro de cada um, apenas deve ter um acento c msm nome disponível
+
+
+#SUBNÍVEIS#
+
+O padrão Singleton pode ser formado de duas formas:
+
+
+					A EAGER INITIALIZATION:
+
+package Estudando.javacore.ZZFpadroesdeprojeto.classes;
+
+import java.util.HashSet;
+import java.util.Set;
+
+/**
+ * PADRÃO SINGLETON
+ * Usado quando o desenvolvedor tem parâmetros em que os
+ * argumentos não podem se repetir
+ * PORÉEEEEM
+ * essa forma de se fazer o padrão não é recomendada, pois não tem proteção
+ * contra construtores criados no método de teste
+ * É muito mais indicado utilizar o exemplo em AviaoSingletonEnum
+ */
+
+public class AviaoSingleton {
+    /**
+     * EAGER INITIALIZATION: Inicializar diretamente no atributo
+     * Transformar o objeto a ser criado num objeto imutável
+     * e alocá-lo na memória
+     */
+
+//    private static final AviaoSingleton INSTANCE = new AviaoSingleton();
+
+    private Set<String> assentosDisponiveis;
+
+    public static AviaoSingleton getINSTANCE() {       //Get p o atributo INSTANCE
+        return INSTANCE;
+    }
+
+    private AviaoSingleton(){                          
+        this.assentosDisponiveis = new HashSet<>();
+        assentosDisponiveis.add("1A");
+        assentosDisponiveis.add("1B");
+    }
+
+    public boolean escolherAssento(String assento){
+        return assentosDisponiveis.remove(assento);
+    }
+}
+
+
+
+
+
+package Estudando.javacore.ZZFpadroesdeprojeto.teste;
+
+
+import Estudando.javacore.ZZFpadroesdeprojeto.classes.AviaoSingleton;
+
+public class viaoSingletonTeste {
+    public static void main(String[] args) {
+        System.out.println("Assento agendado?: ");
+        agendarAssento("1A");
+        System.out.println("Assento agendado?: ");
+        agendarAssento("1A");
+    }
+
+    private static void agendarAssento(String assento){
+        // Agora, nesse caso, o objeto é especificamente
+        // o que tá dentro do método getINSTANCE, o que
+        // vai impedir que objetos sejam removidos duplamente
+        AviaoSingleton a = AviaoSingleton.getINSTANCE();  //Vc faz assim se o construtor tá privado(Nesse caso estava qnd tava fazendo a EAGER)
+        System.out.println(a.escolherAssento(assento));
+    }
+}
+
+
+------------------------------------------------------------------                                                                                               -------------------------------------------------------------
+
+					LAZY INITIALIZATION:
+
+package Estudando.javacore.ZZFpadroesdeprojeto.classes;
+
+import java.util.HashSet;
+import java.util.Set;
+
+/**
+ * PADRÃO SINGLETON
+ * Usado quando o desenvolvedor tem parâmetros em que os
+ * argumentos não podem se repetir
+ * PORÉEEEEM
+ * essa forma de se fazer o padrão não é recomendada, pois não tem proteção
+ * contra construtores criados no método de teste
+ * É muito mais indicado utilizar o exemplo em AviaoSingletonEnum
+ */
+
+public class AviaoSingleton {
+
+    private Set<String> assentosDisponiveis;
+
+    /**
+     * LAZY INITIALIZATION: criando um novo objeto apenas se for necessário
+     */
+
+    private static AviaoSingleton INSTANCE; //Usado apenas na forma LAZY
+
+    //Caso vc faça da forma EAGER, esse get tem apenas q retornar a INSTANCE
+    public static AviaoSingleton getINSTANCE() {       //Get p o atributo INSTANCE
+        // "Se não tiver nada dentro dessa variável INSTANCE..."
+        if (INSTANCE == null){
+            // "... então obtenha o lock dessa classe, pra apenas
+            // uma thread trabalhar nela..."
+            synchronized (AviaoSingleton.class){
+                // "... e checa de novo: se for mesmo nulo..."
+                if (INSTANCE == null){
+                    // "... Então coloca um objeto AviaoSingleton dentro dela"
+                    INSTANCE = new AviaoSingleton();
+                }
+            }
+
+        }
+        return INSTANCE; //eager só teria essa parte
+    }
+
+    private AviaoSingleton(){                           
+        this.assentosDisponiveis = new HashSet<>();
+        assentosDisponiveis.add("1A");
+        assentosDisponiveis.add("1B");
+    }
+
+    public boolean escolherAssento(String assento){
+        return assentosDisponiveis.remove(assento);
+    }
+}
+
+
+
+
+
+package Estudando.javacore.ZZFpadroesdeprojeto.teste;
+
+
+import Estudando.javacore.ZZFpadroesdeprojeto.classes.AviaoSingleton;
+
+public class viaoSingletonTeste {
+    public static void main(String[] args) {
+        System.out.println("Assento agendado?: ");
+        agendarAssento("1A");
+        System.out.println("Assento agendado?: ");
+        agendarAssento("1A");
+    }
+
+    private static void agendarAssento(String assento){
+        // Agora, nesse caso, o objeto é especificamente
+        // o que tá dentro do método getINSTANCE, o que
+        // vai impedir que objetos sejam removidos duplamente
+        AviaoSingleton a = AviaoSingleton.getINSTANCE();  //Vc faz assim se o construtor tá privado(Nesse caso estava qnd tava fazendo a EAGER)
+        System.out.println(a.escolherAssento(assento));
+    }
+}
+
+
+#CUIDADOS#
+
+Esses métodos usadas NÃO são threadsafe(Veja mais sobre no documento 51.1.1-) 
+
+
+#COMO LIDAR C O PROBLEMA#
+
+Dito pelo livro do Joshua, a melhor forma é usando enum
+Ele resolve o problema pq n tem cm vc criar objetos enum, impedindo assim q vc trapaceie ao tentar criar dois objetos da msm instancia msm c o construtor 
+privado, mantendo assim Threadsafe
+
+
+
+        AviaoSingleton aviaoSingleton = AviaoSingleton.getINSTANCE();
+        AviaoSingleton aviaoSingleton1 = null;
+        Constructor[] constructors = AviaoSingletonEnum.class.getDeclaredConstructors();  <----- Isso dará um erro, protegendo assim seu código
+        for (Constructor constructor : constructors){
+            constructor.setAccessible(true);
+            aviaoSingleton1 = (AviaoSingleton) constructor.newInstance();
+            break;
+        }

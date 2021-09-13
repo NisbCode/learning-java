@@ -1,0 +1,13 @@
+Classes usadas: StreamTeste6Collectors2
+package Estudando.javacore.ZZKstreams.teste;
+
+#AGRUPAMENTO DE STREAMS SERVE PARA#
+
+Ajuda a limpar bastante os códigos
+
+
+#COMO FAZEMOS#
+
+Usamos o .groupingBy para agrupar tal lista por alguma chave 
+No caso, decidimos agrupar a lista por gênero
+Também é possível usar .groupingBy dentro de .groupingBy

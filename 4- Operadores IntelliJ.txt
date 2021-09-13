@@ -1,0 +1,98 @@
+++  ===> Incremento
+--  ===> Decremento
++   ===> Mais
+-   ===> Menos
+()  ===> Prioridade
+!   ===> NÃO
+%   ===> Resto da divisão(ajuda a saber se é par ou impar[20%2])
+
+------------------
+cuidado que "+" perto de ""(String) faz com que o app concatene não some
+A melhor forma seria usar a conta de soma antes
+
+Errado:
+
+        System.out.println("Blablabla"+numero1+numero2);
+
+Certo:
+
+        System.out.println(numero1+numero2+"blablablabla"+verde);
+
+
+PORÉM, temos como utilizar depois se usarmos ():
+
+        System.out.println("Blablabla"+(numero1+numero2));
+
+
+========================================================================
+*Operadores de comparação*
+boolean
+
+<    ===> Menor que
+>    ===> Maior que
+<=   ===> Menor ou igual à
+>=   ===> Maior ou igual à
+==   ===> Igual
+!=   ===> Diferente
+
+
+public class OperadoresDeComparacao {
+    public static void main(String[] args) {
+        boolean dezMaiorQueVinte = 10 > 20;
+        boolean dezMenorIgualQueVinte = 10 <= 20;
+        System.out.println(dezMenorIgualQueVinte);
+    }
+}
+
+
+
+=========================================================================
+
+*Operadores Lógicos*
+
+&& ===> E
+|| ===> OU
+
+
+public class OperadoresLogicos {
+        public static void main(String[] args){
+            int idade = 18;
+            float salario = 1000f;
+            System.out.println(idade >= 15 && salario >= 1000);
+        }
+}
+
+
+==========================================================================
+
+*Operadores De Atribuição*
+
+Diminui o número de codigos que você tem no seu programa
+
+==    ===> Igual
+-=    ===> Menos Igual
++=    ===> Mais Igual
+*=    ===> Vezes Igual
+/=    ===> Divisão Igual
+%=    ===> Resto Igual
+
+
+public class OperadoresDeAtribuicao {
+    public static void main(String[] args) {
+        int salario = 1800;
+        salario += 1800;
+        System.out.println(salario);
+    }
+}
+
+- - - - - - - - - - - - - - - - - - - - - - -
+
+public class OperadoresDeAtribuicao {
+    public static void main(String[] args) {
+        int salario = 1800;
+        // caso queira somar ele mesmo com um acrescimo de 10%
+        // você escrever (int) força o número dps de multiplicar por decimal à ficar inteiro, senão ele pediria double
+        salario += (int) (salario * 0.1);
+        System.out.println(salario);
+    }
+}

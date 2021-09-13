@@ -1,0 +1,46 @@
+http://www.agilemodeling.com/essays/umlDiagrams.htm
+
+Este é o link da base de um diagrama de prioridades sobre o que devemos estudar 
+
+Estudaremos o diagrama de classes
+
+
+Na UML é comum o uso de um retângulo dividido em 3 para fazer o esquema de classes
+A parte acima fica o nome da classe
+A do meio fica os atributos
+E a terceira os métodos
+
+
+
+O método "public" por aqui é conhecido com o uso do "+"
+
+Diferente do Java, começamos com primeiro o nome e depois o tipo
+
++ nome: String
+
+A classe enum é é representada assim "<<enumeration>> seguido do nome da classe abaixo dela
+enum tem atributo "+" escrito em upercase e sublinhada
+os tipos "- tipo: string"
+
+A classe abstrata é m italico, e seus métodos abstratos tb
+
+
+O método "private" é representado pelo símbolo "-"
+
+O método protected é representado pelo símbolo "#"
+
+Usamos uma seta aberta --> para indicar as linhas normais de quem faz relação com quem
+Uma seta fechada significa herança
+
+-----[}
+
+EU TENTEI FAZER, MAS CÊ ME ENTENDEU, O MSM DESENHO DAS 4 SETINHAS DO TECLADO
+
+
+
+
+Interfaces:
+
+Usamos em cima do come da classe o: <<interface>>
+Sua seta é tracejada c a ponta fechada   
+- - - - -[}

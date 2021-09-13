@@ -1,0 +1,49 @@
+Classes usadas:
+
+Ajuda no desempenho de sql
+Pq tipo
+Ao trabalhar em um ele passa por um a série de coisas p ver se tá escrito certo e etc
+E nós podemoss pular esse processo agilizando ele 
+
+
+
+    // PreparedStatement: classe filha da classe Statement que melhora a performance da
+    // conversão java-sql (Tipo String e StringBuilder)
+    public static List<Comprador> searchByNamePreparedStatement(String nome) {
+        // A sintaxe no PreparedStatement muda
+        // Wildcard: um valor que está em
+        // aberto para ser substituído por um dado adicionado posteriormente    Nesse caso tamos falando de "?"
+        String selectAllFrom = "SELECT id, nome, cpf FROM agencia.comprador WHERE nome LIKE ?";
+        Connection conn = ConexaoFactory.getConexao();
+        List<Comprador> compradorList = new ArrayList<>();
+        try {
+            // E agora o sql não é mais criado, é preparado
+            PreparedStatement ps = conn.prepareStatement(selectAllFrom);
+            // Settar a informação que vem no lugar do wildcard (?)
+            // baseado no seu tipo (como é nome, uma string nesse caso)
+            // Nos parametros, colocar qual wildcard deve ser substituido
+            // (1, se só tiver um) e o valor de substituição
+            ps.setString(1, "%" + nome + "%");
+            // ResultSet sem parametro, nesse caso
+            ResultSet resultSet = ps.executeQuery();
+            // Para pegar os dados: "Enquanto o resultSet tiver algum proximo item..."
+            while (resultSet.next()) {
+                // "... pegue ou o id (columnIndex, que sempre começa em 1) desejado ou o nome (columnLabel) da coluna desejada,
+                // depende do que o desenvolvedor vai inserir"
+                compradorList.add(new Comprador(resultSet.getInt("id"), resultSet.getString("nome"), resultSet.getString("cpf")));
+
+            }
+            ConexaoFactory.close(conn, ps, resultSet);
+            return compradorList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
+public class TesteConexao {
+    public static void main(String[] args) {
+        // searchByName com menos gastos nos dados
+        System.out.println(CompradorDBOLD.searchByNamePreparedStatement("oao"));

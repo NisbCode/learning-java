@@ -1,0 +1,263 @@
+Classes usadas: TesteCRUD e CompradorDAO(Ps.: Foi alterado dps p CompradorCRUD p q fosse mais organizado) 
+*Aula 154*
+
+Além de tamos criando td de forma mais otimizada, está mais proximo de uma interface 
+
+
+
+package Estudando.javacore.ZZB_jdbc.database;
+
+
+import Estudando.javacore.ZZB_jdbc.classe.Comprador;
+import Estudando.javacore.ZZB_jdbc.ConexaoFactory;
+
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+/***
+ * CLASSE CompradorDBOLD otimizada e trabalhada no try-with-resources com PreparedStatement
+ */
+
+public class CompradorDAO {
+    // Adaptando todos os métodos para o PreparedStatement
+    public static void save(Comprador comprador) {
+        String sql = "INSERT INTO agencia.comprador (cpf, nome) VALUES ( ?, ? );";
+        // usar o TryWithResources para fechar automaticamente
+        // a conexão
+        try (Connection conn = ConexaoFactory.getConexao();
+             PreparedStatement ps = conn.prepareStatement(sql);) {
+            ps.setString(1, comprador.getCpf());
+            ps.setString(2, comprador.getNome());
+            ps.executeUpdate();
+            System.out.println("Registro inserido com sucesso");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void delete(Comprador comprador) {
+        if (comprador == null || comprador.getId() == null) {
+            System.out.println("Não foi possível excluir o registro");
+            return;
+        }
+        String sql = "DELETE FROM agencia.comprador WHERE id = ?;";
+        try (Connection conn = ConexaoFactory.getConexao();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, comprador.getId());
+            ps.executeUpdate();
+            System.out.println("Registro excluído com sucesso");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void update(Comprador comprador) {
+        if (comprador == null || comprador.getId() == null) {
+            System.out.println("Não foi possível atualizar o registro");
+            return;
+        }
+        String sql = "UPDATE agencia.comprador SET cpf = ?, nome = ? WHERE id = ?;";
+        try (Connection conn = ConexaoFactory.getConexao();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, comprador.getCpf());
+            ps.setString(2, comprador.getNome());
+            ps.setInt(3, comprador.getId());
+            System.out.println("Registro atualizado com sucesso");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static List<Comprador> selectAll() {
+        String sql = "SELECT id, nome, cpf FROM agencia.comprador";
+        List<Comprador> compradorList = new ArrayList<>();
+        try (Connection conn = ConexaoFactory.getConexao();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet resultSet = ps.executeQuery(sql)) {
+            while (resultSet.next()) {
+                // "... pegue ou o id (columnIndex, que sempre começa em 1) desejado ou o nome (columnLabel) da coluna desejada,
+                // depende do que o desenvolvedor vai inserir"
+                compradorList.add(new Comprador(resultSet.getInt("id"), resultSet.getString("nome"), resultSet.getString("cpf")));
+
+            }
+            return compradorList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public static List<Comprador> searchByName(String nome) {
+        String sql = "SELECT id, nome, cpf FROM agencia.comprador WHERE nome LIKE ?;";
+        List<Comprador> compradorList = new ArrayList<>();
+        try (Connection conn = ConexaoFactory.getConexao();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, "%" + nome + "%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                compradorList.add(new Comprador(rs.getInt("id"), rs.getString("nome"), rs.getString("cpf")));
+            }
+            ConexaoFactory.close(conn, ps, rs);  //O try-with-resources vai tentar fechar, se já tiver ele vai só ignorar
+            return compradorList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+}
+
+
+
+
+
+
+package Estudando.javacore.ZZB_jdbc.test;
+
+
+import Estudando.javacore.ZZB_jdbc.classe.Comprador;
+import Estudando.javacore.ZZB_jdbc.database.CompradorDAO;
+
+
+import java.util.List;
+import java.util.Scanner;
+
+public class CompradorCRUD {
+    private static Scanner teclado = new Scanner(System.in);
+
+    public static void executar(int op) {   //São pra fazer os casos do teste funcionar
+        switch (op) {
+            case 1:
+                inserir();
+                break;
+            case 2:
+                atualizar();
+                break;
+            case 3:
+                listar();
+                break;
+            case 4:
+                System.out.println("Digite o nome");
+                procurarPorNome(teclado.nextLine());
+                break;
+            case 5:
+                deletar();
+                break;
+        }
+    }
+
+    private static void inserir() {
+        Comprador c = new Comprador();
+        System.out.println("Nome: ");
+        c.setNome(teclado.nextLine());
+        System.out.println("CPF: ");
+        c.setCpf(teclado.nextLine());
+        CompradorDAO.save(c);
+    }
+
+    private static void atualizar() {
+        System.out.println("Selecione um dos compradores abaixo");
+        List<Comprador> compradorList = listar();
+        Comprador c = compradorList.get(Integer.parseInt(teclado.nextLine()));
+        System.out.println("Novo nome ou enter para manter o mesmo");
+        String nome = teclado.nextLine();
+        System.out.println("Novo cpf ou enter para manter o mesmo");
+        String cpf = teclado.nextLine();
+        if (!nome.isEmpty()) {  //Se o nome não for vazio
+            c.setNome(nome);
+        }
+        if (!cpf.isEmpty()) {
+            c.setCpf(cpf);
+        }
+        CompradorDAO.update(c);
+    }
+
+    protected static List<Comprador> listar() {   //Possibilite de retornar a lista
+        List<Comprador> compradorList = CompradorDAO.selectAll();//Lista da class Comprador recebe o método selectAll da class CompradorDao
+        for (int i = 0; i < compradorList.size(); i++) {
+            Comprador c = compradorList.get(i);
+//                              Obs: por algum motivo, os nomes estão no cpf
+//                              e os cpfs estão no nome, ignore isso por ora
+            System.out.println("[" + i + "]" + c.getCpf() + c.getNome());
+        }
+        return compradorList;  //Retorne a lista pra q agt possa usar ela dps p att
+    }
+
+    private static void procurarPorNome(String nome) {
+        List<Comprador> compradorList = CompradorDAO.searchByName(nome);
+        for (int i = 0; i < compradorList.size(); i++) {
+            Comprador c = compradorList.get(i);
+//                              Obs: por algum motivo, os nomes estão no cpf
+//                              e os cpfs estão no nome, ignore isso por ora
+            System.out.println("[" + i + "]" + c.getCpf() + c.getNome());
+        }
+
+    }
+
+    public static void deletar(){
+        System.out.println("Selecione um dos compradores abaixo para deletar");
+        List<Comprador> compradorList = listar();
+        int index = Integer.parseInt(teclado.nextLine());
+        System.out.println("Tem certeza? S/N");
+        String op = teclado.nextLine();
+        if(op.startsWith("s")){
+            CompradorDAO.delete(compradorList.get(index));
+        }
+    }
+}
+
+
+
+
+
+
+
+
+package Estudando.javacore.ZZB_jdbc.test;
+
+
+import java.util.List;
+import java.util.Scanner;
+
+public class TesteCRUD {
+    private static Scanner teclado = new Scanner(System.in); //Variavel static private do tipo Scanner com nome de teclado
+                                                             //q foi inicializado usando o System.io p pegar os dados digitados
+                                                             //no console
+
+    public static void main(String[] args) {
+        int op;
+        while (true) {
+            menu();
+            op = Integer.parseInt(teclado.nextLine());
+            if (op == 0) {
+                System.out.println("Saindo do sistema");
+                break;
+            }
+            if(op == 1){
+                menuComprador();
+                op = Integer.parseInt(teclado.nextLine());   //Lê cm String e converte p int. Isso pq ele considera o enter uma
+                                                             //String ao apertar junto com o num., nisso acaba bugando o processo
+                CompradorCRUD.executar(op);
+            }
+            if(op == 2){
+                menuCarro();
+                op = Integer.parseInt(teclado.nextLine());
+                CarroCRUD.executar(op);
+            }
+            CarroCRUD.executar(op); //Ta aq p ser executado pelo main
+        }
+
+    }
+    private static void menuComprador() {
+        System.out.println("Digite a opção para começar");
+        System.out.println("1. Inserir comprador");
+        System.out.println("2. Atualizar comprador");
+        System.out.println("3. Listar todos os compradores");
+        System.out.println("4. Buscar comprador por nome");
+        System.out.println("5. Deletar");
+        System.out.println("9. Voltar");
+        System.out.println("0. Sair");
+
+
+    }
+}

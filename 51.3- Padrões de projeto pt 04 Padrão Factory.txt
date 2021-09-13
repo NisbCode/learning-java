@@ -1,0 +1,7 @@
+Classes usadas: Moeda, MoedaFactory, Pais e MoedaFactoryTest
+package Estudando.javacore.ZZFpadroesdeprojeto.classes;
+
+#COMO É#
+
+Quando vc tem um método q irá retornar p vc um objeto concreto de uma classe
+Ou seja, a complexidade da criação daquele objeto fica em uma outra classe

@@ -1,0 +1,36 @@
+Usar métodos para proteger seu código se chama encapsulamento
+O uso do get e set serve para que controlemos o que pode ou não ser alterado, porém, ainda poderá ser impresso
+
+Aula 37 resume
+==============================================================================
+Se removermos a parte set de um código, impossibilitamos que aquele possa ser alterado
+Ele ainda poderá ser impresso só que como método:
+
+        estudante.getIdade();
+
+PS.: CASO VOCÊ DELETE UM SET NÃO SE ESQUEÇA DE REMOVER A OUTRA FORMA DE CHAMAR
+
+===============================================================================
+
+Para sertar um valor dentro da memória
+Seguido de uma variável:
+
+public void setNome(String nome){
+
+E para não ter uma confusão de valores, usamos a variável set nome que vai receber a classe com variável nome
+	this.nome = nome;
+
+
+Agora que está privado os valores, teremos que botar os valores aqui:
+
+
+        estudante.setNome ("Carla");
+        estudante.setIdade (16);
+        estudante.setNotas (new double []{0, 0, 0});
+
+        estudante.print();
+        estudante.tirarMedia();
+
+
+Por ultimo, devemos pegar os valores usando get: 
+

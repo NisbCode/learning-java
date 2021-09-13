@@ -1,0 +1,5 @@
+1- Bloco de inicialização estático é executado quando a JVM carregar a classe (É executado apenas UMA vez)
+2- Alocado espaço na memória para o objeto que será criado
+3- Cada atributo de classe é criado e inicializado com seus valores default ou valores explicitos
+4- Bloco de inicialização é executado
+5- O construtor é executado

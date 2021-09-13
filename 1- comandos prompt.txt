@@ -1,0 +1,18 @@
+cd ===> muda o diretório no prompt
+
+javac ===> compila
+
+shift+botãodireito>abrir PowerShell faz vc abrir o prompt já c aquele diretório
+
+../ ===> Significa q vc quer ir ao diretório anterior sem precisar reescrever td usando cd
+
+./ ===> Significa q vc se refere a aquela msm pasta q vc tá
+----------------------------------
+Mostra a frase na tela
+
+public class OlaMundo{
+	public static void main(String[] args){
+		System.out.println("Oi, funcionou?");
+		
+	}
+}

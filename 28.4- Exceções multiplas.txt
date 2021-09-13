@@ -1,0 +1,108 @@
+Ele vai fazer o trabalho de uma exception normal, pegar os possíveis erros 
+
+
+package Estudando.javacore.O_exception.RuntimeExceptionTest;
+
+public class MultiplasRuntimeExceptionTest {
+    public static void main(String[] args) {
+        try {
+            throw new ArrayIndexOutOfBoundsException();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("dentro do ArrayIndexOutOfBoundsException");
+        } catch (IllegalArgumentException e) {
+            System.out.println("dentro do IllegalArgumentException");
+        } catch (ArithmeticException e) {
+            System.out.println("dentro do ArithmeticException");
+        }
+    }
+}
+
+Nesse caso ele tentará pegar o "ArrayIndexOutOfBoundsException" 
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#REGRAS#
+
+Coloque o catch mais genérico(classe mãe) por fim
+Ex.:
+
+package Estudando.javacore.O_exception.RuntimeExceptionTest;
+
+public class MultiplasRuntimeExceptionTest {
+    public static void main(String[] args) {
+        try {
+            throw new ArrayIndexOutOfBoundsException();
+        } catch (RuntimeException e) {
+            System.out.println("dentro do RuntimeException");                 <---------Nesse caso todas as posteriores são filhas da Runtime, isso fará com que
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("dentro do ArrayIndexOutOfBoundsException");     <---------Essa
+        } catch (IllegalArgumentException e) {
+            System.out.println("dentro do IllegalArgumentException");                    <---------Essa
+        } catch (ArithmeticException e) {
+            System.out.println("dentro do ArithmeticException");                             <--------- E essa linha, nunca sejam alcançadas, pois serão consideradas a 1
+        }
+    }
+}
+
+
+Nesse caso o correto seria deixar o RuntimeException para o final, isso dirá algo como "Se a exceção não se enquadrar em nenhuma das anteriores, 
+caso sejam filhas da Runtime, coloque-a aqui"
+Essa é a forma correta:
+
+package Estudando.javacore.O_exception.RuntimeExceptionTest;
+
+public class MultiplasRuntimeExceptionTest {
+    public static void main(String[] args) {
+        try {
+            throw new ArrayIndexOutOfBoundsException();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("dentro do ArrayIndexOutOfBoundsException");
+        } catch (IllegalArgumentException e) {
+            System.out.println("dentro do IllegalArgumentException");
+        } catch (ArithmeticException e) {
+            System.out.println("dentro do ArithmeticException");
+        } catch (RuntimeException e) {
+            System.out.println("dentro do RuntimeException");
+        }
+    }
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Também tem como você pegar tds as exceções de uma só vez:
+
+        try {
+            talvezLanceException();
+       }catch (Exception e){
+            System.out.println("PEGUEI A POHA TD");
+        }
+    }
+    private static void talvezLanceException() throws SQLException, FileNotFoundException {
+
+    }
+
+================================================================================
+
+Do Java 7 em diante fou permitido fazer desta forma, assim poupando linha:
+
+        try {
+            talvezLanceException();
+        }catch (SQLException | IOException e){
+            System.out.println("Isso do Java 7 em diante");
+        }
+
+#REGRAS#
+
+Ao fazer isso vc n pode atribuir a uma variável uma exceção, pq assim o Java n vai saber qual é qual a q vc tá atribuindo
+Não pode fazer isso no caso:  e = new SQLException();
+(No outro já n podia, mas aq pode menos)
+Tb não pode pôr exceções q tejam na msm linha de herança, Naquele caso lá em cima, n poderia usar o Runtime e os outros dps, seria pleonasmo
+É BOM EVITAR mudar de 
+
+        }catch (SQLException | IOException e){
+
+Para 
+
+        }catch (Exception e){
+
+Pois mts códigos ainda estão no antigo modo Java 6

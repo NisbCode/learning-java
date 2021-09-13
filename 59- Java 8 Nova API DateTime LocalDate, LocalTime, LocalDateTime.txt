@@ -1,0 +1,15 @@
+Classes usadas: DateTimeAPITest1
+package Estudando.javacore.ZZNdatetime.test;
+
+
+#POR QUE USAR#
+
+Infelizmente nem sempre a API Date e Calendar n resolviam de fato determinado problema, nisso, pessoas procuraram API diferentes
+Então foi introduzido a DateTime
+
+
+#O QUE VAMOS VER#
+
+Nessa aula vamos ver métodos da LocalDate, uma das classes dessa API, usada para datas
+A LocalTime, q é usada apenas para tempo
+E a LocalDateTime q trabalha c os dois ao msm tempo p n ter q importar cada um separado

@@ -1,0 +1,6 @@
+Não sobreescreva algo que não seja uma classe filha da que está na classe a qual vc extends
+
+Tipo uma Test sobreescrever um método da classe Funcionario q seja Exception
+A test n pode lançar um método que não seja filha desta (IOException por ex)
+
+Vc tb tem a opção de não declarar nada ao sobreescrever

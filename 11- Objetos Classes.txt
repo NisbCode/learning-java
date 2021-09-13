@@ -1,0 +1,28 @@
+Aula 24, 25, etc
+
+Classes são conjuntos de métodos especificados
+
+Uma classe de estudantes
+Tem informações de estudantes
+Ao criar uma segunda classe 
+Podemos importar valores da 1 classe deixando assim td mais organizado
+N se esqueça de q tds as classes são filhas da classe object
+
+Para buscarmos uma informação de uma classe, devemos:
+
+
+1- Importar ela: 
+
+import Estudando.introducao.javacore.classes.Carro;
+
+2- Transformala em objeto:
+
+        Carro carro = new Carro();
+
+Usa primeiro o nome da Classe importada; Depois o nome da variável que irá recebe-la; Após isto, a atribuição junto com a
+palavra "new"; E por fim, a classe importada seguida de "();"
+
+
+3- Chamar ela:
+
+        System.out.println(carro.modelo);

@@ -1,0 +1,6 @@
+Classes usadas: ScheduledThreadPoolTest
+
+
+#QUANDO USAR#
+
+Quando quiser agendar uma tarefa de tanto em tanto tempo

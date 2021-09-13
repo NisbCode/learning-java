@@ -1,0 +1,30 @@
+Classes usadas: LojaTest2
+package Estudando.javacore.ZZMcompletablefuture.teste;
+
+
+#USANDO EXECUTOR CUSTOMIZADO P MUDAR A PERFORMANCE#
+
+Vc tem q passar a quantidade de Threads
+Para isso temos uma fórmula:
+
+        // NumeroDeThreads = Ncpu * Ucpu * (1+W/C)
+        // Ncpu = numero de cores disponivel                               <---Para descobrir: System.out.println(Runtime.getRuntime().availableProcessors());
+        // Ucpu = quantidade de utilização da CPU (0-1)              <---Se quer 100% coloca o 1 msm, pra sl, 50 %, 0.5
+        // W/C = wait time e compute time                                   <---Tempo q sua cpu parada
+        // Ntrheads = 8 * 1 * (1+99) = 800 threads
+
+Para fixar a quantidade de Threads no pool: 
+
+        final Executor executor = Executors.newFixedThreadPool(Math.min(lojas.size(), 100), r -> {
+            Thread t = new Thread(r);
+            t.setDaemon(true);                                    <---Isso é uma boa prática p q se houver uma thread main sendo executada, o programa n, parará
+            return t;
+        });
+
+
+#QUANDO USAR ESSA FRAMEWORK#
+
+Quando um dado q vem de hd ou memoria ou trabalhando numa network, vai de stream
+Já q as Threads vão ficar bloquiadas
+
+Agr se vc tá mexendo c IO ou conectção de htp ou de outro computador usa o Completable Future c Executors

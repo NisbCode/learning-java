@@ -1,0 +1,84 @@
+Classes usadas: *
+package *
+
+#>ESSA AULA FOI DE DICAS E CURIOSIDADES, USAMOS QUASE TDS AS CLASS DE LAMBDAS CRIADAS ATÉ AGR E ALGUMAS DO PACOTE ZZGCOMP...<#
+
+
+
+#TRABALHANDO COM TIPOS PRIMITIVOS EM ALTA PERFORMANCE#
+
+O outboxing e boxing dão uma diminuída no nível de performace q vc consegue , é bem pequena mas em grande quantidade atrapalha
+Então temos algumas interfaces functions q evitam ela cm a IntPredicate:
+
+        //Para usar tipos primitivos em alta performace:
+        Predicate<Integer> par = (Integer i)  -> i % 2 == 0;    //Ele te obriga a pôr o Integer
+        IntPredicate impar = (int i) -> i % 2 == 1;             //Evitam esse whapper automático
+        System.out.println(impar.test(1000));
+
+
+#DICA DE SYNTAXE LAMBDA#
+
+Vc n precisa pôr o tipo(Object, String) pq o java já sabe q tá implicito ali
+
+		Cm é por extenso:
+
+Predicate<Carro> carroPredicateLambda = (Carro carro) -> carro.getCor().equalsIgnoreCase("vermelho");
+
+		Cm podemos fazer:
+
+Predicate<Carro> carroPredicateLambda = carro -> carro.getCor().equalsIgnoreCase("vermelho");
+
+Só nem sempre vale a pena já q DEPENDENDO fica confuso
+
+
+#TARGET TYPE#
+
+É oq lambda tá esperando de tipo:
+
+
+public static void main(String[] args) {
+
+        CarroPredicate carroPredicateAbstrato = new CarroPredicate() {
+            @Override
+            public boolean test(Carro carro) {
+                return carro.getCor().equalsIgnoreCase("vermelho");
+            }
+        };
+
+        Predicate<Carro> carroPredicateLambda = (Carro carro) -> carro.getCor().equalsIgnoreCase("vermelho");  <---Esse Predicate<Carro> é o tipo
+                                                                                                                                                                                           Pois é a interface Predicate tipo carro
+                                                                                                                                                                                           Mas pode ser trocado por:
+
+        CarroPredicate carroPredicateLambda = (Carro carro) -> carro.getCor().equalsIgnoreCase("vermelho");        <---Isso pq nesse caso ambos tem a msm 
+                                                                                                                                                                                           Assinatura funcional
+
+
+#FUNCTIONAL DESCRIPTION#
+
+É oq o a função tá pedindo
+
+
+
+#STATEMENT EXCEPTION#
+
+Então, é possivel q c um bloco de inicialização ou c lambda vc consiga retornar algo por meio de um método q n tem retorno
+Isso num bloco de inicialização seria cm pôr:
+
+{
+     "oi"
+}
+
+A memória n vai guardar nem nd
+Mas pôr:
+
+     new String("oi");
+
+Funcioaria
+
+Isso pq tem cm vc fazer um bloco/lambda retornar caso seja uma expressão
+
+
+#USO DE VARIÁVEIS LOCAIS#
+
+Elas são final ou efetivamente final
+De qualquer forma n dá p altera-las ao longo do código justamente pq dps daquele método ela morre

@@ -1,0 +1,40 @@
+https://www.youtube.com/watch?v=kkOSweUhGZM&list=PL62G310vn6nHrMr1tFLNOYP_c73m6nAzL
+Link do maratona
+
+Aula sobre Java começada dia 13/03/19
+Aula sobre programação começada dia 22/02/19
+Aulas sobre Java finalizada dia 30/06/19
+
+Sempre que criar uma nova pasta "package" crie com o nome inverso da empresa pra que não entre em conflito os arquivos
+Ex:
+
+Empresa: abc.com.br
+Nome da pasta: br.com.abc
+
+
+
+Criamos subpacotes do 1 pacote, clicando com o botão direito no "scr" e indo em packages
+
+Os subpacotes podem ser criados indo dnv em scr, faznedo a msm coisa, mas escrevendo o nome do pacote o qual você quer 
+que tenha um sub, e botando "." + o nome da pasta nova
+
+Ex: 
+
+Pasta principal: introducao
+
+Subpasta:        introducao.aprendendoArrays
+
+
+Classes podem importar informações de outras classes por meio de uma espécime de diretório
+
+import Estudando.introducao.javacore.introducaoclasses.Estudante;
+
+
+Classes devem ser especificas, ex: class estudante devem ter coisas APENAS de estudantes
+
+
+De um tempo para cá você passou a dar run só na parte de test da classe pq lá que vai ter o comando main
+
+A ordem do MAIS RESTRITO TIPO para o MAIS PÚBLICO é:
+
+private > default > protected > public

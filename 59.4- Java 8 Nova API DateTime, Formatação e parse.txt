@@ -1,0 +1,9 @@
+Classes usadas: DateTimeAPITest5
+package Estudando.javacore.ZZNdatetime.test;
+
+
+#CASO V TENHA UMA STRING E QUEIRA PASSAR P LOCALDATE OU VICE-VERSA#
+
+Vc vai usar sempre o FORMAT quando quiser de OBJETO p STRING
+E PARSE de STRING p OBJETO
+

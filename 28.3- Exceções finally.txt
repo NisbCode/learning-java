@@ -1,0 +1,37 @@
+O método finally serve como um bloco que independentemente será executado
+Ele faz parte de TRY CATCH
+
+
+
+public class CheckedExceptionTest {
+    public static void main(String[] args) {
+
+        abrirArquivo();                                                                              <-----Chamada do método
+    }
+
+    public static void criarArquivo() throws IOException {                    <-----Só lembrando q ele tem q tá fora do main pq o main só chama
+        File file = new File("Teste.txt");
+        try {
+            System.out.println("Arquivo criado? " + file.createNewFile());
+            System.out.println("Arquivo criado");
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }                                                                                                        
+
+    public static void abrirArquivo() {
+        try {
+            System.out.println("Abrindo arquivo? ");
+            System.out.println("Abrindo o arquivo");
+            System.out.println("Lendo o arquivo");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {                                                                               <-----Comando de segurança, ele SEMPRE será executado
+            System.out.println("Fechando o arquivo");
+        }
+
+    }
+}
+

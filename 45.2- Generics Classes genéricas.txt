@@ -1,0 +1,173 @@
+Uso as classes: ClasseGenericaTest, Carro e ClasseNaoGenericaTest
+
+Para identificar vc vai usar <T> e nas coleções vc vai usar <E>
+Vc vai fazer uso destas classes sempre q os códigos forem quase o msm, só mudar o nome
+Assim, poupando linhas e organizando mais o projeto
+Muito usados em Frameworks já q vc n sabe q tipo de coisa será usada ali
+
+
+package Estudando.javacore.Z_generics.classes;
+
+public class Carro {
+    private String nome;
+
+    public Carro(String nome) {
+        this.nome = nome;
+    }
+
+    @Override
+    public String toString() {
+        return "CarroOptional{" +
+                "nome='" + nome + '\'' +
+                '}';
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+}
+
+
+
+
+
+package Estudando.javacore.Z_generics.test;
+
+
+import Estudando.javacore.Z_generics.classes.Carro;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ClasseNaoGenericaTest {
+    public static void main(String[] args) {
+        CarroAlugavel carroAlugavel = new CarroAlugavel();
+        Carro carroAlugado = carroAlugavel.alugaCarroDisponivel();
+        System.out.println("Usando o carro por um mês vrumvrum");
+        carroAlugavel.devolverCarro(carroAlugado);
+    }
+}
+
+class CarroAlugavel {
+    private List<Carro> carrosDisponiveis = new ArrayList<>();
+    // Bloco de inicialização, lembra? Nem eu
+    {
+        carrosDisponiveis.add(new Carro("Gol"));
+        carrosDisponiveis.add(new Carro("BMW"));
+    }
+
+    // Método para alugar o carro: cada carro alugado será
+    // removido da lista
+    public Carro alugaCarroDisponivel(){
+        Carro c = carrosDisponiveis.remove(0);
+        System.out.println("Alugando carro " + c);
+        System.out.println("Carros disponíveis: " + carrosDisponiveis);
+        return c;
+    }
+
+    // Para devolver o carro: carro como parâmetro e esse
+    // parâmetro é adicionado a carrosDisponiveis
+    public void devolverCarro (Carro c){
+        System.out.println("Devolvendo carro " + c);
+        carrosDisponiveis.add(c);
+        System.out.println("Carros disponíveis: " + carrosDisponiveis);
+    }
+
+    // Quase uma telinha de menu que mostra você escolhendo
+    // e depositando carros hahaha
+
+    /***
+     * E se você quisesse fazer isso com outros tipos de produtosw
+     * Não teria que copiar esse mesmo código, criar a nova classe
+     * e mudar apenas o tipo? Muita coisa pra programação
+     * dá pra simplificar isso
+     */
+
+}
+
+
+
+
+
+package Estudando.javacore.Z_generics.test;
+
+import Estudando.javacore.Z_generics.classes.Carro;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/***
+ * APRENDENDO A LIDAR COM GENERICS
+ */
+
+public class ClasseGenericaTest {
+    public static void main(String[] args) {
+        List<Carro> carrosDisponiveis = new ArrayList<>();
+        carrosDisponiveis.add(new Carro("Gol"));
+        carrosDisponiveis.add(new Carro("BMW"));
+        // Agora é só colocar o tipo entre maior e menor
+        ObjetoAlugavel<Carro> carroAlugavel = new ObjetoAlugavel<>(carrosDisponiveis);
+        Carro carro = carroAlugavel.alugaObjetosDisponivel();
+        System.out.println("Usando o carro por um mês");
+        carroAlugavel.devolverObjeto(carro);
+
+    }
+    // Para que não precisemos criar várias classes com,
+    // mesmo código, definimos um tipo T entre chaves para entrar
+    // algum dado necessário
+    // Nas Collections é E, fora delas é T, de Type
+
+    static class ObjetoAlugavel<T> {
+        private List<T> objetosDisponiveis = new ArrayList<>();
+
+        public ObjetoAlugavel(List<T> objetosDisponiveis) {
+            this.objetosDisponiveis = objetosDisponiveis;
+        }
+
+
+        public T alugaObjetosDisponivel() {
+            T t = objetosDisponiveis.remove(0);
+            System.out.println("Alugando objeto " + t);
+            System.out.println("Objetos disponíveis: " + objetosDisponiveis);
+            return t;
+        }
+
+        public void devolverObjeto(T t) {
+            System.out.println("Devolvendo objeto " + t);
+            objetosDisponiveis.add(t);
+            System.out.println("Objetos disponíveis: " + objetosDisponiveis);
+        }
+    }
+
+    // Também é possível criar 2 Types numa generic
+    // (não testado, apenas anotação)
+    class DoisAtributos<T, X>{
+        T um;
+        X dois;
+
+        public DoisAtributos(T um, X dois) {
+            this.um = um;
+            this.dois = dois;
+        }
+
+        public T getUm() {
+            return um;
+        }
+
+        public void setUm(T um) {
+            this.um = um;
+        }
+
+        public X getDois() {
+            return dois;
+        }
+
+        public void setDois(X dois) {
+            this.dois = dois;
+        }
+    }
+}

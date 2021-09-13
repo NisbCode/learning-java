@@ -1,0 +1,237 @@
+Classes usadas: CompradorDBOLD, ConexaoFactory, Comprador, TesteConexao
+                              |                              |                        |                                      |
+Contém os métodos   Contém a execução       Contém oq foi executado            Testa a conexão e ações do java p o my sql
+
+Criamos um método save onde usamos uma string com o código q seria usado no mysql para inserir (insert into)
+Dps criamos uma conexão usando a classe Conncetion com atributo conn q recebe o método de pegar conexão da outra classe
+Após isto usamos a classe Statement q vai aplicar o código da string no mysql criando um atributo q recebe a variável de conexão fazendo o método de criar um 
+Statement
+E por fim vc pega a variável Statemente criada e executa o método q executa(PS.: Esse método tem várias versões quando vc for modificar no sentido de atualizar, 
+inserir ou deletar vc usa o executeUpdate, se n tiver ctz usa só o execute, se quiser fazer uma pesquisa vc usa o Query)
+Dps nós mandamos ele dizer quantas linhas foram executadas
+E fechamos tanto a conexão quanto o statement
+E dps é só usar a classe de test p chamar o método inserir 
+
+
+
+
+package Estudando.javacore.ZZB_jdbc;
+
+
+import java.sql.*;
+
+//Basicamente é dever da empresa MySQL ou demais, fazerem com que o banco de dados funfre
+//Porém, p agt conseguir se nocentar a ela, eles criaram 3 interfaces, as q vamos trabalhar
+/***
+ * JDBC: pacote criado para abstrair o desenvolvedor
+ * dos problemas do banco de dados, para tal, é necessário
+ * aprender sobre as interfaces do pacote java.sql
+ * As 3 interfaces principais são:
+ *   Connection, que gera a conexão da interface com o banco
+ *   de dados
+ *   Statemant, para realizar operações que mudam o estado do
+ *   banco
+ *   ResultSet, similar ao select, trabalha com os resultados
+ *   das consultas
+ * A conexão vem através da classe DriverManager, que busca o conector
+ * específico de um banco e devolve ao desenvolvedor
+ */
+
+public class ConexaoFactory {
+    public static Connection getConexao (){  //static pq a conexão é a msm n importando as vezes chamadas, e tb pq n usa nenhuma atrib de classe
+        // Para obter a conexao, 3 coisas são necessárias:
+        // uma url, um usuário e um password
+
+        // Cada banco de dados tem uma url especifica que pode
+        // ser encontrada na sua documentação
+        // No mysql é jdbc:banco_de_dados://endereço_do_banco(localhost em inglês):porta/nome_do_banco
+        // adaptar ao horario brasileiro de verão
+        String url = "jdbc:mysql://localhost/agencia?allowPublicKeyRetrieval=true&useSSL=false&useTimezone=true&serverTimezone=UTC";
+//        Para usar parâmetros numa URL use "?"
+
+        String usuario = "root";
+
+        // senha no mysql
+        String password = "bank";
+
+        // Agora pegar a conexao (dentro de um tratamento de exceções)
+        try {
+            Connection conexao = DriverManager.getConnection(url, usuario, password);
+            System.out.println(conexao);
+            return conexao;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // A classe Connection pede pra fechar com return
+        return null;
+    }
+
+    // Método para encerrar a conexão e lidar com os tratamentos
+    public static void close(Connection connection){
+
+        try {
+            // Se usar chave no if aqui, vai dar erro, cuidado
+            if (connection != null)
+                connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    // Sobrecarga para lidar com statements também
+    public static void close (Connection connection, Statement statement){
+        close(connection);
+        try {
+            // Se usar chave no if aqui, vai dar erro, cuidado
+            if (statement != null)
+                statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+}
+
+
+
+
+
+
+package Estudando.javacore.ZZB_jdbc.database;
+
+
+import Estudando.javacore.ZZB_jdbc.classe.Comprador;
+import Estudando.javacore.ZZB_jdbc.ConexaoFactory;
+
+
+import java.sql.*;
+
+/**
+ * ADICIONANDO DADOS A UMA TABELA COM JAVA
+ */
+
+public class CompradorDBOLD {
+    public static void save(Comprador comprador) {
+        // INSERT INTO no java
+        String insertInto = "INSERT INTO agencia.comprador (cpf, nome) VALUES ('" + comprador.getNome() + "', '" + comprador.getCpf() + "');";
+        // conectar o java com o banco de dados
+        Connection conn = ConexaoFactory.getConexao();
+        try {
+            Statement stmt = conn.createStatement();
+            // Dentro da classe Statement temos vários tipos
+            // de execute:
+            //   executeUpdate: usado para ações que mudam
+            //   o estado da tabela (Update, Delete e Alter)
+            //   execute: é usado quando o desenvolvedor não
+            //   sabe o que vai fazer de primeira
+            //   executeQuery: para fazer consulta
+            System.out.println(stmt.executeUpdate(insertInto));
+            ConexaoFactory.close(conn, stmt);
+            System.out.println("Registro inserido com sucesso");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
+
+
+
+
+
+package Estudando.javacore.ZZB_jdbc.classe;
+
+
+import java.util.Objects;
+
+public class Comprador {
+    private Integer id;
+    private String cpf;
+    private String nome;
+
+    public Comprador() {
+    }
+
+    public Comprador(Integer id, String cpf, String nome) {
+        this.id = id;
+        this.cpf = cpf;
+        this.nome = nome;
+    }
+
+    public Comprador(String cpf, String nome) {    //Isso pq nem sempre o comprador vai ter o id, já q será gerado pelo pc
+        this.cpf = cpf;
+        this.nome = nome;
+    }
+
+    @Override
+    public String toString() {
+        return "Comprador{" +
+                "id=" + id +
+                ", cpf='" + cpf + '\'' +
+                ", nome='" + nome + '\'' +
+                '}';
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Comprador comprador = (Comprador) o;
+        return Objects.equals(id, comprador.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+}
+
+
+
+
+
+package Estudando.javacore.ZZB_jdbc.test;
+
+import Estudando.javacore.ZZB_jdbc.classe.Comprador;
+import Estudando.javacore.ZZB_jdbc.database.CompradorDBOLD;
+
+public class TesteConexao {
+    public static void main(String[] args) {
+//      Para inserir:
+        inserir();
+    }
+
+    // Escolha um método para executar no main e divirta-se :)
+    public static void inserir(){
+        Comprador inserirCompradorPriscila = new Comprador("111.111.111-12", "Priscila ");
+        CompradorDBOLD compradorDB = new CompradorDBOLD();
+        compradorDB.save(inserirCompradorPriscila); //vai retornar o numero de linhas alteradas
+    }
+}

@@ -1,0 +1,27 @@
+Ele é usado para diferenciar qual classe faz oq e tem oq quando tds elas estão em uma relação de herança
+*Aula 60*
+
+
+				Classe:
+
+#REGRAS#
+Não se pode usar "new" numa classe que foi tornada abstrata
+não se pode usar final junto com abstract
+Se temos um método abstrato, obrigatóriamente temos que pôr abstract na classe
+
+
+Classes abstratas podem extender outras classes abstratas
+
+
+				Métodos Abstratos:
+
+#REGRAS#
+Tem que obrigatoriamente ser sobreescritos 
+Os métodos que não são abstrato, são concretos
+Não podem ter um corpo
+Vc usa um método concreto quando ele é usado pelas classes filhas da mesma forma, e o bastrato quando ele irá mudar
+Quando vc criar um método abstrato, vc será obrigado a sobreescrever ele na primeira classe concreta q tiver
+Mas se vc sobreescrever ele numa abstrata, não terá mais o erro de compilação
+
+Isso fará com que o método tenha que ser alterado para as classes filhas, assim deixando cada classe com sua própria irregularidade, para isto, é
+recomendado o uso do tipo protect 

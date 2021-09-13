@@ -1,0 +1,60 @@
+Classes usadas: LambdaTeste2
+package Estudando.javacore.ZZHlambdas.teste;
+
+
+#INTERFACE FUNCTIONAL CONSUMER#
+
+Recebe um objeto T, que deve ser adicionado pelo desenvolvedor e faz uma operação com ele
+Por ex um método q imprime uma lista:
+
+public class LambdaTeste2 {
+    public static void main(String[] args) {
+
+                    // A lista                                                                                       // Agora a operação com o objeto T: nesse caso, imprimir os itens da lista
+        forEach(asList("William", "DevDojo", "facebook.com/devdojobr"), (String s) -> System.out.println(s));
+
+
+    // Interface Consumer
+    public static <T> void forEach(List<T> listaT, Consumer<T> consumidorT){
+        // para cada elemento na listaT, cujo tipo será determinado ao imprimir ou na criação da lista
+        for (T elemento : listaT){
+            // método accept da interface Consumer,
+            // que deverá ser feito pelo desenvolvedor, já
+            // que vem de uma interface
+            consumidorT.accept(elemento);
+        }
+    }
+
+
+#INTERFACE FUNCTIONAL FUNCTION#
+
+Recebe um tipo T nos argumentos e retorna um tipo R, diferente do inicial
+Por ex vc passar uma lista de frutas mas ter de retorno o tamanho de letras em cada item da lista:
+
+
+        List<Integer> listaTamanhoNomes = tamanhoPalavras(asList("William", "DevDojo", "facebook.com/devdojobr"), (String s) -> s.length());
+        System.out.println(listaTamanhoNomes);
+
+    // Interface function
+    public static <T, R> List<R> tamanhoPalavras(List<T> lista, Function<T, R> function){
+        // Uma lista contendo os itens do resultado
+        List<R> result = new ArrayList<>();
+        // Para cada item do tipo T, tirado da lista dada como argumento...
+        for (T item : lista){
+            // ... adicione esse item na lista utilizando o método apply
+            // da interface function
+            result.add(function.apply(item));
+        }
+        return result;
+    }
+
+
+
+#INTERFACE FUNCIONAL SUPPLIER#
+
+Serve apenas p retornar algo, por ex:
+
+Supplier<Carro> supl = () new Carro("preto", 2015);
+sout(supl.get().getCor();)
+
+Ela foi explicada na aula 179 mas decidi colocar ela aq p organizar, n foi usada classe alguma nessa aula, foi só de dicas

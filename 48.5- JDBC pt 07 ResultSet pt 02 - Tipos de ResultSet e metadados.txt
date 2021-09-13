@@ -1,0 +1,109 @@
+Uso das classes: CompradorDBOLD, TesteConexao
+
+ResultSet ajuda a pegar metadados(quantidade das colunas, nomes delas, sua tia, etc)
+Vc pode precisar pegar os metadados caso vc n tenha controle sobre a sql q vc tá executando e precise fazer uma consulta e precise de dados q vc saiba exatamente 
+quais são
+Ele vai basicamente pegar de um sql as informações q vc quiser
+
+public class CompradorDBOLD {
+    public static void save(Comprador comprador) {
+
+
+    // Para pegar metadados (Ou seja, quantidade de colunas, nome delas, etc)
+    public static void selectMetaData() {
+        String sql = "SELECT * FROM agencia.comprador;";
+        Connection conn = ConexaoFactory.getConexao();
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            ResultSetMetaData rsmd = rs.getMetaData();
+            rs.next();
+            // Método para contagem de colunas
+            int qtdColunas = rsmd.getColumnCount();
+            System.out.println("Quantidade de colunas: " + qtdColunas);
+            for (int i = 1; i <= qtdColunas; i++) {
+                System.out.println("tabela: " + rsmd.getTableName(i));
+                System.out.println("Nome da coluna: " + rsmd.getColumnName(i));
+                System.out.println("Tamanho da coluna: " + rsmd.getColumnDisplaySize(i));
+            }
+
+            ConexaoFactory.close(conn, stmt, rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
+
+
+public class TesteConexao {
+    public static void main(String[] args) {
+
+//        // Exibir os metadados, como nome ou numero de colunas
+        CompradorDBOLD.selectMetaData();
+
+
+
+======================================================================================
+
+Apredendo a mover o cursor do ResultSet
+Mas antes, temos q ver se nosso drive (MySQL) suporta tds os 3 casos
+E cada constant dessas 3 tem mais duas, q mostram se eles conseguem ler e atualizar enquanto aberto ou só ler
+No IntelliJ ele só suporta TYPE_SCROLL_INSENSITIVE e TYPE_FOWARD_ONLY
+
+
+public class CompradorDBOLD {
+    public static void save(Comprador comprador) {
+
+    // Suportes do Drives: método para checar informações do ResultSet quanto ao sentido dos dados
+    public static void checkDriverStatus() {
+        Connection conn = ConexaoFactory.getConexao();
+        try {
+            DatabaseMetaData dbmd = conn.getMetaData();
+            // TYPE_FOWARD_ONLY: tipo do ResultSet, com leitura de informações de
+            // cima pra baixo (suportado)
+            if (dbmd.supportsResultSetType(ResultSet.TYPE_FORWARD_ONLY)) {
+                System.out.println("O ResultSet suporta o status TYPE_FOWARD_ONLY");
+                //CONCUR_UPDATABLE: checa se o registro pode ser atualizado automaticamente com o ResultSet aberto
+                if (dbmd.supportsResultSetConcurrency(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE)) ;
+                System.out.println("e também suporta o status CONCUR_UPDATABLE");
+            }
+
+            // TYPE_SCROLL_INSENSITIVE: a leitura pode ir pra frente, pra tras,
+            // começar de um ponto especifico, mas qualquer mudança no banco
+            // não afetará esse ResultSet enquanto ele tiver aberto
+            if (dbmd.supportsResultSetType(ResultSet.TYPE_SCROLL_INSENSITIVE)) {
+                System.out.println("O ResultSet suporta o status TYPE_SCROLL_INSENSITIVE");
+                //CONCUR_UPDATABLE: checa se o registro pode ser atualizado automaticamente com o ResultSet aberto
+                if (dbmd.supportsResultSetConcurrency(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE)) ;
+                System.out.println("e também suporta o status CONCUR_UPDATABLE");
+
+                // Nesse ambiente de desenvolvimento, apenas esse tipo é suportado
+            }
+
+            // TYPE_SCROLL_SENSITIVE: a leitura pode ir pra frente, pra tras,
+            // começar de um ponto especifico, e qualquer mudança no banco
+            // afetará esse ResultSet enquanto ele tiver aberto e as mudanças serão
+            // notadas no objeto
+            if (dbmd.supportsResultSetType(ResultSet.TYPE_SCROLL_SENSITIVE)) {
+                System.out.println("O ResultSet suporta o status TYPE_SCROLL_SENSITIVE");
+                //CONCUR_UPDATABLE: checa se o registro pode ser atualizado automaticamente com o ResultSet aberto
+                if (dbmd.supportsResultSetConcurrency(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE)) ;
+                System.out.println("e também suporta o status CONCUR_UPDATABLE");
+            }
+            ConexaoFactory.close(conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
+
+
+public class TesteConexao {
+    public static void main(String[] args) {
+
+        // Checar o suporte de sentido de leitura dos dados
+        CompradorDBOLD.checkDriverStatus();

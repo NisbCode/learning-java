@@ -1,0 +1,56 @@
+String são imutáveis
+String é uma classe, ou seja, vc pode criar um objeto
+Existe um espaço na memória apenas p Strings, isso ocorre p economizar memória desta forma, (CALMA Q EU EXPLICO ABAIXO, N TEM EM OUTRO LUGAR):
+
+Se existe uma String chamada "Banana"                  <-----------------------------------------
+E vc concatena ela com " Alface"                                                                                  |
+Irá criar uma terceira String chamada "Banana Alface"                                                  |
+Caso dps vc crie dnv uma segunda String chamada "Banana", ela pegará a primeira String já criada c esse nome ao invés de criar outra na memória
+
+Caso vc queira imprimir um nome e um sobrenome, temos 3 forma:
+
+1)
+
+        String nome = "Willian";
+        String sobrenome = new String(" Suane");
+
+
+2)
+
+        String nome = "Willian";
+        nome += " Suane";
+
+
+3) 
+
+        String nome = "Willian";
+        nome = nome.concat(" Suane ");    <-------Vc aq tá pegando nome e concatenando com Suane, e seu resultado está enviando de volta p nome
+
+
+Acho q eu n preciso dizer oq eles fazem, ambos fazem o acrescimo de um sobre nome ao nome ===> Willian Suane 
+Só q as duas primeiras opções vão pesar em sua memória, pq uma String é imutável, então vc cria outras Strings para colocar do lado(nas duas primeiras opções)
+Na 3, vc tá concatenando(mesclando) uma já existente, ele funciona como uma adição ao final da primeira Strings, assim teremos 3 Strings no total
+
+
+Tb é possível criar uma String assim:
+
+        String nome3 = new String("Ana");
+
+Mas ela além de ocupar mt memória, cria tb essas 3 coisas: 1- variável de referência; 2-objeto tipo String; 3-String no pool de String
+
+===============                                ================                         ================              ===============
+
+Métodos da classe String:
+
+        String teste = " Goku";                                                      
+        String teste2 = "            0123456789          ";
+        System.out.println(teste.charAt(3));                              <-------Diz a letra q tem na casa (de 0 em seguinte) 3, no caso ===> k (Ele conta com espaços)
+        System.out.println(teste.equalsIgnoreCase(teste2));     <-------Vai verificar se Strings são iguais ".equals"(Usar IgnoreCase junto, ele vai ignorar o case-sensitive)
+        System.out.println(teste.length());                                <-------Vê a quantidade de casas q tem na String
+        System.out.println(teste.replace('o', 'a'));                      <-------Troca as letras de uma String (1- a letra q deseja trocar 2- por qual deseja trocar)
+        System.out.println(teste.toLowerCase());                     <-------Passa td para minúsculo
+        System.out.println(teste.toUpperCase());                     <-------Passa td para maiúsculo
+        System.out.println(teste2.substring(0, 5));                   <-------Ele pega da casa 0 até a 5
+        System.out.println(teste2.trim());                                 <-------Retira o espaço colocado antes e dps do q foi escrito
+    }
+}

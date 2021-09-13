@@ -1,0 +1,25 @@
+
+			Tipos de exceções checked:
+
+Entrada de IO = entrada e saida (imput e output)
+Só um adendo, IOException classe mãe de algumas exceções como a de arquivo não existente FileNotFoundException
+Nesse caso temos um método da JVM de criação de arquivo considerada checked
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+O bloco Try catch funciona como um if e else 
+Ele é usado para métodos onde são pedidas exceções caso aquele anterior dê errado
+
+
+  public static void criarArquivo() {                                                                       <----------Método normal
+        File file = new File("Teste.txt");
+        try {                                                                                                               <----------Bloco try onde ele tentará fazer oq foi mandado
+            System.out.println("Arquivo criado? " + file.createNewFile());                <----------Método base do JVM (ELE É BOOLEAN, true ou false)
+            System.out.println("Arquivo criado");
+        } catch (Exception e) {                                                           <----------Caso ele não consiga, insira uma variável com o tipo EXCEPTION APENAS 
+            e.printStackTrace();                                                           <----------Ele mostrá oq deu errado (Pode ser apenas uma frase aqui, ao invés dele)
+  }
+
+
+#REGRAS#
+
+NÃO DEIXA O CATCH VAZIO, assim vc nunca vai entender pq o seu código n tá funcionando, ou oq deu nele

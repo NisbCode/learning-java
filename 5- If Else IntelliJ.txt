@@ -1,0 +1,62 @@
+Que nem o JavaScript
+
+Mas com uma peculiaridade, temos 2 opções, a longa:
+
+public class ControleDeFluxo {
+    public static void main(String[] args) {
+        int idade = 9;
+        if(idade >= 18) {
+            System.out.println("Pode ir em um clube");
+        }else if(idade < 18 && idade > 10){
+            System.out.println("Pode ir em festas casuais");
+        } else{
+            System.out.println("Pode ir em festas infantis");
+        }
+    }
+}
+
+--------------------------------------------------------------------------------
+E a curta:
+
+public class ControleDeFluxo {
+    public static void main(String[] args) {
+        int idade = 9;
+        String status;
+        status = idade > 18 ? "Adulto" : "Não adulto";
+        System.out.println(status);
+    }
+}
+
+
+De forma mais longa ainda podemos fazer em uma unica linha o if:
+
+public class ControleDeFluxo {
+    public static void main(String[] args) {
+        int idade = 22;
+        String status;
+        status = idade < 15 ? "Infantil" : idade >= 15 && idade < 18 ? "Juvenil" : "Adulto";
+        System.out.println(status);
+    }
+}
+
+============================================================================================
+
+Exercício pedido sobre imposto em um salário pré-definido:
+
+
+public class ExercicioIfElse {
+    public static void main(String[] args) {
+        double salario = 3500;
+
+        if (salario < 1000){
+            salario *= 0.5;
+        }else if (salario >= 1000 && salario < 2000){
+            salario *= 0.10;
+        }else if (salario >= 2000 && salario < 5000) {
+            salario *= 0.15;
+        }else{
+            salario *= 0.20;
+        }
+        System.out.println("O salario com seu devido imposto ficará: "+salario);
+    }
+}

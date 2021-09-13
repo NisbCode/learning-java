@@ -1,0 +1,5 @@
+N tem mt oq dizer
+Aq ele ensinou uma forma difernete de imprimir o array, usando a classe Array q tb tem um método q ordena
+E uma foma de comparar bem mais rápida e fácil
+
+As classes usadas são as msm anteriores com adição de uma: ProdutoNomeComparator

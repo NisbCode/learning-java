@@ -1,0 +1,49 @@
+Pode ser usado em métodos, classes ou atributos
+
+Constantes são expressas pela palavra "final" ela impede q seu valor mude CASO SEJA DO TIPO PRIMITIVO. Se for reference tem como
+
+				ATRIBUTOS:
+
+
+#REGRAS#
+	Quando você definir uma variável final você terá que inicializa-la
+	Ela pode ser iniciada pelo bloco de inicialização estatico ou diretamente
+	Quando você usar o o tipo final você não precisa do set and get pq n tem cm vc alterar ela dps já q ela é a primeira a acontecer
+	Quando você usar o tipo "final" você deverá escrever diferente:
+
+1 forma: caso você NÃO use a variável static junto:
+
+    private final double VELOCIDADE_FINAL;
+
+public Carro(){
+	VELOCIDADE_FINAL = 200;
+}
+
+
+- - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+2 forma: caso você use a variável static junto:
+
+public class Carro {
+    private static final double VELOCIDADE_FINAL = 250;
+
+Isso se dá pelo fato de que uma variável static é carregada antes mesmo do construtor, então seria como você não tivesse inicializado ela
+
+
+				CLASSE:
+
+Caso você coloque uma variável do tipo final numa classe isso implica que ela não poderá ser extendida(tparticipar de herança)
+
+public class final Carro {
+
+
+MAS é raro você precisar disso
+
+
+
+				MÉTODO:
+
+Caso você queira que um método tenha um mesmo comportamento em todas as classes filhas, você declara ele "final" o que impossibilita de que você
+o sobreescreva maaaaasssss ele permite uma sobrecarga
+
+
+*Aula 56*

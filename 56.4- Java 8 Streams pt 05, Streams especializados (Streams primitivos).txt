@@ -1,0 +1,18 @@
+Classes usadas: StreamTeste4Reduce
+package Estudando.javacore.ZZKstreams.teste;
+
+
+#O QUE É REDUCE#
+
+Quando vc tem uma Stream e reduz ela a um valor
+
+
+#SOBRE STREAM#
+
+Por ele ser terminal, vc n pode chamar a msm stream duas vezes, apenas uma
+Uma forma de resolver seria criar um método q inicie pra q td vez q chamar no método main vc n ter uma exceção
+
+
+#O QUE FALAMOS NA AULA#
+
+Sobre funcionalidade ao fazer operações c reduce

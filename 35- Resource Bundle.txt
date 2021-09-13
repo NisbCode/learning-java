@@ -1,0 +1,39 @@
+Arquivo onde fica guardado suas mensagens de texto e elas serão tratadas conforme a lingua q deve ser entregue
+Isso poupa vc ficar caçando onde tem cada sout para traduzir e faz c q td fique mais rápido e menos chances de erro
+
+Formas de criar:
+Botão direito em scr
+New File 
+Ou
+ResourceBundle
+Crie o nome conforme a regra
+Escreva a palavra q será vista no sout e sua tradução
+Na classe, chame o ResourceBundle seguido do nome, lingua e país
+E escreva as palavras (sout)
+
+#REGRAS FILE#
+
+Forma correta de nomear um file: messages_en_US.properties
+                                                             |             |   |
+                                  Nome do arquivo    língua    país
+
+
+messages_en_US.properties                                                              messages_pt_BR.properties                                 messages.properties
+
+#Okay, agr vai comentar assim                                                        
+!Ou assim
+#De qualquer forma, só avisando q além de = 
+#tb podemos usar : ou so o espaço em branco
+
+Hello = Hello                                                                            Hello = Oi 
+good.morning = Good Morning                                              good.morning = Bom Dia
+show = Show de Bola                                                                                                                                                             show = Show
+
+#REGRAS RESOURCE BUNDLE DIRETAMENTE CRIADO#
+
+Msm esquema na sua composição, porém, p criar vc coloca o nome basic, a lingua e o país ao lado, e pode adicionar quantos quiser. Dps é só dar okay
+======================================================================================
+Herança com resource bundle:
+
+Então, tu cria um file sem a lingua e país e tds os outros herdar automaticamente dele essas palavras
+Para sobreescrever, só por diferente em um dos files

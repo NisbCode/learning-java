@@ -1,0 +1,22 @@
+Classes usadas: ConcorrenciaDeColecoesTest
+
+#SOBRE OQ SE TRATA#
+Então
+Existem classes q ao terem o uso do iterator ficam menos consistentes, ou seja, se vier uma Thread e acrescentar mais 20 atributos p aquele array, ele irá não do 0 à
+10 como esperado e sim de 0 à 30
+
+
+#QUAIS SÃO#
+
+* ConcurrentHashMap: que possui métodos suportados apenas pelo
+ * java 8 (tipo o putIfAbstent(), que ao invés de pegar o valor
+ * da chave, pega a propria chave)
+ * ConcurrentLinkedDeque,  (Ps.: Esse)
+ * ConcurrentLinkedQueue,  (E esse são sincronizados)
+ * ConcurrentSkipListMap, (Ps.: Esse)
+ * ConcurrentSkipListSet     (E esse são sorted[obriga a implementar a classe comparable)
+
+
+#VANTAGENS#
+
+Por elas são serem igual a CopyOnWrite, elas não gastam tanto processamento copiando e mudando, elas mudam logo melhorando o desempenho

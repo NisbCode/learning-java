@@ -1,0 +1,18 @@
+N tem cm usarmos a Classe Console por IntelliJ
+Então ele abriu por prompt de cmd
+
+1 passo- Criar um documento de texto com o nome.<oq for o caso>
+
+2-Abrir ele e salvar o comando
+
+3- Salvar e fechar. Apertar shift+botãodireito e abrir o prompt
+
+4- "javac ConsoleTest.java" + enter
+
+5- "java ConsoleTest" + enter
+
+6- Vc escolhe a senha e ele mostra dps 
+
+7- Ele pede p vc digitar e vc digita um texto q será mostrado dps p vc
+
+Isso td pq o IntelliJ n entende o teclado

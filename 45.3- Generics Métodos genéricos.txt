@@ -1,0 +1,4 @@
+Classes usadas: MetodoGenericoTest
+
+
+Caso vc queira criar um método q crie uma ArrayList o qual tipo será dito apenas na chamada

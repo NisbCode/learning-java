@@ -1,0 +1,49 @@
+Token pega uma String e separa ela usando delimitadores
+
+Classe Token é mais simples e direta:
+
+package Estudando.javacore.U_expressoesregulares;
+
+public class TokenTest {
+    public static void main(String[] args) {
+//        Os tokens são os nomes nesse caso, e os delimitadores oq agt pôr no método split
+        String str = "Willian9 Paulo1 Joana2 Camila3 Anna4 John5 Matheus";
+        String[] tokens = str.split("\\d");
+        for (String arr : tokens){
+            System.out.println(arr.trim());
+//            Método trim elimina o espaço em branco
+        }
+    }
+}
+
+======================================================================================
+
+Já a classe Scanner oferece bem mais:
+
+package Estudando.javacore.U_expressoesregulares;
+
+import java.util.Scanner;
+
+public class ScannerTest {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner("1 true 100 oi");
+//        Diferentemente da classe Token, a Scanner tem delimitador padrão o uso de espaços, vc pode alterar chamando um método:
+//        scanner.useDelimiter("\\d")
+        while (scanner.hasNext()) {   //Aq ele tá vendo se tem algo a frente p pegar usando o delimitador espaço branco
+            System.out.println(scanner.next());  //N se preocupa q ele vai pegar o valor e transformar numa String
+        }
+        System.out.println("#############################");
+        Scanner scanner2 = new Scanner("1 true 100 oi");
+        while (scanner2.hasNext()) {     //Aq ele vê se tem um proximo
+            if (scanner2.hasNextInt()) {   //Aq ele vê se o proximo é um tipo int(Tem vários tipos primitivos além desse)
+                int i = scanner2.nextInt();
+                System.out.println(i);
+            } else if (scanner2.hasNextBoolean()) {
+                boolean b = scanner2.nextBoolean();  //Aq ele vê se o proximo é um tipo boolean
+                System.out.println(b);
+            } else {
+                System.out.println(scanner2.next());  //Aq ele vê se o proximo n é nenhum dos anteriores
+            }
+        }
+    }
+}

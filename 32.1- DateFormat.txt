@@ -1,0 +1,25 @@
+Existe 6 formas de formatar uma data
+DateFormat é uma classe abstrata(n pode se usar new)
+Essa classe já vem com uns métodos base, olharemos 6:
+
+package Estudando.javacore.T_datas;
+
+import java.text.DateFormat;
+import java.util.Calendar;
+
+public class DateFormatTest {
+    public static void main(String[] args) {
+        Calendar c = Calendar.getInstance();
+        DateFormat[] dfa = new DateFormat[6];
+        dfa[0] = DateFormat.getInstance();                                                       ===> 09/04/19 00:38
+        dfa[1] = DateFormat.getDateInstance();                                                ===> 09/04/2019
+        dfa[2] = DateFormat.getDateInstance(DateFormat.SHORT);               ===> 09/04/19
+        dfa[3] = DateFormat.getDateInstance(DateFormat.MEDIUM);            ===> 09/04/2019
+        dfa[4] = DateFormat.getDateInstance(DateFormat.LONG);                ===> 9 de Abril de 2019
+        dfa[5] = DateFormat.getDateInstance(DateFormat.FULL);                   ===> Terça-feira, 9 de Abril de 2019
+
+        for(DateFormat df : dfa){
+            System.out.println(df.format(c.getTime()));
+        }
+    }
+}

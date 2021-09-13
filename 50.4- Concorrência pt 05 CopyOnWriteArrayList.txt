@@ -1,0 +1,40 @@
+Classes usadas: CopyOnWriteTest
+
+
+Começamos a trabalhar c Threads em coleções
+
+
+#IMUTÁVEL#
+
+Quando um objeto é p apenas leitura
+Um ex disso é a classe CopyOnWriteTest, ela é imutável... bem.. Quase, ela ainda pode ser alterada já q ao invés dela apagar uma alteração feita, ela copia e cola
+ou seja, a lista é imutável mas seus valores dentro não
+Um objeto imutável é Threadsafe 
+
+
+#COMO CRIAR UM OBJETO IMUTÁVEL#
+
+1- Transformando a classe em final class(Não poderá ser extends)
+2-            "             os atributos em final(Pede construtor
+3- Não criando setters apenas getters(Impossibilitando criar valores)
+
+
+#ÚTIL?#
+
+Bem, p leitura é bastante, porém, se for alterar mt os conteúdos, gastará processamento
+
+
+#ITERATOR#
+
+Navega entre os arrays, suportando List e Set(Este ultimo retorna um set)
+
+
+#COMO ITERATOR FUNCIONA#
+
+Supondo q vc tenha 3 Threads, duas lendo e 1 removendo 
+C o iterator, assim q vc der start, msm q o comando execute c a removedora, demais threads poderão ler ela, já q o iterator a deixa conforme ela foi encontrada
+
+
+#REGRAS#
+
+Não se pode usar o iterator.remove(); pois iterator é imutável e ao fazer isso vc terá um erro de alterar oq n pode(Operação n suportada)

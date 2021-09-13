@@ -1,0 +1,57 @@
+Uso as classes: ClassesInternasTest
+
+
+Classes internas são classes q executam eventos como clicar para salvar ou cancelar
+
+Para criar uma classe interna é só criar uma classe dentro do bloco da camada mais externa
+Para utilizar uma classe interna vc precisa de um objeto de uma classe externa
+Uma classe interna tem acesso a tds os atributos da classe externa, inclusive os privados
+As regras estáticas afetam as classes internas tb
+A ideia aq é ter duas classes, uma por fora q fará a leitura e etc e um a interna q executará as funções q ocorreram, a interna terá contato c a externa 
+Porém o reverso (Externa comunicar c a interna) n será possível, então aq estamos aprenderndo a usar uma classe e um objeto para chamar aquela classe dentro de
+outra classe
+Na declaração de classes internas tds os tipos de atributos podem ser usados (public, private, etc)
+
+
+package Estudando.javacore.ZZA_classesinternas;
+
+    /***
+     * CLASSES INTERNAS:
+     * Classes dentro de outras classes, funcionam como métodos,
+     * mas com mais possibilidades
+     */
+
+        public class ClassesInternasTest {
+
+            private String nome = "Nathália";
+
+        class Interna{
+            public void verClasseExterna(){
+                System.out.println(nome);
+                // this: usado para referenciar
+                // o objeto com que se lida no momento,
+                // nesse caso, a classe Interna
+                System.out.println(this);
+            }
+        }
+
+
+        public static void main(String[] args) {
+            // Primeiro é criada uma variavel de referencia
+            // da maior classe
+            ClassesInternasTest externa = new ClassesInternasTest();
+
+            // Depois, é criada a variavel da propria classe interna,
+            // referenciando a externa
+            ClassesInternasTest.Interna in = externa.new Interna();
+
+            // Usar a classe
+            in.verClasseExterna(); //Nós meio q criamos um caminho com um objeto de uma classe e usamos dele para ir a
+                                   //outro objeto de outra classe
+
+            // Da forma mais complexa:
+//            Caso vc n tenha/queira usar o objeto da classe externa
+            ClassesInternasTest.Interna in2 = new ClassesInternasTest().new Interna();
+            in2.verClasseExterna();
+        }
+    }

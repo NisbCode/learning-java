@@ -1,0 +1,43 @@
+Classes usadas: 	InterfaceTest(Serviu p executar o main do MyList), 
+		MyList(Serviu p mostrar as novas regras p interface)
+		InterfaceA(Tb usado p mostrar as regras de oq sobressai no q entre interfaces e classes)
+		InterfaceB
+		D
+		E
+		C(Usado p testar oq rola na sobrepossição de interfaces e classes)
+
+package Estudando.javacore.ZZIdefault.classes;
+
+
+#ANTIGAMENTE INTERFACES#
+
+Tds os atributos tinham q ser finais e static
+Métodos n poderiam ser concretos nem static
+
+
+#ATUALMENTE INTERFACES#
+
+É possível ter métodos estáticos, concretos com característica default
+O default impede q tds tenham q implementar o método em suas classes e vc ainda possa pôr no seu
+
+
+#DIFERENÇAS DE INTERFACES E CLASSES ABSTRATAS NO JAVA 8#
+
+Classes abstratas podem implementar multiplas interfaces e pode usar variáveis de instâncias
+
+
+#REGRAS SOBRE INTERFACES E CLASSES#
+
+>Uma classe ou super classe sempre terá prioridade sobre um método da interface/default
+>Se vc tem uma classe C q implementa a interface A e B, se a interface B extends a A, O método mais específico é chamado
+Ou seja, se vc criar um método oi na interface A, extends ela na B, por lá ela ter ficado mais específica ou seja, meio q a ultima a ser mudada, ela q vai ser chamada
+na classe C
+>Caso ocorra o de antes mas sendo E uma interface q n extends A nem A extends E, então vc terá q dizer na classe C de qual interface vc quer
+
+    public static void main(String[] args) {
+        new C().oi();
+    }
+    @Override
+    public void oi() {
+        E.super.oi();
+    }

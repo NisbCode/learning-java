@@ -1,0 +1,21 @@
+Aula de explicação apenas
+
+Scadler faz c q vc defina quanto tempo cada Thread fica em execução e quando uma começa e termina, porém, sua ordem n é garantida
+A Thread Main é a q executa as Threads e a Scadler a q gerencia apenas
+Estados de uma Thread:
+
+New:                                                                      Quando criamos uma Thread
+
+Runable:                                                                 Quando vc dá .start(); Ao fazer isso ela tará pronta p ser executada e n tá executando. 
+                                                                                Meio q esperando o Scadler dizer qnd ser executada
+
+Running:                                                                 Quando o Scadler seleciona a Thread p ser executada
+                                                                                Do estado Running a Thread pode ir p Waiting/Blocked/Sleeping, Dead ou voltar p Runable
+
+Waiting/Blocked/Sleeping:                                      Quando o programador decide bloquea-la por algum motivo ou quando 
+                                                                                terceitos tem algum comando q impeça vc de permanecer c 
+                                                                                a Thread até q algum carregamento pesado termine de baixar.
+                                                                                Quando ela puder voltar a ativa ela voltará ao estado de Runable
+
+Dead:                                                                      Quando o método Running já foi executado e finalizado, meio q o processo acabou
+                                                                                Quando ela morre, não é possível usar ela dnv, terá q chamar outra Thread p continuar

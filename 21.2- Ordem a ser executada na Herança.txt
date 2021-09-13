@@ -1,0 +1,12 @@
+Vai iniciar a classe mãe primeiro
+
+1: Inicialização estática classe Mãe
+2: Inicialização estática classe Filha
+(Isso porque o bloco de inicialização vai primeiro no carregamentodo que as próprias classes)
+3: Inicializações Mãe
+4: Construtores Mãe
+5: Inicializações Filha
+6: Construtores Filha
+
+
+*Aula 54*

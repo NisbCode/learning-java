@@ -1,0 +1,55 @@
+Classes usadas: ContaTest
+
+#QUANDO FAZER#
+
+O sincronismo de código é necessário quando duas Threads tentam acessar a mesma instância quando a mesma será modificada
+
+
+#EXEMPLO#
+
+Por ex
+Se Anna é uma Thread e tenta sacar 10 reais
+E Agatha tb é uma Thread tentando sacar os msm 10 reais
+Utilizar um:
+
+if(saldo < 10){
+sout("Não tem money)"
+}
+
+Não irá impedir q ocorra o seguinte erro:
+Anna foi iniciada e está indo executar a ação, porém, Agatha tb
+Ambas ao passar pelo if viram q o saldo tava maior q 10 porém ambas conseguem sacar deixando o saldo negativo. Isso pq na hr q ambas passaram pelo if
+estava na condição exigida, logo, uma recebe um dinheiro q n poderia pq vc n soube gerenciar a segurança
+
+
+#COMO CRIAR UMA SINCRONIA #
+
+Usando atomicidade, ou seja, não poder dividir o trabalho. Quando apenas uma Thread possa acessar por vez um endereço de memória, quando vc liberar o lock
+
+PASSOS NECESSÁRIOS
+
+>Todos os campos(atributos) devem ser privados
+>Atribua o tipo synchronized ao seu método, isso fará c q apenas uma Thread possa passar por vez, DETALHE, a Thread q tiver controlando não poderar revesar
+o método em questão, apenas quando a Agatha terminar tudo possível naquele método q a outra poderá ir.
+independentemente de se a Thread dormiu ou não, só qnd ela terminar q a proxima poderá passar pelo método
+
+
+#LOCK#
+
+Todo objeto tem um cadeado q só se torna tangivel à uma Thread assim q usamos o synchronized, todo objeto tem um e apenas UM cadeado
+É o lock q fará c q assim q a Agatha acabar, a outra Thread possa ir. 
+Uma Thread pode pegar mais de um lock(Supondo q a mesma venha de outra classe
+Vc pode usar esse synchronized em BLOCOS e MÉTODOS
+
+
+#CUIDADOS#
+
+Ao criar um bloco synchronized, use a variável final pra impossibilitar q vc crie um outro objeto e usar essa variável de referencia
+É possível criar um metódo static e synchronized, só q assim vc terá dizendo q essa Thread tá presa apenas e unicamente aquela classe pq isso q static faz
+Porém tb é possivel vc synchronized logo a classe dessa forma:
+
+    public static void imprime(){
+        synchronized (ContaTest.class){
+            System.out.println("Classe sincronizada é o mesmo q usar synchronized com static só q nesse caso está escrito por extenso");
+        }
+    }

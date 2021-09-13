@@ -1,0 +1,47 @@
+Ele serve de certa forma para impedir que a pessoa escreva qualquer coisa que já não esteja definida no enum
+Delimitando oq deseja por num banco de dados
+
+#REGRAS#
+Não se pode mudar o conteudo de um enum
+enum podem ser public, etc, mas se não colocar nenhum, será o padrão o utilizado o de pacote(só poderá ser acessado naquele pacote)
+Não se pode criar um enum dentro de um método
+Temos duas formas de criar
+Com classes separadas ou em forma de atributo
+Atributos escritos em upercase(letra maiúscula)
+
+				Classe:
+
+Onde vc faz uma associação a outra classe:
+
+    private TipoCliente tipo;
+
+
+Na classe enum (Vc muda na hr de colocar uma nova classe para enum), você define as variáveis possíveis continuas:
+
+    PESSOA_FISICA, PESSOA_JURIDICA;
+
+Isso fará com que os tipos possíveis sejam estes
+
+
+Na hr de testar, vc deve chamar o tipo assim:
+
+        Cliente cliente = new Cliente("Ana", TipoCliente.PESSOA_FISICA);
+
+
+Vc chama a classe enum seguido de "."+o tipo q deseja
+
+#REGRAS DE ENUM DE CLASSE#
+Não se pode por atributos na antes da enum
+Não se pode ter um construtor public num enum pq ele msm vai se chamar, eles são considerados privados
+Não se deve criar um método seter, pq aí n valeria a pena vc tá fazendo um enum
+
+
+
+				Variável:
+
+ELa basicamente funciona como uma variável comum com apenas uma diferença
+Antes de começar a escrever ela como uma variável comum, você deverá escrever isto:
+
+    public enum TipoPagamento {
+        AVISTA, APRAZO
+    }

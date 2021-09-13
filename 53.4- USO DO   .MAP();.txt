@@ -1,0 +1,7 @@
+map(): usado para retornar o metodo que o desenvolvedor quer pegar, não sendo um optional
+Meio q extrai um valor
+
+Foi usado algumas vezes em lambdas e em NullPointerException
+
+Porém, ao usar em NullPointerException vc acaba tendo como valor um optional de um optional
+Nesse caso, temos tambem o .flatMap que retornará um método Optional

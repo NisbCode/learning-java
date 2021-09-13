@@ -1,0 +1,20 @@
+Ao sobreescrever você pega um método já existente e modifica para que ele se adapte a nova classe
+A vantagem de usar ela é por conta do polimorfismo
+
+
+No exemplo usado na *Aula 55* temos o prof usando a classe Object que é a mãe de tds aqueles que não tem extends do lado do nome da classe
+E repete de forma idêntica o método 
+
+    public String toString(){
+        |
+        |
+Regra: Não se pode definir um modificador de acesso mais privado do que foi definido na super classe(classe mãe)
+
+
+O qual nos diz o referencial do objeto, porém, podemos sobreescreve-lo para que ele escreva já o que desejamos usando:
+
+        return "Nome: " + nome + "; Idade: " + idade;
+    }
+
+
+MANO, MAIS UMA DICA, O alt+insert TAMBÉM TE DÁ UM MODELO DE IMPRESSÃO, O "toString"

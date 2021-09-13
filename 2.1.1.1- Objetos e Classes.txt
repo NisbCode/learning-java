@@ -1,0 +1,14 @@
+Classes são como a receita para fazer um biscoito
+
+Elas contem os atributos das marcas, nome, sabor, cor
+
+E cada biscoito criado é um objeto, ele tem os msm atributos
+Mas cada biscoito é um
+Biscoito trakinas  
+Biscoito Ruffles
+
+Se por exemplo gero uma CLASSE "Cachorro"
+os campos que definem as caracteristicas do cachorro serão os ATRIBUTOS, como nome, idade, peso, raça. 
+Seriam os MÉTODOS da classe cachorro, as ações que o cachorro pode ter, Morder, Comer, Latir.
+Porém, qnd eu me refiro a um cachorro específico: nome: Bob, idade: 2 anos, peso: 8 kg, raça: pitbull. 
+Nesse momento eu to tratando o OBJETO da classe cachorro.

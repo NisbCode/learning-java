@@ -1,0 +1,109 @@
+Usa o mesmo nome do método só que com parâmetros obrigatoriamente diferentes
+
+Quando usar? Imagina q tem 68865 nego usando o msm código, se vc mudar a raiz de um método, fode pra geral(Pq quebra o 
+comando de todos
+Então o mais plausível é vc acrescentar no q já tem
+
+Porém isso deve ser feito de uma forma diferente:
+
+1- Acrescente a variável privada/publica que deseja acrescentar(No caso o RG)
+
+public class Funcionaria {
+    private String nome;
+    private String CPF;
+    private String RG;
+    private double salario;
+
+
+2- Copiar o 1 método com suas ações
+
+    public void init(String nome, String CPF, double salario){
+        this.nome = nome;
+        this.CPF = CPF;
+        this.salario = salario;
+    }
+
+
+3- Acrescente seu novo método
+
+        public void init(String nome, String CPF, double salario, String RG){
+                this.nome = nome;
+                this.CPF = CPF;
+                this.salario = salario;
+                this.RG = RG;
+
+
+4- Mude na forma de imprimir 
+
+    public void imprime(){
+        System.out.println(this.nome);
+        System.out.println(this.CPF);
+        System.out.println(this.salario);
+        System.out.println(this.RG);
+    }
+
+
+5- E por ultimo, ESTRANHAMENTE, set um valor na lista de argumentos para o RG na classe test
+
+        func.init("Ana Júlia", "843.264.028-04", 2460, "3618399276-22");
+
+
+============================================================================
+Agora temos um problema, as linhas se repetem assim, olhe: 
+
+    public void init(String nome, String CPF, double salario){
+        this.nome = nome;
+        this.CPF = CPF;
+        this.salario = salario;
+    }
+
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        public void init(String nome, String CPF, double salario, String RG){
+
+        init(nome, CPF, salario);
+                this.nome = nome;
+                this.CPF = CPF;
+                this.salario = salario;
+                this.RG = RG;
+            }
+
+
+Ambos usam as mesmas linhas apenas para ter uma sobrecarga, então porque não removemos linha inutil?
+Com esta linha podemos chamar todos os comandos usados em outros métodos:
+
+        init(nome, CPF, salario);
+
+================================================
+Construtores são formas de inicializar objetos  
+
+    public Pessoa(){
+        this.nome = nome;
+    }
+
+
+Caso queira que algo não inicie até que você seja OBRIGADO a escrever aquela informação, faça assim:
+
+    public Pessoa(String nome){
+        this.nome = nome;
+    }
+
+Isso te obriga a colocar um nome ao inicializar
+
+NO CASO DE SER UM CONSTRUTOR,
+USE:
+
+this(matrícula, nome, notas);
+
+*Aula 40*
+================================================
+
+
+Depois disso é só continuar a sua ação
+
+        public void init(String nome, String CPF, double salario, String RG){
+        init(nome, CPF, salario);
+                this.RG = RG;
+            }
+
+

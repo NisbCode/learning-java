@@ -1,0 +1,48 @@
+Classes usadas: OptionalTeste2, OptionalTeste3
+package Estudando.javacore.ZZJoptional.teste;
+
+#PARA CHECAR SE O NOME DE DETERMINADA SEGURADORA É O QUE VOCÊ ESCOLHER#
+
+Antigamente:
+
+private static void checarNomeSeguradora(SeguradoraOptional seguradora){
+         if (seguradora != null && seguradora.getNome().equals("DevDojo Seguros")){
+             System.out.println("é o devdojo");
+         } else {
+             System.out.println("não é o devdojo");
+         }
+     }
+
+
+Dps do Java 8 usando Optional:
+
+    private static void checarNomeSeguradoraOptional(SeguradoraOptional seguradora){
+        Optional<SeguradoraOptional> seguradoraOptional = Optional.ofNullable(seguradora);
+        seguradoraOptional.filter(s -> s.getNome().equals(Optional.of("DevDojo Seguros")))  //.filter Verifica se tem conteúdo
+                        .ifPresent(x -> System.out.println("é o devdojo"));                 //Se tiver retorne
+    }
+
+
+#PEGANDO ATRIBUTOS QUE PODEM VIR A SER NULOS#
+
+public class OptionalTeste3 {
+    public static void main(String[] args) {
+        PessoaOptional pessoa = new PessoaOptional();
+        pessoa.setNome(null);
+
+        /**
+         * Quando você está lidando com atributos
+         * que podem vir a ser nulos, vale a pena
+         * você usar o optional para encapsular eles
+         */
+        // ao invés de apenas:
+        System.out.println(pessoa.getNome());
+
+        // Usar:
+        System.out.println(Optional.ofNullable(pessoa.getNome()));
+
+        /**
+         *
+         */
+    }
+}

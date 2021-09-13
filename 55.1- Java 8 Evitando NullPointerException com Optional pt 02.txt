@@ -1,0 +1,39 @@
+Classes usadas:             CarroOptional(package Estudando.javacore.ZZJoptional.classes;)
+		PessoaOptional
+		SeguradoraOptional
+		Carro(package Estudando.javacore.ZZJoptional.classes2;)
+		Seguradora
+		OptionalTeste2(package Estudando.javacore.ZZJoptional.teste;)
+
+
+#USADO PARA IDENTIFICAR NOMES VAZIOS OU NÃO DE UM CASO ONDE TEMOS UMA PESSOA SEGURADORA E CARRO PODENDO SER NULOS#
+
+Aqui vamos tentar procurar informações sobre uma seguradora  DE DETERMINADA PESSOA podendo que alguma dessas informações sejam nulas
+1-Vá na classe de informações (nesse caso é SeguradoraOptional)
+2- Ponha o getNome com optional CASO ele possa ser nulo
+
+    public Optional<String> getNome() {
+        return Optional.ofNullable(nome);
+    }
+    // Para o caso do nome da seguradora poder vir nulo, é adicionado o Optional. Isso não muda relevantemente, apenas faz com que desenvolvedores entendam
+que aquela variável pode vir nula só de olhar o get
+
+3- Uso do Optional no método da class main 
+
+    public static String obterNomeSeguradoraOptional(Optional<PessoaOptional> pessoaOptional){   //Usar o Optional nessa classe no parâmetro diz q não 
+                                                                                                                                                                   //necessariamente precisa ter uma pessoa para que o 
+                                                                                                                                                                   //método execute
+        System.out.println(
+                // flatMap(): retorna um método optional
+                pessoaOptional.flatMap(PessoaOptional::getCarroOptional)               //A partir da pessoa eu quero saber o nome do carro
+                    .flatMap(CarroOptional::getSeguradoraOptional)                            //A partir desse carro me dê a seguradora
+    //                    // map(): usado para retornar o metodo que o desenvolvedor
+    //                    // quer pegar, não sendo um optional
+                        .map(SeguradoraOptional::getNome)                                          //Me retorne o Optional do nome da seguradora conforme o exigido antes
+
+                        //Você usa o map aq e não antes pq aq ele já está retornando uma string, antes ele retornava um optional de string
+                            .orElse(Optional.of("Não existe seguradora"))
+        );
+        return "";
+    }
+

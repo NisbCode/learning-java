@@ -1,0 +1,122 @@
+Eles mudam de classe pra classe:
+
+Classe Calculadora
+
+
+                                      Parâmetro <---       --->A variável 
+                                                             |     |
+    public void alterandoImpressoes(int num1, int num2){
+        num1 = 30;
+        num2 = 40;
+        System.out.println("Números da classe: ");
+        System.out.println(num1);
+        System.out.println(num2);
+    }
+
+
+===>O valor impresso será 30 e 40
+
+Agora se importarmos o valor dessa classe para outra classe:
+
+
+import Estudando.introducao.javacore.introducaometodos.Calculadora;
+
+
+Podemos imprimir ela modificando aqueles valores:
+
+
+public class ParametrosTest {
+    public static void main(String[] args) {
+        Calculadora calc = new Calculadora();
+        int num1 = 5;
+        int num2 = 10;
+        calc.alterandoImpressoes(num1, num2);
+        System.out.println("Dontro do teste");
+        System.out.println(num1);
+        System.out.println(num2);
+    }
+}
+
+===>Nesse caso mostrará 5 e 10
+
+
+===================================================================================
+Agora chegamos no x da questão, programadores evitam o uso excessivo de linhas 
+
+Então, Comandos que acabam se repetindo são escritos de uma forma para usar menos linhas. Ex.:
+
+
+        Professor prof = new Professor();
+
+        prof.nome = "Marcos";
+        prof.matricula = "18395274";
+        prof.RG = "38375924";
+        prof.CPF = "568.246.227-06";
+
+
+        Professor prof2 = new Professor();
+
+        prof2.nome = "Ana";
+        prof2.matricula = "4002";
+        prof2.RG = "308-62";
+        prof2.CPF = "698.754.555-06";
+
+
+Imprimir isto daria papo de 8 linhas:
+
+
+        System.out.println(prof.nome);
+        System.out.println(prof.matricula);
+        System.out.println(prof.RG);
+        System.out.println(prof.CPF);
+        System.out.println(prof2.nome);
+        System.out.println(prof2.matricula);
+        System.out.println(prof2.RG);
+        System.out.println(prof2.CPF);
+
+
+Para evitar isto, nós criamos uma nova classe apenas de execução, onde ficarão guardados as informações
+
+E uma classe basica que guardara intruções
+
+
+A basica (Professor) terá o argumento modificado(quando você recebe um parâmetro, o que chega na outra classe é o
+argumento. Lá também terá o passo a passo a ser repetido
+
+
+    public void imprime(Professor aux){
+        System.out.println("------------------------");
+        System.out.println(aux.nome);
+        System.out.println(aux.matricula);
+        System.out.println(aux.RG);
+        System.out.println(aux.CPF);
+    }
+
+
+Nesse caso a variável aux recebe os valores de prof1 e prof2 e fará os comandos com cada um deles, imprimindo ambos
+assim que solicitado na classe de execução (onde tem os valores de prof1 e prof2):
+
+
+        prof.imprime(prof);
+        prof.imprime(prof2);
+
+
+
+
+--------------------------------------------------------------------------------------
+Outra forma de fazer isto é usando o comando this ao invés de criar uma variável para pegar os arquivos:
+
+
+    public void imprime(){
+        System.out.println("------------------------");
+        System.out.println(this.nome);
+        System.out.println(this.matricula);
+        System.out.println(this.RG);
+        System.out.println(this.CPF);
+
+
+O unico requerimento de usar isto é trocando a variável de chamada para seu bloco de informações em questão:
+
+
+        prof.imprime();
+        prof2.imprime();

@@ -1,0 +1,21 @@
+N existe uma regra de como escrever cada coisa em banco de dados, apenas siga uma sequencia sua(pondo tb_ na frente de uma tabela, ou outras coisas, vc decide
+
+Ao criar um database, clique c o botão direito na parte de schemas e aperte "Refresh All" para aparecer o novo q vc fez
+
+Vc tem duas formas de criar tabelas, ou manualmente, ou clicando no botão direito em cima da database e criando
+Para criar os atributos vc coloca no column name e marca as opções desejadas
+Dps de td criado, aperte em aply*2
+
+Para criar uma foreign key vc deve ir na aba em questão abaixo do campo de comentários, ou, se estiver fazendo por código, escrever e referencia-lo cm feito na 
+pasta de banco de dados
+Após isto, vc deve colocar o nome da variável q vc decidiu ser a estrangeira, dps a tabela onde a primária se encontra, dps a coluna vdd c a PK e por ultimo o atrib.
+
+Ao usar uma tabela, vc deve especificar qual entidade. Tem 3 formas p isso:
+1- Use <nome>;
+2- select * from <nome>.<nometabela>;
+3- Clica na entidade c o botão direito e set as default, aí vc n vai precisar especificar
+
+Exercício proposto:
+Uma agencia com carro e comprador
+Um comprador pode comprar um ou vários carros
+Mas um carro só pode ter um comprador

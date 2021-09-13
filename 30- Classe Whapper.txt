@@ -1,0 +1,98 @@
+Então, agora todos os tipos de variável são objetos e filhas da classe mãe, "Number"
+O modo de se fazer um cast mudou 
+E n se pode mais retirar as letras de algumas variáveis
+
+
+Cm estava:
+
+package Estudando.javacore.R_whappers;
+
+public class WhappersTest {
+    public static void main(String[] args) {
+        byte bytePrimitivo = 1;
+        short shortPrimitivo = 1;
+        int intPrimitivo = 10;
+        long longPrimitivo = 10;
+        float floatPrimitivo = 10;
+        double doublePrimitivo = 10;
+        char charPrimitivo = 'A';
+        boolean booleanPrimitivo = true;
+
+
+Como ficou:
+
+        Byte byteWhapper = 1;
+        Short shortWhapper = 1;
+        Integer intWhapper = 10;
+        Long longWhapper = 10L;
+        Float floatWhapper = 10F;
+        Double doubleWhapper = 10D;
+        Character charWhapper = 'A';
+        Boolean booleanWhapper = true;
+
+
+    }
+}
+
+
+#CURIOSIDADES#
+
+Se vc escrever como String o número 10 ele converte para inteiro, etc, isso c tds, float etc
+Boolean tb passa por isso, e ela n é case sensitive, ou seja, pode escrever 'TrUE' q ele entende q é boolean true
+Outro método de fazer a transferência de valores é assim:
+
+        String valor = "10";
+        Float f = Float.parseFloat(valor);
+        System.out.println(f);
+
+
+Vc pode usar a palavra "valueOf" para retornar o valor de uma variável primitiva para uma whapper
+Temos também métodos do objeto Character onde vc pode ver se algo é ou n aquilo
+Ex.:
+
+        System.out.println(Character.isUpperCase('A'));
+
+===> Verifica se está em capslock
+
+Ou tb o:
+
+        System.out.println(Character.toUpperCase('s'));
+
+===> Imprime em letra maiuscula a letra colocada
+
+
+QUANDO EU CRIO UMA INT E UMA INTEGER? E QUAIS SUAS DIFERENÇAS?
+
+int, char, boolean, long, float são resquicios da origem C que o java possui.
+Java não é uma linguagem 100% orientada a objetos pois possui tipos primitivos.
+Classes Integer, Character, Long e Float são algumas das classes Wrappers, cuja função é permitir operações c objetos q sintetizem oq tipos primitivos representam.
+Logo, se o teu projeto é orientado a objetos, o mais adequado seria utilizar as classes Wrapper, pois você manteria a integridade do mesmo.
+Motivos de se preferir Integer a int:
+Tipos primitivos não são objetos, logo, não possuem métodos nem atributos. Eles apenas representam um valor específico.
+Classes Wrapper, assim cm tds as classes, representam gps de objetos c atributos e operações comuns. Os numerais 1, 2, 4, 30, 120 são objetos. 
+Eles possuem atributos (valor) e métodos (getValorAbsoluto), portanto, podem ser interpretados cm tal.
+Como um objeto da classe Integer pode representar qualquer número que exista ou não, desde que seja inteiro (não fracionário), é possível utilizar a sintaxe
+Integer val = null;
+Portanto, a não ser em casos bem específicos (como utilizar a variável num laço for), prefira a classe Integer e todas as Wrappers.
+
+
+Explicação 2:
+
+
+Um wrapper é um objeto, portanto, ele pode ou não assumir uma referência, uma posição em memória.
+Integer i = 10;
+Pronto, já tens algo em memória. Assim:
+Integer i = null;
+E agora ? Nada.
+E o int ? Todos os tipos primitivos tem valores default´s que são alocados em memória.
+int i = null;
+Impossível !!! Não é um Objeto, portanto, é obrigatório sua alocação em memória, ou se preferir, atribuir um valor a ele que não seja nulo !(0 é um valor)
+Essa diferença é bastante utilizando na camada DAO, onde se persisti objetos em banco de dados. Mas pode ser utilizada também para calculo entre outros.
+Se existe a possibilidade de tu n utilizar o valor, use um Integer, recomendo, afinal, ele pode ser nulo em algum momento e tu n precisa ocupar memória de graça, 
+mas, se o valor sempre vai existir, pq n usar um primitivo certo ?
+Fora isso, é que o Wrapper tb te oferece métodos, portanto, da uma lida no javadoc do Integer 88. Estes métodos lhe serão úteis ? Excelente, use um Integer.
+
+
+
+Retirado de:
+https://www.guj.com.br/t/qual-a-diferenca-entre-uma-variavel-int-e-integer-e-suas-vantagens-e-desvantagens/85529

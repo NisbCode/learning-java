@@ -1,0 +1,186 @@
+É vc pegar um objeto e passar ele por um canal de dados, um fluxo
+Usando uma String de objetos
+Serializable é uma inferface flag onde só serve p avisar q aquela classe pode ser serializada, vc faz isso implementando a classe Serializable
+Numa serelizalização o construtor n é chamado
+Então uma herança onde o construtor tenha um super, pode dar problema nesse acaso
+transiente faz c que o atributo seja ignorado já q a senha n deve ser repassada
+O erro de SerialVersion acontece quando vc gravou serializou algo e tá tentando desserializar sendo q o arquivo foi alterado, só serializar dnv q pega
+(Serializar nesse exemplo é gravar
+Descerializar nesse exemplo é ler
+Nesse caso tb vamos usar associação
+
+
+
+Como vamos usar objetos, vamos usar a ObjectOutputStream
+
+
+package Estudando.javacore.Y_serializacao.test;
+
+import Estudando.javacore.Y_serializacao.classes.Aluno;
+import Estudando.javacore.Y_serializacao.classes.Turma;
+
+import java.io.*;
+
+public class SerializacaoTest {
+    public static void main(String[] args) {
+        gravadorObjeto();
+        leitorObjeto();
+    }
+
+//    Para Escrever:
+    private static void gravadorObjeto() {
+        Turma t = new Turma("Maratona Java, só para os campeões");
+        Aluno aluno = new Aluno(1L, "Naty Ignácio", "123456789"); //O "L" vem de long
+        aluno.setTurma(t);
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("aluno.txt"))) { //Salva a caracteristica de um objeto p um arquivo
+            oos.writeObject(aluno);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+//    Para Ler:
+    private static void leitorObjeto() {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("aluno.txt"))) {
+            Aluno aluno = (Aluno) ois.readObject(); //readObjetct retorna um object, então vc força ele em uma variável
+            System.out.println(aluno);
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
+
+
+
+package Estudando.javacore.Y_serializacao.classes;
+
+import java.io.Serializable;
+
+public class Turma implements Serializable {
+    private String nome;
+
+    public Turma(String nome){
+        this.nome = nome;
+    }
+
+    @Override
+    public String toString() {
+        return "Turma{" +
+                "nome='" + nome + '\'' +
+                '}';
+    }
+
+    public String getNome(){
+        return nome;
+    }
+
+    public void setNome(String nome){
+        this.nome = nome;
+    }
+}
+
+
+
+
+
+package Estudando.javacore.Y_serializacao.classes;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+//Ele extender Pessoa faz c q ela mostre tb
+public class Aluno extends Pessoa implements Serializable {
+    private long id;
+    private String nome;
+    private transient String password;  //transiente faz c que o atributo seja ignorado já q a senha n deve ser repassada, ela virá vazia
+    private static String nomeEscola = "DevDojo";
+    private transient Turma turma;  //aquela associação básica, caso vc n possa serializar essa classe mas queira a classe Aluno? transient
+
+    //                                    Nesse caso, se vc precisar do q tem na classe Turma, existem dois métodos da classe Serializable#1
+//    Construtor
+    public Aluno(Long id, String nome, String password) {
+        System.out.println("Dentro do construtor");
+        this.id = id;
+        this.nome = nome;
+        this.password = password;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Aluno{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", password='" + password + '\'' +
+                ", nomeEscola='" + nomeEscola + '\'' +
+                ", turma=" + turma +
+                '}';
+    }
+
+
+
+    //    #1  esses aq q tem q ser escritos na classe q vc quer serializar, eles tem q ter uma assinatura perfeita por serem especiais:
+    private void writeObject(ObjectOutputStream oos) {
+        try {
+            oos.defaultWriteObject();       //Tente escrever e fazer a inicialização normal
+            oos.writeUTF(turma.getNome());  //Escreva uma string
+//            A ordem de ambas n importa desde q na leitura vc siga a msm ordem q colocou
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void readObject(ObjectInputStream ois) {
+        try {
+            ois.defaultReadObject();
+            turma = new Turma(ois.readUTF());
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public static String getNomeEscola() {
+        return nomeEscola;
+    }
+
+    public static void setNomeEscola(String nomeEscola) {
+        Aluno.nomeEscola = nomeEscola;
+    }
+
+    public Turma getTurma() {
+        return turma;
+    }
+
+    public void setTurma(Turma turma) {
+        this.turma = turma;
+    }
+
+}

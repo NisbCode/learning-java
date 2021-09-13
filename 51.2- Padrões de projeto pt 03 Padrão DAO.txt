@@ -1,0 +1,21 @@
+Classes usadas: interface CarroDAO(package Estudando.javacore.ZZB_jdbc.interfaces;),
+		   CarroDAOImpl(package Estudando.javacore.ZZB_jdbc.database;),
+		   CarroCRUD(package Estudando.javacore.ZZB_jdbc.test;),
+		   CarroDAOImplNoSQL(package Estudando.javacore.ZZB_jdbc.database;)
+		   E TesteCRUD
+
+
+#CONCEITO DE UM DAO#
+
+Trabalhado em 3 partes:
+
+>Interface   CarroDAO
+>Implementação da interface  CarroDAOImpl
+>Modelo
+
+
+A INTERFACE CarroDAO q terá os métodos
+A classe CarroDAOImpl/CarroDAOImplNoSQL IMPLEMENTA a interface e tem a lógica do código 
+E um modelo q vai ser o objeto q vc vai construir pegando os dados do seu banco de dados, dependendo de cada BD
+Nesse caso temos a classe CarroCRUD q tem o MODELO p a execução na classe CarroTest
+Então ao invés de termos q mudar td caso agt vá trabalhar c outro banco de dados, agt só faz o CRUD implementar a classe c a lógica a qual se refere o trab

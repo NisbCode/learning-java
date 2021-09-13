@@ -1,0 +1,131 @@
+Arrays de arrays
+É cm se um ano tivesse 12 meses e cada mês 30/31 dias
+
+int [][] dias = new int [][];
+                         ^ ^
+                         | |
+                         | ---- Este a quantidade espaços que terá cada Array
+                         |
+                 Este vai dimensionar a quantidade de Arrays criados
+
+
+-----------------------------------------------------------------------------------------
+Ao chamar o Array, você deverá acha-lo
+No exemplo a seguir vemos que "dias" é o array maior que terá dois arrays de 2 casas
+
+
+int [][] dias = new int [2][2];
+
+
+É cm se tivéssemos dois armários com duas prateleiras cada
+
+                        [][]
+                       /    \
+                    [][]    [][]
+
+Agora para chama-lo:
+
+        dias [0][0] = 30;
+        dias [0][1] = 31;
+
+Como pode ver, temos o [0][0]
+Para ver onde isso ficaria, seria assim:
+
+                        0  1
+                        [][]
+                       /    \
+                    [][]    [][]
+                    0  1    0  1
+
+[0][0] Ficaria aqui:
+
+                        0 
+                        []
+                       /   
+                    []
+                    0  
+
+E o [1][0] aqui:
+
+                           1
+                          []
+                            \
+                            []
+                            0  
+
+
+
+-----------------------------------------------------------------------------------
+Estes arrays também tem uma forma diferente de serem chamados pelo foreach:
+
+1- Defina um array bidimensional:
+
+public class Arrays4 {
+    public static void main(String[] args) {
+        int[][] dias = new int[2][2];
+        dias[0][0] = 30;
+        dias[0][1] = 31;
+        dias[1][0] = 29;
+        dias[1][1] = 28;
+
+
+2- o 1 foreach vai usar o "[]" para mostrar q é uma referencia à um array
+3- criamos uma variável q irá receber esse array. Lembre-se que estamos primeiro recebendo uma referencia de um array 
+de um valor inteiro, por isso os "[]"
+
+        for (int[] ref : dias) {
+
+4- Agora iremos pegar essa referencia e mandar para uma variável pegar oq está dentro desses arrays. Como se nós temos 2
+armários e dentro de cada um deles, duas caixas, o primeiro passo (já feito acima) é falar para alguém pegar nessas 
+caixas, dentro dos armários, suas respectivas coisas. Agora depois de dizermos as """coordenadas""" dos armários
+falaremos para a pessoa pegar cada item
+5- criamos uma variável nova para receber essas referências dos armários e mostrar oq tinha dentro de cada caixa
+6- dia recebe de ref as coordenadas e depois mostra oq tinha em cada uma delas:
+
+            for (int dia : ref) {
+                System.out.println(dia);
+            }
+        }
+
+-----------------------------------------------------------------------------------
+Temos várias formas de chamar um array bidimensional, sendo está a mais fácil:
+
+        int[][] dias = {{0, 0}, {1, 2, 3}, {0, 22, 0, 0}};
+
+1- Aqui nós começamos chamando um array multidimensional sofrendo uma leve modificação disto:
+
+int [][] dias = new int [][];
+
+2- Para trocar a segunda parte diretamente pelas posições
+3- O colchete maior diz q isto é um array
+4- Os menores representam a quantidade de armários, no caso 3
+5- Por ultimo, cada número separado por vírgula representa uma caixa, no caso, a 1 tem 2;  a 2 tem 3 ;e a 3 tem 4
+6- Na forma comum ela ficaria assim: 
+
+int [][] dias = new int [3][];
+
+7- A segunda parte fica vazia por não ser uma caixa com espaços iguais
+
+8- A forma mais demorada de preencher estas caixas desiguais seria assim:
+
+        //Com essas 2 formas:
+
+        dias[0] = new int [2];
+
+        // E está faz com que ela tenha um valor pré-definido:
+        dias[1] = new int []{1, 2, 3};
+        dias[2] = new int [4];
+
+9- Preenchendo assim caixa por caixa de cada armário
+10- A forma mais rápida seria:
+
+public class Arrays6 {
+    public static void main(String[] args) {
+        int[][] dias = {{0, 0}, {1, 2, 3}, {0, 22, 0, 0}};
+        for (int[] ref : dias) {
+            for (int num : ref) {
+                System.out.println(num);
+            }
+        }
+    }
+}

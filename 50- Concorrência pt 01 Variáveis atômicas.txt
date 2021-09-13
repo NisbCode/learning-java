@@ -1,0 +1,36 @@
+Classes usadas: ConcorrenciaTest, Contador e IncrementadorThread
+
+É praticamente um Thread mais util e mais moderno
+Sintaxe mais simples por ex
+
+
+#APRESENTANDO O PROBLEMA#
+
+Em casos massivos de contagem, por ex, caso vc precise de uma Thread p contar algo, cm o spawn de mobs e outra o contar as mortes deles, p poder controlar
+Se houverem 10000 mortes, deverá ter 10000 spawnados, porém, cm Threads são imprevisíveis, dificilmente vai estar minimamente correto isso
+
+
+#DANDO UMA SOLUÇÃO#
+
+P solucionar esse erro, vc poderia sincronizar o método, porém, isso gasta MUITO processamento, e p algo em massa é bom preservar. Nesse caso temos a classe
+AtomicInteger
+
+
+#O QUE ELA FAZ#
+
+a classe AtomicInteger,
+     * que é criada de uma forma ThreadSafe chamada CAS
+     * (Compare and Swap) que funciona assim:
+     * A CPU do computador cria uma variável temporária
+     * após atomicInteger ser usado dentro de um método (isso acontece
+     * toda vez que uma variável é usada dentro de método), contudo,
+     * antes dela retornar esse valor à variável atomicInteger,
+     * ela compara pra ver se ele é diferente de como estava anteriormente,
+     * se sim,
+     * ele troca o valor antigo pelo novo
+Assim, a resposta sempre será 20000 já q o contador só vai finalizar quando a Thread terminar o processo td
+
+    public int getAtomicInteger(){
+        return atomicInteger.intValue();
+    }
+        System.out.println(contadorObjeto.getAtomicInteger());

@@ -1,0 +1,72 @@
+VAMOS APRENDER A CUSTOMIZAAAAAAR
+
+#REGRAS#
+
+Éuma boa forma de se praticar, vc fazer uma classe q termine c a palavra exception
+
+
+
+================================================================================
+
+Passo 1:
+
+Crie uma classe que extenda a classe exception e seja a nossa principal para construção de uma mensagem ao executar o erro
+
+
+package Estudando.javacore.O_exception.d_customexception;
+
+public class LoginInvalidException extends Exception {
+
+//    Não use esse espaço para tratamentos CLASSES DE EXCEÇÃO NÃO   T R A T AM   A EXCEÇÃO SE N ELA PARA DE VALER DPS DE UM TEMPO
+    public LoginInvalidException(){
+        super("Usuário ou senha inválida");
+    }
+}
+
+
+
+===> Estudando.javacore.O_exception.d_customexception.LoginInvalidException: Usuário ou senha inválida
+
+
+Passo 2:
+
+Crie a segunda classe a qual será  a nossa sala de controle
+
+
+Passo 3:
+
+A parte de cima conterá o método main (Método que faz a classe ser chamada e executar a poha td)
+
+
+package Estudando.javacore.O_exception.d_customexception;
+
+public class CustomExceptionTest {
+    public static void main(String[] args) {
+        try {
+            logar();                                                                           <--------Método q tamos tentando chamar
+        } catch (LoginInvalidException e) {                                    <--------Caso ele não funcione, diga porquê
+            e.printStackTrace();
+        }
+    }
+
+
+
+Passo 4
+
+Crie o método e as variáveis que tarão contidas aq jogando a resposta para a classe anterior
+
+
+    private static void logar() throws LoginInvalidException {                          <--------Método criado com assinatura pra dizer q tem ligação c outra classe
+        String usuarioBancoDeDados = "Goku";
+        String senhaBancoDeDados = "111";
+        String usuarioDigitado = "Goku";
+        String senhaDigitada = "123";
+        if (!usuarioBancoDeDados.equals(usuarioDigitado) || !senhaBancoDeDados.equals(senhaDigitada)) {   <--------A String tem um método usado p verificar*
+            throw new LoginInvalidException();                                              <--------Se for verdadeira essa afirmativa, avisa pra classe de exceção
+        }else{
+            System.out.println("Logado");                                                         <--------Senão, diga que logou
+        }
+    }
+}
+
+*se duas Strings são iguais, ela se chama "equals", vc ao invés de falar que algo é "==" vc diz ".equals()", e para falar que é DIFERENTE vc usa !<String>.equals

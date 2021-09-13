@@ -1,0 +1,9 @@
+Uso das classes: CompradorDAO, CompradorCRUD, Carro, CarroDAO, CarroCRUD e TesteCRUD
+Aula 155
+
+Vc pode clicar com o botão direito em cima da tabela e ir em Select Rows p selecionar td da tabela e mostrar de forma mais rápida
+Terminamos o menu
+Eu consertei uns erros
+E bem
+O projeto se consiste na implementação de dados no BD utilizando algo proximo de uma interface
+

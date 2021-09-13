@@ -1,0 +1,12 @@
+Classes usadas: Loja, LojaTeste
+package Estudando.javacore.ZZMcompletablefuture.classe;
+
+#PRÁTICAS PRA CASO OCORRA UMA EXCEÇÃO USANDO THREADS ASSÍNCRONAS#
+
+Uma delas é colocar um timeout nos argumentos das threads justamente p se caso dê algum erro, o programa n fique esperando uma resposta pra sempre e assim,
+prendendo o usuário
+E a segunda é colocar um try catch no método onde vc dá o método q a Threads vão executar, fazendo c q assim, a Thread tente executar, se n der, terá uma 
+exceção forçada e seu motivo
+No caso
+Aritmetic exception
+O método o qual foi usado isso foi: getPrecoAsync()

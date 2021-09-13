@@ -1,0 +1,19 @@
+sempre a 1 palavra minuscula e o inicio do resto das 1 palavras maiusculas numa variavel: idadeDoPrimeiroAluno
+
+int         ===> idade: 22                                                                   |Número inteiro que conhecemos. requer 32 bits para ser implementado. Vai de -2.147.483.648 à 2.147.483.647
+double      ===> salarioDouble: 3000                                              |Número fracionado. PRECISO PACAS
+float       ===> salarioFloat: 3000                                                    |Número fracionado. Preciso de uma forma simples e mais leve
+boolean     ===> verdadeiro: true/  falso: false                                |O tipo de dado boolean tem apenas dois valores possíveis: true e false(verdadeiro/falso). Este tipo de dado representa um bit de informação. O if devolve uma informação booleana, então usar 0<10 também é valor boolean
+char        ===> caractere/  '\u00041'  /ou números c 2 algarismos   |Char é um tipo primitivo que só aguenta dois algaritmos ou o código de uma letra(USA ASPAS SIMPLES). O tipo de dado char é um caractere de 16 bits único Unicode
+byte        ===> idadeByte: 12                                                           |Requer 8 bits para ser implementado. Vai de -128 à 127. O tipo de dado byte pode ser útil para economizar espaços de memória em matrizes de grandes dimensões
+short       ===> idadeShort: 32767                                                  |Msm coisa que o Byte mas requer 16 bits para ser implementado. Vai de -32.768 à 32.767. Você pode usar para economizar memória em arrays grandes, em situações em que as economias seja realmente importante.
+long        ===> numeroGrande   : 1000L                                         |Requer 64 bits para ser implementado. Vai de -9.223.372.036.854.775.808 e à 9.223.372.036.854.775.807
+String      ===> "Willian"                                                                   |Aguenta a porra td de letra, até sua mãe
+
+
+Variáveis podem ser do tipo primitivo ou do tipo reference
+O reference faz uma referencia ao local onde está o valor
+
+Só tem como alterar um valor variável num objeto da classe do reference em questão
+
+Uma variável local sempre vai ter prioridade ao ser chamada em relação a uma variável classe

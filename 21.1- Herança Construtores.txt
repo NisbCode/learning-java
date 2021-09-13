@@ -1,0 +1,18 @@
+
+
+Se vc diz para a classe Pessoa que ela tem um construtor com parâmetro
+Você diz que é obrigatório que você passe esse parâmetro 
+Porém se Funcionario extends Pessoa 
+Então na subclasse você deverá chamar um construtor com o nome da classe mãe
+
+Então Temos uma classe mãe chamada Pessoa que obriga você ter pelo menos um nome
+E uma classe filha chamada Funcionaria que é uma pessoa
+Você também colocará um construtor com o mesmo parâmetro:
+
+
+    public Funcionario(String nome){
+        super(nome);
+    }
+
+
+O super foi usado por se tratar de uma herança (Se apertar ctrl+p ele te mostra o que você poderia colocar ali)

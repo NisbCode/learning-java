@@ -1,0 +1,3 @@
+Baixamos o MySQL Conectors q serve p nos conectar
+Diretório: C:\Users\natyb\Downloads\programação\Banco de dados\para conexões de java p MySQL
+Quando vc baixar, vc extrai p uma pasta no seu intelliJ, dps será obrigatório vc apertar f4>libraries>+>java+>selecione a pasta

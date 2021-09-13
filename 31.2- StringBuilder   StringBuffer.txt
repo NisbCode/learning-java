@@ -1,0 +1,43 @@
+N esqueça q ambas são classes
+
+StringBuilder:
+
+package Estudando.javacore.S_string;
+
+public class StringBuilderTest {
+    public static void main(String[] args) {
+        String s = "Uma frase comum";
+        StringBuilder sb = new StringBuilder(16); //<--- O num. é a capacidade de caracteres q ele te disponibiliza,limite é 16
+        sb.append("Uma frase comum");
+        sb.append(" test");
+        System.out.println(sb);
+    }
+}
+
+#MÉTODOS#
+
+.reverse() ===> Reverte oq tá escrito: tset mumoc esarf amU
+.delete(0, 2) ===> Deleta aquelas casas: a frase comum test
+.insert(2, "%$#¨&") ===> Um%$#¨&a frase comum test
+#REGRAS#
+
+N existe método concat 
+E s o append q serve para n criar uma String nova e s reutilizar a antiga, serve da msm forma q o concat só q melhor na performace
+
+
+StringBuffer: Usa da mesma forma, só que são sincronizados(Isso é explicado nas aulas de Threads), MAS N MUDA ND AO ESCREVER OU O RESULTADO
+
+package Estudando.javacore.S_string;
+
+public class StringBuilderTest {
+    public static void main(String[] args) {
+        String s = "Uma frase comum";
+        StringBuilder sb = new StringBuilder(16); //<--- O num. é a capacidade de caracteres q ele te disponibiliza,limite é 16
+//      Transforma StringBuilder em String:   s = sb.toString();
+        sb.append(" test");
+        sb.append("def").insert(3, "ghi").reverse().delete(2, 4);     <---------Lê da esqueda p a direita(1- acrescenta "def" 2- insira na casa 3 as letras "ghi" 3- reverta, etc
+        System.out.println(sb);
+    }
+}
+
+===> fesihget 

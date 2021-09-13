@@ -1,0 +1,91 @@
+Classes usadas: ThreadTest, ThreadExemplo  e ThreadExemploRunnable 
+
+Pode ser ou um objeto ou uma linha comum
+Ambas são Threads
+
+Elas funcionam de forma não prevista e possibilitam que a gente possa ter coisas funcionando paralelamente 
+A JVM decide q Tread começa e qual termina
+AVISO, QUANDO VC COMEÇAR UMA THREAD VC N PODE CHAMAR ELA DNV OU TERÁ UMA EXCEPTION
+
+As Threads podem ser Daemon ou User
+>Threads User: A JVM só finaliza a execução quando todas as Threads Users forem finalizadas.
+>Threads Daemon: Já p a Daemon a JVM não se importa. Ex de Daemon: Garbage Collector
+
+#Existem duas formas de se CRIAR uma Thread#
+A 1 envolve vc extends uma Thread, mas não é uma boa ideia quando usada em orientção a objeto, pq vc só deve extends uma classe se for especificar ela
+Ela corre dentro do Método sobreescrito Run 
+Toda Thread tem um nome, independente de vc dar ou não
+Vc pode descobrir ela por meio do método: System.out.println("Thread executada: " + Thread.currentThread().getName());
+Para iniciar uma: Thread t1.start(); é possível chamar usando t1.run(); mas não o correto pq ele não irá iniciar apenas chamar de forma organizada e este n é o
+comportamento comum de uma Thread
+
+
+public class ThreadTest {
+    public static void main(String[] args) throws InterruptedException {
+        // Para saber o nome de uma thread
+        System.out.println(Thread.currentThread().getName());
+        /**
+         * Threads baseadas nas instâncias
+         */
+        ThreadExemplo t1 = new ThreadExemplo('A');
+        ThreadExemplo t2 = new ThreadExemplo('B');
+        ThreadExemplo t3 = new ThreadExemplo('C');
+        ThreadExemplo t4 = new ThreadExemplo('D');
+        t1.join();
+        t2.start();
+        t3.start();
+        t4.start();
+
+class ThreadExemplo extends Thread {
+    private char c;
+
+    public ThreadExemplo (char c){
+        this.c = c;
+    }
+
+    @Override
+    public void run() {  //Se vc quiser que algo corra em paralelo vc coloca ele dentro dessa Run
+        for (int i = 0; i < 1000; i++) {
+            System.out.print(c);
+            if(i % 100 == 0){
+                System.out.println();
+            }
+        }
+    }
+}
+
+
+#A 2#
+A 2 envolve vc extends a Interface Runnable
+
+
+        /**
+         * Thread baseadas na interface
+         */
+        Thread t1 = new Thread(new ThreadExemploRunnable('A'), "Thread1"); //Ou seja, vc cria uma Thread e dps passa o Runnable
+        Thread t2 = new Thread(new ThreadExemploRunnable('B'), "Thread2"); //dentro dela
+        Thread t3 = new Thread(new ThreadExemploRunnable('C'), "Thread3");
+        Thread t4 = new Thread(new ThreadExemploRunnable('D'), "Thread4");
+        t1.start();
+        t2.start();
+        t3.start();
+        t4.start();
+
+
+
+class ThreadExemploRunnable implements Runnable {
+    private char c;
+
+    public ThreadExemploRunnable(char c) {
+        this.c = c;
+    }
+
+    // O método run é obrigatório na implementação
+    @Override
+    public void run() {
+        //        System.out.println("Thread executada: " + Thread.currentThread().getName());  //E aq vc consegue saber o nome dela
+        for (int i = 0; i < 50; i++) {
+            System.out.print(Thread.currentThread().getName() + c + " ");
+            if (i % 10 == 0) {
+                System.out.println();
+            }

@@ -1,0 +1,31 @@
+É um contrato que diz oq cada classe deve fazer mas não como fazer
+
+#REGRAS#
+
+(Nesse caso não é uma regra, MAS é preferível) Interfaces tem nomeclatura terminada como adjetivo tipo "Tributavel" ou, começam com "I" de interface
+Como seu objetivo é ser extendida não deve ser usado a palavra "final"
+De interface para interface você usa extends e n implement
+Não pode ter métodos concretos, tds serão abstratos
+Não é necessário escrever public abstract pq tds os métodos abstratos são assim
+Tds os atributos de uma interface são constantes
+Msm q vc esteja usando interface ainda se fala "É UM"
+Pode-se ter classes c msm implemento mas q funcionam diferente
+Exemplo: Eu tenho a classe Produto que é um Transportavel e Tributavel
+Mas tb temos Carro que pode ser os dois
+A forma que o Carro será tributavel será diferente da do Produto, nesse caso vc sobreescreve o método da interface desejada
+Sobreescrita numa interface tem que ser OBRIGATÓRIAMENTE public
+Vc pode criar uma variável de objeto, mas não instanciar um objeto(TEM APENAS UMA EXCESSÃO: "classes anônimas"):
+
+Tributavel t;                                                              Tributavel t = new Tributavel();
+       ^                                                                                              ^
+        |                                                                                                |
+     Pode                                                                                     Não pode
+
+
+
+				implements:
+
+É a msm coisa q extends só q pra interface, a diferença é q vc pode ter multiplas implementações mas n multiplas heranças
+Escrito da seguinte forma:
+
+public class Produto implements Tributavel{

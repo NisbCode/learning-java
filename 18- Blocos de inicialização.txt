@@ -1,0 +1,21 @@
+São criados abrindo e fechando chaves
+
+    {
+        
+    }
+
+
+Eles podem substituir os construtores na inicialização dos objetos por ser executado primeiro que eles
+
+======================================================================================================
+Um bloco static além de ser iniciado primeiro e uma vez apenas
+Ele nos ajuda a econoizar processamento
+
+static{
+
+}
+
+
+Usado em momentos onde um valor não precisa ser alterado ou reiniciado pois será sempre aquele
+
+*Aula 44* Dever de Cliente - modificadores estaticos

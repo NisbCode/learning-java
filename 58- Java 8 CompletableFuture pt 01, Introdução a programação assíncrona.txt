@@ -1,0 +1,19 @@
+Classes usadas: ExecutorTeste
+package Estudando.javacore.ZZMcompletablefuture.teste;
+
+
+#O QUE É COMPLETABLE FUTURE#
+
+Quando vc manda uma tarefa ser executada e enquanto isso ele vai continua o funcionamento do q vc tava fazendo até q dps vc tenha aquela resposta 
+
+
+#DIFERENÇA DELE PRO SCHEDULE FUTURE#
+
+No schedule a Thread vai esperar por um tempo até q saia aquela resposta 
+Já esse o código n fica parado
+
+
+#O QUE É SINCRONADA E ASSINCRONADA#
+
+Assincrona ou concorrencia vc manda a Thread fazer uma coisa e enquanto aquela coisa n tem resposta a msm Thread vai fazer outra coisa
+E Sincrona ou paralelismo a Thread fica esperando uma resposta p fazer outra coisa

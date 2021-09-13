@@ -1,0 +1,67 @@
+É um conceito na orientação objetos onde uma variável de referência pode se comportar de diversas formas baseada no tipo do objeto que ela está
+referenciando
+Ajuda a diminuir as linhas de códigos
+
+=================================================================
+variável de referência  ===> Funciona como um controle onde tem as mesmas coisas que um objeto e controla quando cada ação vai rolar
+E um objeto é cm a tv q executa a função
+As funções são os métodos
+"this.salario" variável de referência
+"g.calcularPagamento" objeto
+=================================================================
+					TIPO PRIMITIVO
+
+Cast obriga a aquele valor ocupar o quanto é possível naquele tipo
+Vc pode pôr um float num double:
+double d = 10;
+float f = 10f;
+
+Isso é possível:
+
+d = f;
+
+Isso não:
+
+f= d;
+
+Mas fazer um cast seria obrigar que o resultado entre no f, fazendo com que os valores que excedão sejam discartados:
+
+f = (float) d;
+=================================================================
+
+Infelizmente explicar isso só vendo, Olha a *Aula 64* e principalmente o dever "N_polimorfismo" na orientação objeto
+
+Mas de forma resumida
+Tu usa uma classe para fazer o método de outra classe
+
+
+public class PolimorfismoTest {
+    public static void main(String[] args) {
+        Gerente g = new Gerente("Ludmilla", 5000, 2000);
+        Vendedor v = new Vendedor("Renan", 2000, 20000);
+        RelatorioPagamento relatorio = new RelatorioPagamento();
+//        DEMOROU MT PRA EU ENTENDER, MAS ESSAS LINHAS AQ NA FRENTE FAZEM REFERÊNCIA AO MÉTODO DO FUNC.
+//        Ele faz referencia ao método mas c variável na classe Gerente/Vendedor
+//        Isso faz c q vc use a classe Func para criar tds as outras coisas q fazem o msm método
+        relatorio.relatorioPagamentoGenerico(g);
+        System.out.println("-------------------------");
+        relatorio.relatorioPagamentoGenerico(v);
+    }
+}
+
+
+public class RelatorioPagamento {
+    public void relatorioPagamentoGenerico (Funcionario funcionario){
+        System.out.println("Gerando relatório de pagamento");
+        funcionario.calcularPagamento();
+        System.out.println("Nome: " + funcionario.getNome());
+        System.out.println("Salário desse mês: " + funcionario.getSalario());
+    }
+
+
+
+public class Gerente extends Funcionario {
+    @Override
+    public void calcularPagamento() {
+        this.salario = this.salario + pnl;
+    }

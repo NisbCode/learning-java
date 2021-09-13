@@ -1,0 +1,6 @@
+1: Obrigatoriamente a 1 linha de um construtor deve ser o chamado para o anterior
+
+2: Só pode ser chamado um construtor dentro da mesma classe
+
+this(nome);
+this.cpf = cpf;

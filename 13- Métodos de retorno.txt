@@ -1,0 +1,10 @@
+Sinto mt mas n vou refazer as aulas 30 e 31 por bug
+
+Usar um return dentro de um "if" faz com que ele saia do comando e ignore oq tiver abaixo 
+
+	if(i==0){
+		System.out.println("Este aluno não possui notas");
+	return;
+
+
+Isso fará com que ele ignore o comando que estiver depois

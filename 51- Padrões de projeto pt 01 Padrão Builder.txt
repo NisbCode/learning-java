@@ -1,0 +1,27 @@
+Classes usadas: Pessoa, PessoaTest
+package Estudando.javacore.ZZFpadroesdeprojeto.classes;
+
+
+#SOBRE FRAMEWORK FORKJOIN#
+
+Ele é usado na divisão de tarefas, ou seja, se vc tiver uma tarefa longa vc as divide em menores e dps as junta p finalizar a tarefa
+Bem, tem erro pra caramba, é ineficiente, infelizmente cai na certificação mas n deve ser usado no ambiente de trabaho
+
+
+#PADRÕES DE PROJETO O QUE SÃO#
+
+É a forma q vc tem de codificar q irá resolver um problema específico
+
+
+#TIPOS DE PADRÃO DE PROJETO#
+
+>Builder: Usa classes estáticas q usa os padrões p inicializar.
+Imagina q vc foi lá, criou os atributos bonitinhos e dps foi na classe test, fez aquele argumento respondendo td
+sout("Naty", "Ignácio Silva", "Bomfim", "Deise");
+Dia seguinte vc nem lembra mais qual argumento se relaciona ao oq e tem q ficar apertando ctrl+p em cima de cada um
+P evitar isso já q tem classes c MUITOS argumentos, nós usamos o padrão Builder
+
+
+#DICAS#
+
+Seria interessante ler o LIVRO EFFECTIVE JAVA DO JOSHUA BLOSH

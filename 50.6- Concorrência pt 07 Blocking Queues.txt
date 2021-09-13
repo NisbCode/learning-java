@@ -1,0 +1,35 @@
+Classes usadas: BlockingQueueTest, LinkedTransferQueue
+
+
+#PARA QUE SERVE#
+
+Ele serve p a troca de informações entre threads não permitindo q o código continue até q seja efetuado
+
+
+#COMO FUNCIONA#
+
+Uma thread produz as informações e as deposita na queue e outra consume as informações
+
+
+#COMO SE COMPORTAM#
+
+Depende muito de cada método
+Um deles é as filas limitadas onde vc define um limite nessas filas "queue"(A 1 q usamos na classe trabalhada na aula)
+
+Outras:
+SynchronousQueue: tem capacidade 0, ou seja, não pode ter
+     * algum item dentro. Isso faz com que, se o desenvolvedor
+     * faz algum comando, por exemplo, adicionar algo, então a
+     * operação fica bloqueada até outra thread vir e fazer a
+     * operação oposta, tipo remover, nesse caso
+Obrigando c q a ação ocorra ao msm tempo
+
+     * DelayQueue: objetos que não devem ser consumidos antes de
+     * um determinado tempo
+
+
+#LINKEDTRANSFERQUEUE#
+
+Ela tem literalmente tds os comportamentos anteriores ao msm tempo
+Com alguns métodos novos
+E é o recomendado p usar ao trabalhar c Queues

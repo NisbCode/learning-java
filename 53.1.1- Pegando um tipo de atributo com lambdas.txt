@@ -1,0 +1,3 @@
+List<Carro> list = asList(new Carro("rosa", 2018), new Carro("preto", 2015), new Carro("azul", 1985));
+        List<String> listCor = tamanhoPalavras(list, (Carro carro) -> carro.getCor());
+        System.out.println(listCor);

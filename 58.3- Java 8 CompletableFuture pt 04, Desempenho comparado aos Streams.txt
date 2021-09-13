@@ -1,0 +1,18 @@
+Classes usadas: Loja, LojaTeste, LojaTest2
+package Estudando.javacore.ZZMcompletablefuture.classe;
+
+#REDUÇÃO DE LINHAS C MÉTODO SUPLY#
+
+Vimos no documento passado q uma forma de tratar exceções c Threads assíncronadas é surround with try catch, esse método vai literalmente substituir aquela 
+caralhada de linha em apenas uma
+Isso é mostrado no método: getPrecoAsyncTunado()
+
+
+#CASO O DESENVOLVEDOR NÃO POSSA MUDAR AS CLASSES DA API USADAS#
+
+A classe LojaTest2 serve p mostrar caso vc n tenha controle de uma classe q tem apenas um metodo sincronizado e cm vc pode trabalhar nele de forma assincrona
+
+
+#DIFERENÇAS OBSERVADAS AO TESTAR#
+
+Ao testar vc pode ver q o Completable Future e o Stream paralelo tem tempos parecidos, a vantagem de usar o Future é ele aceitar um executor customizado

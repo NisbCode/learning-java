@@ -1,0 +1,50 @@
+Classes usadas: OptionalTeste1
+package Estudando.javacore.ZZJoptional.teste;
+
+
+#O QUE É#
+
+A classe Optional serve p ajudar c o erro do NullPointerException
+
+
+#Cm funciona#
+
+Veio com alguns métodos q ajudam a diminuir a quantidade de linhas q vc usaria de if p verificar se tá vazio
+Ela tb veio p exclarescer e ajudar a visualização, por ex, quando vc ver uma variável:        private Optional<String> nome;    
+vc já vai pensar no "OPA, talvez ela possa ficar nula" enquanto verifica seu código
+
+
+#SEUS MÉTODOS#
+
+        // Encapsulando variavel em Optional caso o desenvolvedor tenha certeza
+        // de que a variavel utilizada é não-nula (utilizar o método of())
+        Optional<String> optionalCertezaNaoNulo = Optional.of(optionalTeste.nomeNaoNulo);
+
+        // Também é possivel utilizar um Optional vazio
+        Optional<String> optionalVazio = Optional.empty();
+
+        // E também tem pro caso do desenvolvedor não saber se a variavel
+        // utilizada é ou não nula. Se for, vai retornar Optional.empty();
+        Optional<String> optionalIncerto = Optional.ofNullable(optionalTeste.nomeNaoNulo);
+
+
+					COMO IMPRIMIR
+
+        System.out.println(optionalCertezaNaoNulo);
+        System.out.println(optionalVazio);
+        System.out.println(optionalIncerto);
+
+
+					COMO BUSCAR VALORES
+
+É util pra quando vc tiver q saber em q momento aquela variável e qual variável deu nulo, num erro vc vai passar um ano procurando qual é
+
+
+>Vc pode usar o .get quando tiver CERTEZA q tem algo ali
+
+        System.out.println(optionalCertezaNaoNulo.get()); 
+
+>Ou pode usar o .orElse quando NÃO TIVER CERTEZA. Ele pede alguma frase caso esteja vazio p imprimir
+
+        System.out.println(optionalVazio.orElse("vazio"));
+        System.out.println(optionalIncerto.orElse("vazio"));

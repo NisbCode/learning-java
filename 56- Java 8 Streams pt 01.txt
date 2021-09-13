@@ -1,0 +1,55 @@
+Classes usadas: Pessoa, StreamTeste
+package Estudando.javacore.ZZKstreams.classes;
+
+
+#O QUE É#
+
+Uma sequencia de elementos de uma origem(Array, etc) q suporta operação de processamento de dados
+
+#COMO FUNCIONA#
+
+Trabalha com coleções de forma muito mais simples, quase da mesma forma usada em banco de dados
+
+
+#DIFERENÇA ENTRE STREAMS E COLLECTIONS#
+
+>Collections: armazenam dados
+>Stream: computa dados, faz alguma coisa com esses dados além disso, as interações em Streams são internas (não precisam de for)
+
+
+#EXERCÍCIO PRA  USAR OS STREAMS#
+
+Pegar os 3 primeiros nomes das pessoa com menos de 25 anos ordenados pelo nome
+
+
+					JAVA 7
+
+    public static void main(String[] args) {
+        List<Pessoa> pessoas = Pessoa.bancoDePessoas();                                                                                 <---Pegue a lista de pessoas
+        Collections.sort(pessoas, (o1, o2) -> o1.getNome().compareToIgnoreCase(o2.getNome()));              <---Sorteie elas por nome(Sim, tem lambdas ali pq sim)
+        List<String> nomesMenorQue25Java7 = new ArrayList<>();                                                             <---Faça uma lista de nomes com menos de 25
+        for (Pessoa pessoaItem : pessoas){                                                                                                            <---Enquanto tiver pessoas, as coloque na variável
+            if (pessoaItem.getIdade() < 25){                                                                                                          <---Pegue apenas quem tiver menos de 25
+                nomesMenorQue25Java7.add(pessoaItem.getNome());                                                                <---Pegue o nome dessas pessoas
+                if (nomesMenorQue25Java7.size() >= 3){                                                                                     <---Se a lista de pessoas com 25 anos for = ou > que 3
+                    break;                                                                                                                                            <---Pare de adicionar a lista
+                }
+            }
+        }
+        System.out.println(nomesMenorQue25Java7);                                                                                       <---Imprima a lista 
+
+
+
+					JAVA 8
+
+        List<String> nomesMenorQue25Java8 = pessoas
+                .stream()                                                                                        <---stream(): pega as informações em tempo real
+                .filter(pessoa -> pessoa.getIdade() < 25)                                      <---filter(): para filtrar os resultados
+                .sorted(Comparator.comparing(Pessoa::getNome))                     <---sorted(): para implementar o comparator, dentro do método comparing
+                .limit(3)                                                                                          <---limit(): limita a quantidade de itens
+                .map(Pessoa::getNome)                                                                <---map(): é um Function, pega um tipo de valor e transformar em outro tipo de valor
+                                                                                                                             //vai pegar os valores de getNome()
+                .collect(Collectors.toList());                                                            <--- ... e jogar tudo pra dentro de uma lista como collect()
+
+
+        System.out.println(nomesMenorQue25Java8);

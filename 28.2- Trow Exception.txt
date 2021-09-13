@@ -1,0 +1,36 @@
+Lançar uma exceção ajuda a nós mesmos a saber qual é aquela exceção
+
+
+package Estudando.javacore.O_exception.RuntimeExceptionTest;
+
+public class RuntimeExceptionTest {
+    public static void main(String[] args) {
+        try {
+            divisor(10, 0);
+
+        }catch(Exception e){
+            System.out.println(e.getMessage());                                                 <----------Esse comando pega uma mensagem definida ao lançar uma exceção
+            e.printStackTrace();                                                                           <----------Mostra que merda deu
+        }
+    }
+    private static void divisor(int num1, int num2){
+        if(num2 == 0){
+            throw new IllegalArgumentException("Passe um número diferente de 0 para num2");   <----------Passa uma mensagem caso o comando dê pau
+        }
+        System.out.println(num1/num2);
+    }
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    public static void criarArquivo() throws IOException {
+        File file = new File("Teste.txt");
+        try {
+            System.out.println("Arquivo criado? " + file.createNewFile());
+            System.out.println("Arquivo criado");
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+
+    }
+}

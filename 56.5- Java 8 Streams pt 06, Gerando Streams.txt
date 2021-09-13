@@ -1,0 +1,12 @@
+Classes usadas: StreamTeste5GenerandoStreams
+package Estudando.javacore.ZZKstreams.teste;
+
+
+#O QUE FALAMOS NA AULA#
+
+Mais métodos para streams cm:
+Como pegar palavras de um arquivo que tenham tais letras
+Como pegar numeros pares contendo o ultimo e sem conter
+Transformar Arrays em streams
+Criar streams vazias
+Por ultimo aprendemos sobre streams infinitas usando generate() e iterator()

@@ -1,0 +1,75 @@
+Uso das classes: TesteConexao e CompradorDBOLD
+
+Okay, sabe quando vc ajudou aquele ser lá a comorar um ingresso? Então
+Existe mais de 10.000 adolescentes querendo ver u show e vc é a adulta no meio delas
+O ingresso é de quem conseguir efetuar a compra daquela determinada cadeira a tempo
+Se vc comprar e a filhinha de papai tb comprar ao msm tempo, a compra vai p quem pagou 1 e efetuou td o processo
+O outro vai ter q fazer o processo td de novo 
+
+
+Existe um comando chamado getcommit ou set
+Ele de normal está true
+Ele faz uma inserção/atualização/etc individualmente em cada mudança
+Ou seja, passou uma etapa, inseriu q sl, o cartão registra
+Para q vc tenha q passar por tds as etapas para por ultimo td terminar
+Caso algo dê errado vc vai ter q voltar tudo, ou seja, rowback
+
+
+AVISO, A TABELA DO DRIVE TEM Q SER DE ENGINE INODB OU ELA NÃO IRÁ FUNCIONAR
+Clique c o BD na tabela>Alter table>Engine>InoDB>Aply>Aply>Finish
+MySam(Tipo de Engine) é mais rápida porém não recebe suporte para transações
+
+
+public class CompradorDBOLD {
+    public static void save(Comprador comprador) {
+
+    // Transações: conjuntos de instruções que devem ser feitas
+    // em bloco para funcionar, ou todas funcionam ou nenhuma
+    // funciona
+    public static void saveTransaction() throws SQLException {
+        String insertInto = "INSERT INTO `agencia`.`comprador` (`cpf`, `nome`) VALUES ('TESTE1', 'TESTE1')";  //CUIDADO, aq é ` não '  errar isso erra a sintaxe
+        String insertInto2 = "INSERT INTO `agencia`.`comprador` (`cpf`, `nome`) VALUES ('TESTE2', 'TESTE2')";
+        String insertInto3 = "INSERT INTO `agencia`.`comprador` (`cpf`, `nome`) VALUES ('TESTE3', 'TESTE3')";
+        // conectar o java com o banco de dados
+        Connection conn = ConexaoFactory.getConexao();
+        // Adicionando savepoint, para o caso de querer salvar
+        // certos dados da transação
+        Savepoint savepoint = null;
+        try {
+            // Deve ser o primeiro passo
+            conn.setAutoCommit(false);
+            Statement stmt = conn.createStatement();
+            // Então, inserir os dados no banco
+            stmt.executeUpdate(insertInto);
+            savepoint = conn.setSavepoint("One");
+            stmt.executeUpdate(insertInto2);
+            // Simulando erro dentro da transação
+            if(true)
+                throw new SQLException();
+            stmt.executeUpdate(insertInto3);
+            // E por ultimo, alterar o estado do banco
+            conn.commit();
+            ConexaoFactory.close(conn, stmt);
+            System.out.println("Registro inserido com sucesso");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Caso dê erro na transação, para mostrar
+            // onde o banco deve voltar, baseado num savepoint
+            conn.rollback(savepoint);// Ele lança uma exceção q botamos na assinatura do método e pegamos c o try catch na classe Teste
+            // agora pra voltar pro momento do savepoint PS.: RECOMENDO Q FAÇA ISSO DE ROWBACK P NÃO DAR ERRO POR SEGURANÇA
+            conn.commit();
+        }
+    }
+
+
+
+public class TesteConexao {
+    public static void main(String[] args) {
+
+//        // Transação
+        try {
+            CompradorDBOLD.saveTransaction();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }

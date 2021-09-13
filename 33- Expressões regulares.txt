@@ -1,0 +1,367 @@
+É uma linguagem dentro da linguagem Java
+Util para achar algo fácilmente num documento o qual possui um padrão
+Metacaracteres são caracteres especiais usados no padrão da expressão
+Aula 89
+Terá duas classes que fazem este comando, uma classe vai servir para procurar padrões e a outra para identificar neles
+Pattern e Matcher
+Link interessante q eu vi sobre q talvez vc precise olhar: https://www.devmedia.com.br/conceitos-basicos-sobre-expressoes-regulares-em-java/27539
+
+package Estudando.javacore.U_expressoesregulares;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class ExpressoesRegularesTest {
+    public static void main(String[] args) {
+        String regex = "aba";                                        //<--- Palavra procurada
+        String texto = "abababa";                                //<--- Texto
+        Pattern pattern = Pattern.compile(regex);      //<---Procura no texto
+        Matcher matcher = pattern.matcher(texto);      //<---Vê oq bate
+        System.out.println("texto: " + texto);
+        System.out.println("indice: 0123456789");      //<---Índice usado para descrever onde ficam as posições
+        System.out.println("expressão: " + matcher.pattern());
+        System.out.println("posições encontradas");
+        while(matcher.find()){
+            System.out.print(matcher.start() + " ");   //<--- Começa na 0 a 1 sequencia achada e tem outra na posição 4
+        }
+    }
+}
+
+===>
+texto: abababa
+indice: 0123456789
+expressão: aba
+posições encontradas
+0 4 
+Process finished with exit code 0
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Um exemplo do uso dos colchetes:
+
+
+package Estudando.javacore.U_expressoesregulares;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class ExpressoesRegularesTest {
+    public static void main(String[] args) {
+
+        //Algumas opções de buscas possíveis
+        //  \d todos os digitos (Número)
+        //  \D  tudo o que não for digito
+        //  \s espaços em branco e símbolos cm "\t \n \f \r"
+        //  \S caractere que não é branco
+        //  \w caractere de palavras a-z, A-Z , digitos e o underline (_)
+        //  \W tudo que não for caractere de palavra
+        //  [] faz ele prucurar aquelas letras com o case sensitive ativado
+        //  Quantificadores:
+        //  ?  zero ou uma
+        //  *  zero ou mais
+        //  +  uma ou mais
+        //  {m, n} m até n
+        //  () agrupar para escolhas   ex.: o(v|c)o ===> ovo ou oco
+        //  |  ou
+        //  $  fim de linha
+        //  \\.  coringa; serve p ser substituido por qualquer coisa ex.: 1.3 = 123, 133, 1A3, 1#3, 1 3
+        //  ^  caractere de negação usado para excluir oq vc não quer na seleção ex.: [^ABC] quer dizer q vc quer td menos ABC
+
+        String regex = "[a-cA-C]";    //<---O msm rola com números, só usar o -, ex.: 0-5
+        String texto = "#c@hab1278yBguanebm0C212121  \r_ ";
+        Pattern pattern = Pattern.compile(regex);      //<---Procura no texto
+        Matcher matcher = pattern.matcher(texto);      //<---Vê oq bate
+        System.out.println("texto: " + texto);
+        System.out.println("indice: 012345678901234567");      //<---Índice usado para descrever onde ficam as posições
+        System.out.println("expressão: " + matcher.pattern());
+        System.out.println("posições encontradas");
+        while(matcher.find()){
+            System.out.print(matcher.start() + " ");   //===> Começa na 0 a 1 sequencia achada e tem outra na posição 4
+        }
+    }
+}
+
+===>
+_ 
+indice: 012345678901234567
+expressão: [abcABC]
+posições encontradas
+1 4 5 11 14 17 20 
+Process finished with exit code 0
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+PS.: Necessário conhecimento sobre oq são números hexadecimais
+É uma linguagem criada por pares de números e letras
+As letras vão até a F apenas
+Fazendo c q sua combinação se torne infinita 
+01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F 10 11...
+
+
+package Estudando.javacore.U_expressoesregulares;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class ExpressoesRegularesTest {
+    public static void main(String[] args) {
+
+        //Algumas opções de buscas possíveis
+        //  \d todos os digitos (Número)
+        //  \D  tudo o que não for digito
+        //  \s espaços em branco e símbolos cm "\t \n \f \r"
+        //  \S caractere que não é branco
+        //  \w caractere de palavras a-z, A-Z , digitos e o underline (_)
+        //  \W tudo que não for caractere de palavra
+        //  [] faz ele prucurar aquelas letras com o case sensitive ativado
+        //  Quantificadores:
+        //  ?  zero ou uma
+        //  *  zero ou mais
+        //  +  uma ou mais
+        //  {m, n} m até n
+        //  () agrupar para escolhas   ex.: o(v|c)o ===> ovo ou oco
+        //  |  ou
+        //  $  fim de linha
+        //  \\.  coringa; serve p ser substituido por qualquer coisa ex.: 1.3 = 123, 133, 1A3, 1#3, 1 3
+        //  ^  caractere de negação usado para excluir oq vc não quer na seleção ex.: [^ABC] quer dizer q vc quer td menos ABC
+
+        int hex = 0x1;                          //<---Tamo mexendo com números hexadecimais
+        String regex = "0[xX][0-9a-fA-F]";      //<---Ele tem q começar c 0; pode ter x ou X; pode ter de 0 à 9 ou de a à f ou A à F
+        String texto = "12 0x 0X 0xFFABC 0x10G 0x1"; //<---Aq é o texto da net
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(texto);
+        System.out.println("texto: " + texto);
+        System.out.println("indice: 012345678901234567");
+        System.out.println("expressão: " + matcher.pattern());
+        System.out.println("posições encontradas");
+        while(matcher.find()){       
+                                       		             __________Pega os valores onde tem os resultados q pedimos
+                                                                                    |
+            System.out.println(matcher.start() + " " + matcher.group());
+        }
+    }
+}
+
+===>
+texto: 12 0x 0X 0xFFABC 0x10G 0x1
+indice: 012345678901234567
+expressão: 0[xX][0-9a-fA-F]
+posições encontradas
+9 0xF
+17 0x1
+23 0x1
+
+Process finished with exit code 0
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+Quantificadores servem para dizer que o programa deve procurar por uma ou mais ocorrencias de determinada expressão
+Temos 7 tipos de quantificadores
+Oq vai delimitar são os espaços entres as palavras/ simbolos
+TALVEZ vc precise daquele link no inicio, e vamos lá
+
+package Estudando.javacore.U_expressoesregulares;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class ExpressoesRegularesTest {
+    public static void main(String[] args) {
+
+        //Algumas opções de buscas possíveis
+        //  \d todos os digitos (Número)
+        //  \D  tudo o que não for digito
+        //  \s espaços em branco e símbolos cm "\t \n \f \r"
+        //  \S caractere que não é branco
+        //  \w caractere de palavras a-z, A-Z , digitos e o underline (_)
+        //  \W tudo que não for caractere de palavra
+        //  [] faz ele prucurar aquelas letras com o case sensitive ativado
+        //  Quantificadores:
+        //  ?  zero ou uma
+        //  *  zero ou mais
+        //  +  uma ou mais
+        //  {m, n} m até n
+        //  () agrupar para escolhas   ex.: o(v|c)o ===> ovo ou oco
+        //  |  ou
+        //  $  fim de linha
+        //  \\.  coringa; serve p ser substituido por qualquer coisa ex.: 1.3 = 123, 133, 1A3, 1#3, 1 3
+        //  ^  caractere de negação usado para excluir oq vc não quer na seleção ex.: [^ABC] quer dizer q vc quer td menos ABC
+
+        int hex = 0x1;                          //<---Tamo mexendo com números hexadecimais
+
+        String regex = "0[xX]([0-9a-fA-F])+(\\s|$)"; //<---Procure algo q comece c 0, seguido de x|X, seguido de 0 à 9 | de a à f | A à F, uma ou mais vezes onde 
+                                                                                       //sejam seguidas de espaços ou fim de linha
+
+        String texto = "12 0x 0X 0xFFABC 0x10G 0x1";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(texto);
+        System.out.println("texto: " + texto);
+        System.out.println("indice: 012345678901234567");
+        System.out.println("expressão: " + matcher.pattern());
+        System.out.println("posições encontradas");
+        while(matcher.find()){
+            System.out.println(matcher.start() + " " + matcher.group());
+        }
+    }
+}
+
+===>
+texto: 12 0x 0X 0xFFABC 0x10G 0x1
+indice: 012345678901234567
+expressão: 0[xX]([0-9a-fA-F])+(\s|$)
+posições encontradas
+9 0xFFABC                                                <---Isso se dá pq vc diz p ele achar tds até o espaço
+23 0x1                                                        <---Ou até o fim da linha
+
+Process finished with exit code 0
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+Buscando emails e datas dentro de determinado texto
+
+Buscar<---Pega oq vc procura
+
+Validar<---Diz se aquele texto faz parte do q vc procura
+
+
+package Estudando.javacore.U_expressoesregulares;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class ExpressoesRegularesTest {
+    public static void main(String[] args) {
+
+        //Algumas opções de buscas possíveis
+        //  \d todos os digitos (Número)
+        //  \D  tudo o que não for digito
+        //  \s espaços em branco e símbolos cm "\t \n \f \r"
+        //  \S caractere que não é branco
+        //  \w caractere de palavras a-z, A-Z , digitos e o underline (_)
+        //  \W tudo que não for caractere de palavra
+        //  [] faz ele prucurar aquelas letras com o case sensitive ativado
+        //  Quantificadores:
+        //  ?  zero ou uma
+        //  *  zero ou mais
+        //  +  uma ou mais
+        //  {m, n} m até n
+        //  () agrupar para escolhas   ex.: o(v|c)o ===> ovo ou oco
+        //  |  ou
+        //  $  fim de linha
+        //  \\.  coringa; serve p ser substituido por qualquer coisa ex.: 1.3 = 123, 133, 1A3, 1#3, 1 3
+        //  ^  caractere de negação usado para excluir oq vc não quer na seleção ex.: [^ABC] quer dizer q vc quer td menos ABC
+
+        int hex = 0x1;
+
+        String regex = "([0-9A-Za-z\\._-])+@([a-zA-Z])+(\\.([a-zA-Z])+)+"; //Talvez tenha letras maiusc., minusc., 0 à 9,pont|underline|line, podendo acontecer uma 
+ou mais vezes;TEM q ser seguido de arroba, podendo ser seguido de a-zA-Z, podendo ser seguido de a-zA-Z repetindo uma ou mais vezes;
+(TEM q ser seguido de ponto final, podendo ser seguido de a-zA-Z repetindo uma ou mais vezes)Este gp maior pode ser ter uma ou mais vezes
+
+        String texto = "fulano@hotmail.com , 102Abc@gmail.com, #@!abrao@mail, teste@gmail.com.br, teste@mail";
+//      Validar:
+        System.out.println("Email valido?" + "#@!abrao@mail".matches(regex));
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(texto);
+        System.out.println("texto: " + texto);
+        System.out.println("indice: 012345678901234567");
+        System.out.println("expressão: " + matcher.pattern());
+        System.out.println("posições encontradas");
+        while(matcher.find()){
+            System.out.println(matcher.start() + " " + matcher.group());
+        }
+    }
+}
+
+
+---------------                  ---------------------                 -----------------                   ---------------------                  --------                       --------------------               -----------
+
+Procurando por datas:
+
+package Estudando.javacore.U_expressoesregulares;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class ExpressoesRegularesTest {
+    public static void main(String[] args) {
+
+        //Algumas opções de buscas possíveis
+        //  \d todos os digitos (Número)
+        //  \D  tudo o que não for digito
+        //  \s espaços em branco e símbolos cm "\t \n \f \r"
+        //  \S caractere que não é branco
+        //  \w caractere de palavras a-z, A-Z , digitos e o underline (_)
+        //  \W tudo que não for caractere de palavra
+        //  [] faz ele prucurar aquelas letras com o case sensitive ativado
+        //  Quantificadores:
+        //  ?  zero ou uma
+        //  *  zero ou mais
+        //  +  uma ou mais
+        //  {m, n} m até n
+        //  () agrupar para escolhas   ex.: o(v|c)o ===> ovo ou oco
+        //  |  ou
+        //  $  fim de linha
+        //  \\.  coringa; serve p ser substituido por qualquer coisa ex.: 1.3 = 123, 133, 1A3, 1#3, 1 3
+        //  ^  caractere de negação usado para excluir oq vc não quer na seleção ex.: [^ABC] quer dizer q vc quer td menos ABC
+
+        int hex = 0x1;
+
+          Pode ter dois desse                        Dois até 4           PS.: CASO QUEIRA MAIS, PODE USAR ASSIM: {2,} ISSO DEIXARÁ INFINITO DPS DO DOIS
+                                        |                       |
+        String regex = "\\d{2}/\\d{2}/\\d{2,4}";
+        String texto = "22/01/2002  05/05/2015  1/1/01  01/05/55"; //dd/MM/yyyy
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(texto);
+        System.out.println("texto: " + texto);
+        System.out.println("indice: 012345678901234567");
+        System.out.println("expressão: " + matcher.pattern());
+        System.out.println("posições encontradas");
+        while(matcher.find()){
+            System.out.println(matcher.start() + " " + matcher.group());
+        }
+    }
+}
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+Uso da negativa:
+
+package Estudando.javacore.U_expressoesregulares;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class ExpressoesRegularesTest {
+    public static void main(String[] args) {
+
+        //Algumas opções de buscas possíveis
+        //  \d todos os digitos (Número)
+        //  \D  tudo o que não for digito
+        //  \s espaços em branco e símbolos cm "\t \n \f \r"
+        //  \S caractere que não é branco
+        //  \w caractere de palavras a-z, A-Z , digitos e o underline (_)
+        //  \W tudo que não for caractere de palavra
+        //  [] faz ele prucurar aquelas letras com o case sensitive ativado
+        //  Quantificadores:
+        //  ?  zero ou uma
+        //  *  zero ou mais
+        //  +  uma ou mais
+        //  {m, n} m até n
+        //  () agrupar para escolhas   ex.: o(v|c)o ===> ovo ou oco
+        //  |  ou
+        //  $  fim de linha
+        //  \\.  coringa; serve p ser substituido por qualquer coisa ex.: 1.3 = 123, 133, 1A3, 1#3, 1 3
+        //  ^  caractere de negação usado para excluir oq vc não quer na seleção ex.: [^ABC] quer dizer q vc quer td menos ABC
+        int hex = 0x1;
+        String regex = "proj([^,])+";
+        String texto = "proj1.bkj, proj1.java, proj1.class, proj1final.java, pproj2.bkp, texto, diagrama, foto";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(texto);
+        System.out.println("texto: " + texto);
+        System.out.println("indice: 012345678901234567");
+        System.out.println("expressão: " + matcher.pattern());
+        System.out.println("posições encontradas");
+        while(matcher.find()){
+            System.out.println(matcher.start() + " " + matcher.group());
+        }
+    }
+}

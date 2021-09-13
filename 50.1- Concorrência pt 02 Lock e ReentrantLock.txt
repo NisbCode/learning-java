@@ -1,0 +1,21 @@
+Classes usadas: LockTest
+
+#DIFERENÇAS DENTRE USAR SYNCHRONIZED OU REENTRANTLOCK(Classe da interface Lock)#
+
+Há três diferenças da interface Lock do pacote concurrent p o synchronized 
+A PRIMEIRA é q em synchronized a Thread fica esperando a outra terminar p passar a chave
+Já na Lock, vc pode definir q a Thread espere a chave por 5 segs e se n tiver, ela continua a execução
+
+A SEGUNDA é, supondo que tenham 5 Threads trabalhando no msm  método, usar o non-fair locks fará c q vc entregue a chave pra quem menos executou já q
+Threads são imprevisíveis 
+Esse fair trabalha c boolean, se n por nd dentre os parenteses ele é considerado falso
+
+	ReentrantLock lock = new ReentrantLock();
+
+A TERCEIRA é q dá p interromper uma Thread enquanto ela está esperando pelo Lock
+Assim cm tb tem um método p ver quantas Threads estão esperando por um Lock
+
+
+#QUANDO USAR CADA UM#
+
+synchronized deve ser a 1 opção sempre, já q é o mais simples, só use ReentrantLock caso vc precise das coisas q só tenham nele

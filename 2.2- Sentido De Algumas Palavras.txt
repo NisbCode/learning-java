@@ -1,0 +1,43 @@
+public é um modificador de acesso
+
+void é um tipo de retorno que não traz retorno/executa e não retorna nada
+
+
+Instância é quando você cria uma variavel
+, tipo Carro carroDeRoberta = new Carro();
+carroDeRoberta é a instância do objeto Carro()
+
+println faz pular linhas
+print imprime sem pular
+
+
+erro de compilação ===> Erro de lógica ao programar
+
+erro de em tempo de execução ===> Erro enquanto o programa executa o código
+
+
+"public" pode ser visto em qualquer local
+Já "private" será visivel apenas daquela classe apenas, isto protege o código e impede que qualquer programador mexa
+No private podemos acessar usando comandos get e set 
+No protected usamos para todas as classes filhas (que tem herança) poderem acessar também, mas só elas ou no mesmo PACOTE
+O default que usamos para todas do mesmo pacote (NÃO SENDO NECESSÁRIA COLOCAR)
+Escrever public void significa que você quer colocar um valor que todas as outras classes podem ver(public) mas que não 
+terão nenhum retorno, apenas colocarão um valor na memória (void) 
+"static" é um valor unico para todos, que tará separado de um objeto mas vinculado a classe, caso mude ele, todos os objetos
+mudam juntos (Dever 19-)
+transiente faz c que o atributo seja ignorado já q a senha n deve ser repassada
+efetivamente é quando se nd alterar é considerado aquilo, por ex, um atributo final em varirável local, msm q vc n escreva q ele é final, ele será considerado assim
+extends Object ===> Te leva para a classe Mãe padrão do Java
+abstract ela é criada para ser extendida
+final não pode ser extendida
+
+@Override ===> Esse @ serve para os programadores que pegarem seu código entenderem q isso é uma sobreescritura
+
+
+Autoboxing e unboxig ===> tirar ou colocar valores numa variável
+
+
+Imutável ===> Quando um objeto é p apenas leitura
+
+
+type erasure ===> Verificar o tipo em tempo de execução em uma lista

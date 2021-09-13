@@ -1,0 +1,69 @@
+Classes usadas: MySQL(Agencia), CompradorDBOLD e TesteConexao 
+
+É uma preparação q nem o PrepareStatement só q p métodos feitos no SQL ou seja, funções e p Procedures
+A diferença entre funções e Stored procedures é q Funções retorna um valor
+E Procedures n precisa
+
+*Criando uma Stored procedures no SQL*
+
+Vc pd bloquear uma tabela p as pessoas, fazendo c q só possa ser acessada por meio de procedures, q nem pôr uma variável de private p incrementar a segurança
+
+DELIMITER // /*Uma stored procedure pode ter mais q uma instrução no sql, é bom mudar ele p // */
+
+create procedure SP_GetCompradoresPorNome(termo varchar(100)) /*Recebendo parâmetro termo q será varchar de 100*/
+
+BEGIN 
+SELECT * FROM comprador where nome like termo;  /*Selecione td de comprador onde nome for igual ao termo*/
+
+END //
+
+DELIMITER ;
+
+
+*Chamando ela*
+
+Vc chama ela p assim pôr a busca por ali, lembre-se, isso é uma extensão da aula anterior, então é sobre procura de dados, porém no driver
+1- Escrevendo por extenso usando "call"
+2- Botão direito na Stored Procedure e send to SQL editor e dps procedure call
+
+CALL `agencia`.`SP_GetCompradoresPorNome`('%oão%');
+
+
+*Chamando ela no JAVA*
+
+    // CallableStatement: classe filha de Statement, serve para chamar
+    // procedures do SQL (coisa que eu n sei exatamente o que
+    // é, então melhor perguntar a Rully)
+    public static List<Comprador> searchByNameCallableStatement(String nome) {
+        String sql = "CALL `agencia`.`SP_GetCompradoresPorNome`( ? );";
+
+        Connection conn = ConexaoFactory.getConexao();
+        List<Comprador> compradorList = new ArrayList<>();
+        try {
+
+            CallableStatement cs = conn.prepareCall(sql);
+
+            cs.setString(1, "%" + nome + "%");
+            // ResultSet sem parametro, nesse caso
+            ResultSet resultSet = cs.executeQuery();
+            // Para pegar os dados: "Enquanto o resultSet tiver algum proximo item..."
+            while (resultSet.next()) {
+                // "... pegue ou o id (columnIndex, que sempre começa em 1) desejado ou o nome (columnLabel) da coluna desejada,
+                // depende do que o desenvolvedor vai inserir"
+                compradorList.add(new Comprador(resultSet.getInt("id"), resultSet.getString("nome"), resultSet.getString("cpf")));
+
+            }
+            ConexaoFactory.close(conn, cs, resultSet);
+            return compradorList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
+public class TesteConexao {
+    public static void main(String[] args) {
+        // SearchByName usando uma procedure
+        System.out.println(CompradorDBOLD.searchByNameCallableStatement("ari"));

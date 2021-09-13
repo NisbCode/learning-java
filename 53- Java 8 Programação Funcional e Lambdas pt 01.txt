@@ -1,0 +1,41 @@
+Classes usadas: LambdaTest
+package Estudando.javacore.ZZHlambdas.teste;
+
+
+#O QUE É#
+
+Ela é anonima
+Uma função, já q n tá presa em classe nem nd
+Concisas, pq vc resume uma classe anonima inteira em uma linha
+
+
+#COMO CRIAR#
+
+Dividida em 3 partes:
+                                                    (Carro carro) -> carro.getCor().equalsIgnoreCase("dourado")
+>Parâmetro                                         |             |
+>Seta                                                                  |                |
+>Expressão                                                                           |
+
+
+#QUANDO USAR#
+
+Só pode ser usado em INTERFACES FUNCIONAIS(Interfaces onde só tem um método e ele é abstrato[Tem que obrigatoriamente ser sobreescritos], métodos 
+							default não são contados pois n serão sobreescritos)
+Por ex o Runnable
+Ou interfaces criadas
+
+
+					De forma extensa classe anonima:
+
+        CarroPredicate carroPredicateAbstrato = new CarroPredicate() {
+            @Override
+            public boolean test(Carro carro) {
+                return carro.getCor().equalsIgnoreCase("vermelho");
+            }
+        };
+
+
+					Pelo Lambda
+
+        Predicate<Carro> carroPredicateLambda = (Carro carro) -> carro.getCor().equalsIgnoreCase("vermelho");

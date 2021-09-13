@@ -1,0 +1,79 @@
+Classes usadas: ConexaoFactoryRowSet, CompradorDBOLD, TesteConexao e MySQL(agencia)
+
+CachedRowSet é um RowSet disconectado 
+Normalmente ele se vincula ao BD p a leitura
+Executa a Query
+Preenche o CachedRowSet
+E dps fecha a conexão
+
+Ao atualizar
+Ela se liga ao BD 
+Atualiza
+E fecha a conexão
+
+RESOLVENDO ERRO 
+
+Can''t call commit when autocommit=true   vc escreve na sql &relaxAutoCommit=true
+
+
+
+public class ConexaoFactoryRowSet {
+
+    public static CachedRowSet getRowSetConnectionCached (){
+        String url = "jdbc:mysql://localhost:3306/agencia?useTimezone=true&serverTimezone=UTC&relaxAutoCommit=true";
+        String usuario = "root";
+        String password = "bank";
+
+        try {
+            // Para criar um objeto JdbcRowSet
+            CachedRowSet cashedRowSet =  RowSetProvider.newFactory().createCachedRowSet();
+            cashedRowSet.setUrl(url);
+            cashedRowSet.setUsername(usuario);
+            cashedRowSet.setPassword(password);
+            return cashedRowSet;                  //Isso vai ser sempre o retornado acima no public... Se lá é Cached, aq tb
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        // A classe Connection pede pra fechar com return
+        return null;
+    }
+
+
+
+
+
+public class CompradorDBOLD {
+    public static void save(Comprador comprador) {
+
+    // CachedRowSet: fecha a conexão automaticamente
+    public static void updateRowSetCached (Comprador comprador) {
+        if (comprador == null || comprador.getId() == null ){
+            System.out.println("Não foi possivel atualizar o registro");
+            return;
+        }
+        String sql = "SELECT * FROM comprador WHERE id = ?";
+        CachedRowSet crs = ConexaoFactoryRowSet.getRowSetConnectionCached();
+        try {
+            crs.setCommand(sql);
+            crs.setInt(1, comprador.getId());
+            crs.execute();
+            crs.next();
+            crs.updateString("nome", "Fernando");
+            crs.updateRow();   //Quando vc for atualizar, infelizmente ele  tb te pede para aceitar as mudanças
+//            Thread.sleep(8000);    //Isso faz o programa demorar 8000 milisegundos (Pegue a exceção c o try catch)
+            crs.acceptChanges();   //Vc aceita elas aq(Cuidado q pode dar um erro de auto commit onde vc terá q por um comando na sql esse: &relaxAutoCommit=true Se o erro persistir, o código ainda funciona)
+            System.out.println("Registro atualizado com sucesso");
+        } catch (SQLException /*| InterruptedException*/ e){
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
+public class TesteConexao {
+    public static void main(String[] args) {
+
+        CompradorDBOLD.updateRowSetCached(new Comprador(1, "111.111.111-11", "William"));

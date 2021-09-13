@@ -1,0 +1,62 @@
+Usado para reaproveitar códigos ou usar polimorfismo
+
+
+
+A forma usada para iniciar/identificar uma herança é pela linha:
+
+public class Funcionario extends Pessoa {
+                           |        |
+                           |        -----------------> Classe a qual estamos pegando as heranças
+                           |
+                           Comando que identifica que isto é uma herança
+
+
+
+Para herança usamos a palavra "é um"
+Funcionario é uma pessoa
+
+No caso de associação usamos "tem um"
+
+
+Toda classe que não tiver escrito nada ao lado, ela é a mãe, caso você não coloque, estará escrito implicitamente "extends Object"
+Isso identifica que aquela é uma classe mãe, mas não é necessário escrever (Mas é bom saber, vai que)
+
+public class Pessoa extends Object{
+
+
+Para acessar, clique com o ctrl+botão esquerdo
+===================================================================
+			SOBREESCRITA:
+
+1- Escreve da mesma forma que o método está na outra classe
+    public void imprime(){
+
+2- Usa a palavra "super" junto do método da outra classe
+        super.imprime();
+
+3- Acrescenta a parte nova
+        System.out.println("Salário: " + this.salario);
+    }
+
+===================================================================
+Okay, cm explicar? Vc tem uma classe chama Funcionario que herda a classe Pessoa, vc a sobreescreveu e agora quer fazer
+uma frase simples. Nela vc pega o nome do funcionário e mais algumas variáveis. Porém, elas estão definidas como
+private e outra classe que possui os dados de nome e etc.
+
+Nós poderiamos usar a seguinte forma na classe "Funcionario":
+
+    public void imprimeReciboPagamento(){
+        System.out.println("Eu, " + getNome() + ", Recebi o valor de " + this.salario + ".");
+    }
+
+
+E na parte de test:
+
+        f.imprimeReciboPagamento();
+
+
+Contudo, não fica estéticamente agradável e desorganizado, até mesmo confuso. Então podemos fazer o seguinte
+
+Mudar de private pra protected
+
+Isso fará com que agora você possa alterar aquela frase sem muitos problemas.

@@ -1,0 +1,143 @@
+Classes usadas: TesteLambda3, ComparadorCarro
+package Estudando.javacore.ZZHlambdas.teste;
+
+
+#O QUE É#
+
+Method References é uma forma de facilitar mais ainda a leitura de um código
+Ele é usado juntamente c lambda q já serve p melhorar um código
+
+
+#COMO FAZER#
+
+Então, ele tem 4 TIPOS possíveis
+Ele utiliza :: como forma de vc usar aquele método
+Ex.:
+
+forEach(asList("William", "Devdojo", "facebook.com/devdojo"), string -> System.out.println(string));      <---Agt conhece essa lambda
+forEach(asList("William", "Devdojo", "facebook.com/devdojo"), System.out::println);                                <---E essa é a lambda c method reference
+                                                                                                      -------------------------
+                                                                                                              |_______________________------->Essa parte é resumida
+
+
+======================                                     ============================                                     ============
+
+					1-Referência à um método estático
+
+Criamos um método static de comparação de cores sem utilizar a implementação da classe Comparable e s criando nossa própria q realmente tem o msm método
+compareTo, porém, cm se já tivesse sido sobreescrito:
+
+public class ComparadorCarro {
+    public static int comparePorCor(Carro c1, Carro c2){
+        return c1.getCor().compareToIgnoreCase(c2.getCor());
+    }
+
+E agr vem as formas diferentes de se fazer:
+
+>>Pela sobreescrita do método compareTo da classe Comparable, ou seja, sem usar oq criamos acima(Ps.: S, usei de outro lugar pq n tô c saco de criar essa poha):
+
+    @Override
+    public boolean equals(Object o) {
+        return Objects.equals(serialNumber, produto.serialNumber);
+    }
+
+
+>>Pela sobreescrita do método compareTo USANDO LAMBDA, ainda a classe Comparable:
+
+     Collections.sort(listaCarros, (carro1, carro2) -> carro1.getCor().compareToIgnoreCase(carro2.getCor()));
+
+
+>>Pela sobreescrita do método compareTo usando lambda e USANDO METHOD REFERENCE, aq eu uso aquele método criado:
+
+     Collections.sort(listaCarros, ComparadorCarro::comparePorCor);
+
+Eu sou obrigada a criar o método p resumir pq é a unica forma de usar method c parâmetros
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+					2- Referência a instância de método
+
+Msm coisa quase q o anterior, a diferença é teórica, que você passa a usar um objeto no lugar da própria classe. Isso é importante pra certificação Oracle
+
+    public int comparePorAno(Carro c1, Carro c2){
+        return ((Integer) c1.getAno()).compareTo(c2.getAno());
+    }
+
+>> Agora é só fazer o msm de antes só q ao invés da classe q vc coloca, aq vc vai colocar o objeto
+
+        ComparadorCarro comparadorCarroInstancia = new ComparadorCarro();
+
+>>Como ficaria até agora:
+
+        Collections.sort(listaCarros, (Carro carro1, Carro carro2) -> carro1.getCor().compareToIgnoreCase(carro2.getCor()));
+
+>>Como vai ficar:
+
+        Collections.sort(listaCarros, comparadorCarroInstancia::comparePorAno);
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+					3- Referência a instância de método particular de objeto arbitrário
+
+TRADUZINDO: Esse nome todoai pra dizer que você pode chamar um método não-estatico de uma classe
+
+        List<String> listaNomes = asList("Billie", "Mel", "Florence", "Halsey");
+
+>>Como ficaria até agora:
+
+        listaNomes.sort((s1, s2) -> s1.compareTo(s2));
+
+>>Com method references:
+
+        listaNomes.sort(String::compareTo);
+        System.out.println(listaNomes);
+
+>>Como ficaria até agora:
+
+        Function<String, Integer> stringToInteger = s -> Integer.parseInt(s);
+
+>>Com method references:
+
+        Function<String, Integer> stringToInteger2 = Integer::parseInt;
+        System.out.println(stringToInteger2.apply("10"));
+
+>>Como ficaria até agora:
+
+        BiPredicate<List<String>, String> checkItemInList = (lista, elemento) -> lista.contains(elemento); <---Msm coisa q o Predicate mas recebe dois parâmetros
+
+>>Com method references:
+
+        BiPredicate<List<String>, String> checkItemInList2 = List::contains;
+        System.out.println("O nome está presente na lista?: " + checkItemInList2.test(listaNomes, "Billie"));
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+					4- Referência por construtor
+
+Isso é realmente criar um construtor utilizando lambda
+
+
+Usando Supplier p criar a referência p um construtor sem argumentos
+
+        ComparadorCarro comparadorCarroInstancia = new ComparadorCarro();
+        Supplier<ComparadorCarro> comparadorCarroSupplier = ComparadorCarro::new;
+        Collections.sort(listaCarros, comparadorCarroSupplier.get()::comparePorAno);
+        System.out.println((listaCarros);
+
+
+Usando o BiFunction pq ele se adequa melhor ao caso já q precisaremos de 2 argumentos e uma referencia:
+
+>>Como ficaria até agora:
+
+        BiFunction<String, Integer, Carro> carroBiFunction = (string, integer) -> new Carro(string, integer);
+
+>>Com method references:
+
+        BiFunction<String, Integer, Carro> carroBiFunction2 = Carro::new;
+        System.out.println(carroBiFunction.apply("Laranja", 1971));
+
+======================================================================================
+#REGRAS#
+
+N se pode usar method references c parâmetros por isso contornamos isso no 1 tipo de cm usar method

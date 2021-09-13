@@ -1,0 +1,82 @@
+Classes usadas: ListaNomes, ThreadSafeTest(Ambas foram usadas na demonstração de q mesmo uma classe sendo ThreadSafe, isso não promete algo de fato tão
+correto cm parece), e DeadlockTest
+
+Classes ThreadSafe são classes onde tds os seus métodos são synchronized exemplo a StringBuffered
+Tb é possível fazer o msm c as collections desta forma: 
+private List<String> nomes = Collections.synchronizedList(new LinkedList<>());
+
+
+#COMO RESOLVER O PROBLEMA DE THREADSAFE NÂO SEREM TÂO CORRETAS#
+
+>Sincronize os acessos mais externos(APARENTEMENTE, ME CORRIJA SE EU ESTIVER ERRADA, São os q n tão no método main), fazendo com que não precise 
+sincronizar as mais internas
+
+
+
+package Estudando.javacore.ZZC_threads.classe;
+
+
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
+/**
+ * CLASSES ThreadSafe
+ * Classes que, como a StringBuffer, por exemplo, possuem
+ * seus métodos sincronizados pra que duas threads não mudem
+ * algum dado ao se confundirem.
+ * Existe, mas não é 100% confiável, o que torna necessário
+ * o uso do syncronized tambem nos métodos derivados dessa classe
+ */
+
+public class ThreadSafeTest {
+    public static void main(String[] args) {
+        ListaNomes nome = new ListaNomes();
+        nome.add("Melanie Martinez");
+        class RemovedorDeNomes extends Thread {
+            @Override
+            public void run() {
+                nome.removerPrimeiro();
+            }
+        }
+
+        new RemovedorDeNomes().start();
+    }
+}
+
+
+						SERIA ESSA PARTE ABAIXO A MAIS EXTERNA
+
+class ListaNomes {
+    //                              método synchronizedList() que sincroniza todos
+    //                              os métodos de uma Lista/Collection
+//    private List<String> nomes = Collections.synchronizedList(new LinkedList<>());
+    //                  Mas a classe usada é essa apenas, por causa da não garantia de classes ThreadSafe
+
+    private List<String> nomes = new LinkedList<>();
+
+    public synchronized void add (String nome){
+        nomes.add(nome);
+    }
+
+    public synchronized void removerPrimeiro(){
+        if (nomes.size() > 0){
+            System.out.println(nomes.remove(0));
+        }
+    }
+}
+
+
+
+
+
+#DEADLOCKS O QUE SÃO#
+
+Quando uma Thread B está a espera de uma chave q está com uma Thread A para acessar o objeto A, porém, a Thread A está a espera de uma chave da Thread B p 
+acessar o objeto B. Como ambas estão esperando a outra e nenhuma das duas podem seguir até que a anterior termine, o código acaba ali com um erro eterno
+
+
+#CM FICA OS DEADLOCKS#
+
+Literalmente o comando de uma segurando a outra:
+

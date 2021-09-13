@@ -1,0 +1,14 @@
+Classes usadas: DateTimeAPITest2
+package Estudando.javacore.ZZNdatetime.test;
+
+
+#O QUE VAMOS VER#
+
+Dessa vez vamos aprender sobre a classe Instant 
+Ela representa um ponto no tempo usando nanosegundos
+
+A classe Durantion q serve p pegar intervalo de tempo
+
+A classe Period q é uma forma mais humanizada de trabalhar c dias, meses e anos, intervalos entre eles
+
+E a Chonounit q funciona tapa um problema da Period q é a dificuldade de pegar um intervalo de tempo em uma unidade estabelecida

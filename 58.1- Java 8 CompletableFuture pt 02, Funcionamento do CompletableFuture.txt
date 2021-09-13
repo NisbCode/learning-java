@@ -1,0 +1,8 @@
+Classes usadas: Loja, LojaTeste
+package Estudando.javacore.ZZMcompletablefuture.classe;
+
+#O QUE FOI DITO#
+
+Reforçamos a ideia de que um trabalho sincronado se torna mais lento
+E assincronado, a ideia de usar a msm Thread em mais coisas
+Tb tivemos o uso de um método e as classes foram usadas p aproximar de um problema real

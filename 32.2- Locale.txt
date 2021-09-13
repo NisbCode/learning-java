@@ -1,0 +1,40 @@
+Serve para configurar uma hora e data, até a linguagem conforme o país e o local
+Ele faz isso seguindo a ISO 639, a qual se refere à simbologia de cada país e suas respectivas linguagens
+
+
+package Estudando.javacore.T_datas;
+
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
+public class LocaleTest {
+    public static void main(String[] args) {
+//        ISO 639 Define símbolos da lingua e país: pt= portugues - Brasil - ingles, US - Estados Unidos
+
+   Língua q aquela variável terá<----      ----> País onde a lingua é falada
+                                                        |     |
+        Locale locItaly = new Locale("it", "IT");                                                                                    <-----Criou uma variável q recebe o objeto Locale
+        Locale locSuica = new Locale("it", "CH");
+        Locale locIndia = new Locale("hi", "IN");
+        Locale locJapao = new Locale("ja");
+
+        Calendar c = Calendar.getInstance();
+        DateFormat df1 = DateFormat.getDateInstance(DateFormat.FULL, locItaly);      <-----Data da variável em questão de forma completa
+        DateFormat df2 = DateFormat.getDateInstance(DateFormat.FULL, locSuica);
+        DateFormat df3 = DateFormat.getDateInstance(DateFormat.FULL, locIndia);
+        DateFormat df4 = DateFormat.getDateInstance(DateFormat.FULL, locJapao);
+
+        System.out.println("Itália " + df1.format(c.getTime()));                                          <-----Diga a data
+        System.out.println("Suiça " + df2.format(c.getTime()));
+        System.out.println("India " + df3.format(c.getTime()));
+        System.out.println("Japão " + df4.format(c.getTime()));
+
+                                                                                                                              FUNÇÕES IMPORTANTES:
+        System.out.println(locItaly.getDisplayLanguage());                         A)Fala a lingua contida na variável na lingua do seu pc ===>Italian
+        System.out.println(locJapao.getDisplayLanguage(locItaly));           B)Faz co msm do anterior só q na língua da variável colocada entre "()"===> giapponese
+        System.out.println(locSuica.getDisplayCountry(locItaly));              C)O getDisplayCountry faz c q apareça o nome do país na lingua do seu pc
+                                                                                                                 Mas se vc colocar uma váriavel c alguma lingua dentro, ele vai falar o nome do país naquela
+                                                                                                                 língua ===>Svizzera
+    }
+}

@@ -1,0 +1,36 @@
+Sever também para barrar a criação de objetos por meio de um requisito
+
+
+Construtores NUNCA terão NENHUM retorno
+
+    public Funcionaria(){
+    }
+
+
+O próprio Java cria um construtor para você, caso você SEJA UM PREGUIÇOSO E NÃO COLOQUE, SUA MULA
+
+
+
+1- Dentro do parênteses nós podemos por exemplo ditar regras,como NÃO poder criar uma funcionária sem nome:
+
+  public Funcionaria(String nome){
+
+
+2- Coloque seus atributos tranformando em objeto
+
+        this.nome = nome;
+
+
+3- Retorne para a classe teste e você verá que tem um erro de compilação na parte de criação de objetos
+
+        Funcionaria func = new Funcionaria();
+
+Isto se dá pelo fato de que se QUALQUER PESSOA que quiser criar uma classe funcionária agora terá que criar um nome
+
+
+
+4- Preencha os requisitos
+
+
+        Funcionaria func = new Funcionaria("ângela");
+

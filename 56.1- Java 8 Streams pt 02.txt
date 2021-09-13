@@ -1,0 +1,37 @@
+Classes usadas: StreamTeste
+package Estudando.javacore.ZZKstreams.teste;
+
+
+#INTERMIDIATE E TERMINAL#
+
+No código da aulapassada podemos ver claramente a diferença entre ambos:
+
+        List<String> nomesMenorQue25Java8 = pessoas
+                .stream()
+                .filter(pessoa -> pessoa.getIdade() < 25)
+                .sorted(Comparator.comparing(Pessoa::getNome))
+                .limit(3)
+                .map(Pessoa::getNome)
+                .collect(Collectors.toList());
+
+>Todos até o collect(), são métodos stream, ou seja, métodos que retornavam outras streams, métodos assim são chamados de Intermediate
+>Já o collect é um método Terminal, porque retorna uma lista, uma coisa diferente de streams
+Apenas os Terminal executam processamento
+
+
+#OUTRPOS MÉTODOS STREAMS#
+
+					TERMINAL
+
+                // count(): conta quantos elementos há na lista
+                .count()
+        );
+        pessoas.stream().forEach(System.out::println);   //Tipo de for
+
+
+					INTERMIDIATE
+
+                // skip(): pula o resultado selecionado dentro dos parenteses, de acordo com a ordenação
+                .skip(1)
+                // distinct(): mostra quantos elementos distintos tem na lista
+                .distinct()

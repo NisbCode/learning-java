@@ -1,0 +1,16 @@
+//      Isso serve meio q como um array só q expandível
+        List<String> lista = new ArrayList<>();
+        lista.add("Nome1");
+        lista.add("Nome2");
+        lista.add("Nome3");
+        lista.add("Nome4");
+        lista.add("Nome5");
+        lista.add("Nome6");
+        for(String nome : lista){
+            System.out.println(nome);
+        }
+    }
+}
+
+
+E o método "List" é uma interface, poupando assim dnv mts linhas

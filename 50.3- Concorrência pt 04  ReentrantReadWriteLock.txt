@@ -1,0 +1,19 @@
+Classes usadas: MapReadWrite
+
+#QUANDO USAR#
+
+As vezes vc tem q proteger a escrita pq se duas variáveis tentarem modificar o msm membro vc pode ter resultados imprevisíveis
+Com a classe ReentrantReadWriteLock vc pode proteger quantas Threads leem, escrevem e etc
+
+
+#COMO FUNCIONA#
+
+Ela trabalha c pares associados de lock
+Uma lock p leitura e outra p escrita
+Ou seja, uma Thread pode acessar e modificar a escrita de um arquivo por vez
+Já na leitura, mais de uma Thread pode acessar
+O diferencial maior desta interface é que tudo que uma pessoa alterar na escrita tem q ser alterado em tds as leituras
+
+#LEMBRETE#
+
+As locks são necessárias justamente p q n ocorra erros de acessar enquanto está sendo modificado ou ao msm tempo

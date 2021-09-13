@@ -1,0 +1,25 @@
+Acredite oq veio antes era a introdução da introdução
+Aq eu vou te explicar q além desse ser um dos assuntos mais importantes
+Coleções serve para agrupar em organização do que você decidir
+Uma delas é a HashCode vista antes
+
+Elas podem ser ordenadas  <---De forma organizada e prevista digamos assim
+Ou sortidas, classificadas    <---Aleatória, as vezes n totalmente
+Caso surja uma dúvida de qual é e qual não é: 
+https://www.bing.com/images/search?view=detailV2&id=17F600A848EFE48A88F3A5E7B4CD7BAD4F00BEF1&thid=OIP.LPX0zwyjr41BmSfyqiErlQHaEy&mediaurl=http%3A%2F%2Fgreyshine.files.wordpress.com%2F2011%2F03%2Fcollection-ordered-sorted.png&exph=329&expw=509&q=collections+ordered+e+sorted+programa%c3%a7%c3%a3o&selectedindex=2&ajaxhist=0&vt=0&eim=1,2,6
+
+Existe algo chamado Complexidade Ciclomática
+E o código Big-O q vai reproduzir o pior desempenho possível daquele software, aq nesse site tb temos um sumario
+http://bigocheatsheet.com/
+Um exemplo:
+
+Um Array de acesso tem velocidade constante
+
+
+Uma boa forma de saber a melhor escolha ao criar uma coleção é usar este link "https://www.javacodegeeks.com/2011/04/simple-big-o-notation-post.html" 
+e num dos ultimos tópicos "Lists and Sets:"
+Vc ver oq mais cabe ao momento
+Isso de 50.000 objetos para cima
+
+
+Além disso ainda temos uns site q te ajuda a criar alguns métodos

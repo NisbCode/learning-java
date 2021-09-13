@@ -1,0 +1,28 @@
+Classes usadas: StreamTeste2
+package Estudando.javacore.ZZKstreams.teste;
+
+
+#USO DO MAP E FLATMAP COM STREAMS#
+
+Flatmap é usado pra quando vc tem um valor dentro do outro e vc quer reduzir aquele valor p um só
+Map é usado para pegar o ultimo valor, quando você não tiver mais que resumir
+
+
+#NESSA AULA#
+
+Falamos de alguns outros métodos de Streams que escrevi no documento anterior tipo o skip
+Lidamos com a missão de pegar duas frases de duas listas e outra missão em separar letra por letra
+
+
+					DUAS LISTAS COM DUAS FRASES EM UMA FRASE APENAS UMA LISTA
+Pra isso
+Temos que:
+
+1- Juntar as listas de frases em uma só 
+2- Juntar as duas frases em uma só
+
+
+					DUAS PALAVRAS SEPARADAS LETRA POR LETRA 
+
+Agora no caso das duas palavras separadas letra por letra, vc terá q juntar ambas numa lista já q usar apenas o .get e o .split irá pegar apenas a 1 palavra
+Dps vc as coloca numa lista

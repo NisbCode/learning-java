@@ -1,0 +1,61 @@
+alt+1 ===> mostra projetos
+
+
+shift+f10 ===> Run no comando                                     
+
+
+ctrl+alt+l ===> formata texto(arruma)
+
+
+ctrl+q ===> Diz o que determinado método faz ao passar o mouse em cimas
+
+
+ctrl+D ===> Copia a linha       
+
+
+ctrl+x ===> Recorta a linha
+
+
+ctrl+o ===> Sobreescreve um método de outra classe na sua dps de um extends. Dica: Usar shift vai selecionar quais métodos, usar ctrl faz vc escolher cada um
+
+
+psvm+tab ===> escreve rápido a linha: public static void main(String[] args) {
+    }                                         
+
+sout+tab ===> escreve rápido a linha: System.out.println();                  
+
+
+ctrl+shift+setas cima ou baixo ===> move o a linha (dps de selecionar ela) para cima ou baixo
+
+
+botãodireito>Copy Path ===> Copiar diretório de uma pasta nos seus documentos
+
+
+alt+enter ===> c o mouse em cuma da palavra isso importará outra class para a atual
+Ou mostrará um erro e como poderá solucionar ele
+
+
+"\n" ===> Pula uma linha abaixo após escrever
+
+
+ctrl+/ ===> comenta a linha
+
+
+alt+setas cima ou baixo ===> passa para o método de cima/baixo
+
+
+ctrl+p ===> mostra os parâmetros pissiveis dentro de um construtor ao escolher um novo
+
+
+alt+insert ===> lista de ajuda com métodos. ESSE COMANDO É MARAVILHOSO QUE ELE TE DÁ OS COMANDOS PRONTOS PRA TI
+
+
+ctrl+clique ===> desmarca/Entra em determinada classe
+
+
+ctrl+f ===> search
+
+ctrl+alt+o ===> Tira os imports n utilizados
+
+shift+f6 ===> muda o nome onde tds as variáveis tão sendo usadas MARAVILHOSO TB(Seleciona para mudar o get and set e dá um do refactor na
+Parte q vier dps de dar ok na tela grande

@@ -1,0 +1,23 @@
+Caso vc queira por ex imprimir uma variável q n contem na classe Funcionario vc tem q fazer um cast explicito
+Por ex se vc quiser imprimir uma variável contida numa classe q n é a q tá cm parâmetro
+Msm dever de antes, mais fácil vc entender vendo, *Aula 66*
+
+===========================================================================
+Ele praticamente sobreescreve um método, tendo duas formas de ser feita, uma c a criação de uma variável q recebe um objeto
+
+            Gerente g = (Gerente) funcionario;
+            System.out.println("Participação nos lucos: " + g.getPnl());
+
+Onde o g é a variável criada q recebe o objeto funcionário
+
+E a outra onde n precisa de uma variável
+
+            System.out.println("Total de vendas: " + ((Vendedor) funcionario).getTotalVendas());
+
+Admito q achei ela mais fácil, vc mostra a classe a ser chamada, o objeto o qual está executando o bloco e o método q deseja
+
+
+===========================================================================
+#REGRAS#
+
+Variáveis q n tem relações entre si n podem fazer um Cast. Ex.: G pode fazer referência a G, mas G n pode fazer c V pq elas n tem herança entre si

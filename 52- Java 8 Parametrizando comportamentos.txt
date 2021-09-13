@@ -1,0 +1,100 @@
+Classes usadas: Carro, interface CarroPredicate, CarrosCorDouradoPredicate, CarrosDezAnosRecentePredicate e CarroTeste
+package Estudando.javacore.ZZGcomportamentoporparametro.classe;
+
+#O QUE É ISSO#
+
+Acredite, agt já fez isso mil vezes, é só o fato de vc usar cm parâmetros um método genérico ou uma classe(anônima ou n) p poupar linhas
+
+
+#INTERFACE PREDICATE#
+
+Uma das formas usadas p parametrizar(A q mais é recomendada)
+
+
+
+#QUANDO USAR#
+
+Então, imagina q tu tá fazendo seu trampo na boa e do nd o cliente chega e manda tu filtrar tds os carros azuis
+Aí cê vai lá e filtra
+Dps ele quer verde
+Aí cê vai lá e filtra 
+Dps o viado quer os mais recentes
+Aí tu fica puto
+Pq cá entr nós, vc usaria um jogo de criar uma lista, receber o array de carros, botar num for p ele mostrar a lista e se esse array tiver bla bla bla vc adiciona ele no
+resultado do filtro e por fim vc retorna o resultado do filtro
+Ao invés de vc fazer isso td, tu cria apenas um método
+
+
+#COMO FAZER#
+
+Temos várias formas de parametrizar um comportamento
+
+
+					CLASSES
+
+Uma delas é c a criação de interface e classes
+Nela vc terá uma interface(CarroPredicate) c apenas um método, q terá cm argumento a classe (Carro)
+E teremos classes q implementarão a interface e retornarão o if de cada método, ou seja, retiramos o if de cada método poupando linha e organizando o trabalho
+Sério, poupa MUITA linha
+Por fim vc volta a classe q tinha uma kralhada de código onde só mudava o if e apenas cria um método q funcione de filtro p os parâmetros q chegarão:
+
+
+    public static List<Carro> filtrarCarros(List<Carro> listaDeCarros, CarroPredicate carroPredicate) {
+        List<Carro> listaFiltrarCarros = new ArrayList<>();
+        for (Carro carro : listaDeCarros){
+            if (carroPredicate.test(carro))
+                listaFiltrarCarros.add(carro);
+        }
+        return listaFiltrarCarros;
+    }
+
+
+E para chamar o filtro:
+
+
+System.out.println(filtrarCarros(carros, new CarrosDezAnosRecentePredicate()));
+
+
+					CLASSES ANONIMAS(Podendo ser melhorado c lambda)
+
+Pegando um gancho da interface q vc cria quando faz a forma anterior
+Vc pega diretamente da interface e cria a classe:
+
+        System.out.println(filtrarCarros(carros, new CarroPredicate() {
+            @Override
+            public boolean test(Carro carro) {
+                return carro.getCor().equalsIgnoreCase("dourado");
+            }
+        }));
+
+
+					USANDO INTERFACE PREDICATE(Achei melhor)
+
+Essa interface vem c um método test
+Vamos usar método genérico mas acredite é a msm coisa q os anteriores mas ao invés de criar uma interface, JÁ TEM UMA CRIADA
+Vamos sobreescrever ela e criar de uma forma bem genérica um método já q n sabemos oq vamos receber de lista:
+
+    public static <T> List<T> filtrar(List<T> list, Predicate<T> predicate){   //N se assuste, é o msm de antes, porém, de forma mais vaga já q n sei oq de lista é
+        List<T> result = new ArrayList<>();                                                       //vai q é uma de números ou de String
+        for(T e : list){
+            if(predicate.test(e)){
+                result.add(e);
+            }
+        }
+        return  result;
+    }
+
+
+
+E p filtrarmos por ex os numeros pares: 
+
+        List<Integer> num = asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
+
+        //Classe anonima usando interface Predicate:
+        System.out.println(filtrar(num, new Predicate<Integer>() {
+            @Override
+            public boolean test(Integer integer) {
+                return integer % 2 == 0;
+            }
+        }));
+

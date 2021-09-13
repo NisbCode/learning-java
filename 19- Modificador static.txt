@@ -1,0 +1,34 @@
+Um operador estático desvincula um valor de um objeto e liga ele a classe no geral
+Fazendo assim com que todos os objetos tenham um determinado valor unico que será alterado para todos simultaneamente
+
+Por ex.: Um carro ter uma velocidade limite de 240 e futuramente a lei abaixar para 220
+Ao invés de mudar em cada carro existente
+Esse operador fará com que todos mudem juntos
+
+
+Ao determinar um objeto static ele pertencerá a classe, não mais ao objeto
+
+
+Atributos estaticos não podem ser acessados com "this." nem usam get ou set
+
+Sendo assim, serão publicos
+
+
+=============================================================================
+Agora métodos estáticos
+Se n quiser criar atributos publicos, pode criar métodos estáticos
+Também pertecem a classe como um todo
+
+
+o uso do "this." é ligado a um objeto E LEMBRE QUE ESCREVER STATIC SIGNIFICA QUE ELE DEIXA DE SER OBJETO PARA SE 
+TORNAR PARTE DA  C L A S S E 
+Então usamos a classe
+
+
+============================================================================
+Quualquer método pode se tornar um método estaticco desde que ele não esteja vinculado com um objeto
+Lembre-se, primeiro será criado os métodos static e dps os métodos normais, n tem como acessar algo que não existe ainda
+Por isso que não se tem um método imprimir sendo static
+
+Então a regra geral é: Se está recebendo atributos de classe, só está recebendo parâmetros, pode pôr static
+

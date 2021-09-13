@@ -1,0 +1,17 @@
+Classes usadas: ListaMembros(Onde terá o trabalho das Threads em relação a avisar), Entregador(Terá os métodos relacionados ao oq fazer), EntregadorTeste(Tem
+o método main onde inicializará cada Thread)
+PS.: ESSE TESTE NÃO FOI SINCRONIZADO
+
+#PARA O QUE SERVEM#
+
+Esses métodos servem de interação e agilizar o processo
+São Threads q servem literalmente p avisar e mandar outra Thread fazer logo o trabalho dela
+Supondo q vc receba um email, vc teria q ter 1 Thread p checar o email de 10 em 10 mins e assim q ela achar um, ela avisa
+Nesse caso usaremos duas Threads, uma p ficar esperando o aviso pra ir lá pegar ele e outra pra ficar checando
+
+
+#CUIDADO#
+
+Esses métodos só devem ser usados qnd o contexto tá synchronized, pois se vc tentar chamar o notifyAll sem ter aquele objeto synchronized vc terá uma exceção
+
+

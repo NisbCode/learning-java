@@ -1,0 +1,44 @@
+Tanto Error quanto Exception vem da classe mãe delas "Trowable"
+
+Eles podem ser previnidos como num checked ou não precisarem de tratamento, como num unchecked
+
+Checked e unchecked são tipos de classificações de problemas
+
+Checked é algo além do programador (O programa espera que você dê um tratamento se não o programa nem compila)
+Conexão da internet cair 
+Filhas de Exception diretamente
+
+E unchecked são os erro de execução, erro q vc faz PORQUE É BURRO
+Vem de "RuntimeError" para baixo
+Filhas de RuntimeError
+
+
+			Tipos de erros:
+
+//  Erro de estourar a memória por se tornar um looping
+    public static void stackOverFlowError(){
+        stackOverFlowError();
+    }
+}
+
+===============================================================================
+
+			Tipos de exceções:
+
+    ArithmeticException
+        int a = 10 / 0;
+//        É um erro em tempo de execução, causado pela lógica do programador
+        System.out.println(a);
+
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+//    ArrayIndexOutOfBoundsException, Vc tentar imprimir uma casa que não tem no array
+        int[] a = new int[2];
+        System.out.println(a[2]);
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+//    NullPointerException, pelo objeto estar vazio
+        Object o = null;
+        System.out.println(o.toString());

@@ -1,0 +1,17 @@
+Classes usadas: CompradorDBOLD, ConexaoFactory e TesteConexao
+
+RowSet é q nem ResultSet porém o RowSet tem duas variações
+Td q vimos p o ResultSet serve p o RowSet
+1 Tipo- Vc tem q estar constantemente conectado c o BD p trabalhar c os dados assim cm o ResultSet
+2 Tipo- Vc n precisa estar sempre conectado, vc apenas pega os dados, salva em memória, trabalha c ele e quando necessário acessa dnv o BD p atualizar os dados
+
+
+*Vamos falar dos conectados primeiro*
+
+Ele é menos complexo q o ResultSet por n precisar criar um statement e uma conexão, ele já faz isso por vc
+Ele n trabalha c a Classe Conection e s c o javabin, ou seja, o comum, c métodos get and set
+O ruim é q ele n usa comandos cm update ou delete, p isso vc tem q fazer q nem o TYPE_SCROLL_INSENSITIVE
+
+Cm o RowSet pode trilhar dois caminhos sendo um deles disconectado e o outro conectado
+Vc precisa executar ele a cada ação, isso caso vc queira att ou delete ou etc, a melhor forma de fazer isso é c a classe RowSetListener
+Ela vai executar aquele comando sempre q algo for alterado

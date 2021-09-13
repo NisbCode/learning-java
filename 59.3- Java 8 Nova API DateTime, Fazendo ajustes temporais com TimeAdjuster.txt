@@ -1,0 +1,7 @@
+Classes usadas: DateTimeAPITest4, ObterProximoDiaUtil(package Estudando.javacore.ZZNdatetime.util;)
+package Estudando.javacore.ZZNdatetime.test;
+
+
+#O QUE TEM NESSA TIMEADJUSTER#
+
+Praticamente é o msm da aula anterior, mas de forma mais rápida e prática

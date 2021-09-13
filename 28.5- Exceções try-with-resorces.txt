@@ -1,0 +1,40 @@
+Antigamente era horrível fechar um arquivo, (Java 6 pra trás), então criaram um método que faz isso pra vc :p
+
+Com o try-with-resources, vc vai diminuir seu código disso:
+
+    //    Assim que se fechava um arquivo no Java 6 ///5.74 600
+    public static void lerArquivoOldJava6() {
+        Reader reader = null;
+        try {
+            reader = new BufferedReader(new FileReader("Text.txt"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+Para isto:
+
+    public static void lerArquivo(){                                                                               <-------Inicio da declaração do método
+        try (Reader reader = new BufferedReader(new FileReader("Text.txt"))){          <-------Implemento da classe Reader, variável reader e seu parâmetro
+        } catch (IOException e) {                                                                                     <-------O catch necessário para rodar esse tipo de Closeable
+            e.printStackTrace();                                                                                         <-------Mostra um relatório do erro
+        }
+    }
+
+
+
+Só é possível usar este modo com Classes que tenham um método Closeable(Tipo o Reader)
+Também é possível fazer desta forma:
+
+    public static void lerArquivo() throws IOException {
+        try (Reader reader = new BufferedReader(new FileReader("Text.txt"))){
+        }
+    }

@@ -1,0 +1,30 @@
+Classes usadas: ThreadExemploRunnable e ThreadTest
+
+Sabemos q Threads são aleatórias, mas podemos ao menos influenciar na vida delas, vamos ver aq um pouco sobre 
+
+
+SOBRE TEMPOS DE EXECUÇÃO
+
+Ao usar o método estático em milisegundos      .sleep();        vc tá mandando a Thread dormir por um tempo
+Ele lança uma checked InterruptedException. PS.: NÃO SE PODE LANÇAR UMA EXCEÇÃO NUM MÉTODO SOBREESCRITO
+Usar o Sleep é dar uma chance p outras Threads executarem
+
+
+SOBRE PRIORIDADES
+
+Temos cm marcar a prioridade de 1 à 10, porém, a melhor coisa a se fazer é usar atributos estáticos definindo. 
+		t1.setPriority(Thread.MAX_PRIORITY);
+Isso faz c q no estado Runable a q tiver maior prioridade GERALMENTE é a 1 a ser executada
+
+
+SOBRE VOLTAR AO ESTADO RUNABLE
+
+Cm dito, é possível fazer uma Thread oltar ao estado Runable usando o método estático        .yield();
+Isso mão vai te dar 100% de ctz mas terá mais chances
+Fazer isso daria mais chances p outras Threads c maiores prioridades serem executadas
+
+DECISÕES AO EXECUTAR E SUAS RESTRIÇÕES
+
+O método    .join();       Falará p o Scadler(Defina qnt tempo cada Thread fica em execução e qnd uma começa e termina) q determinada Thread só deve executar
+dps de outra dita. Ou seja, temos as Threads: t1, t2, t3 e t4
+O Join vai falar p o Main (Que é a Thread a qual executa as Threads) apenas executar a t2, por ex, dps de executar a t4
